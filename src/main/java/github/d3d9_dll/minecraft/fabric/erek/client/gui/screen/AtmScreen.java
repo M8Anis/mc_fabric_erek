@@ -26,7 +26,6 @@ public class AtmScreen extends Screen {
     private ButtonWidget exchangePiece;
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private ButtonWidget exchangeMoney;
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private TextFieldWidget exchangeCount;
 
     private boolean error = false;

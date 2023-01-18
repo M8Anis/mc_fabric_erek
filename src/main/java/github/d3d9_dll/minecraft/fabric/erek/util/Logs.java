@@ -15,11 +15,11 @@ public class Logs {
 
     public void debug(String message) {
         if (Version.IS_DEBUG != 1) return;
-        logger.info("[" + LOG_PREFIX + "/DEBUG] " + message);
+        logger.debug(message);
     }
 
     public void error(String message) {
-        logger.info("[" + LOG_PREFIX + "/ERROR] " + message);
+        logger.error(message);
     }
 
 }

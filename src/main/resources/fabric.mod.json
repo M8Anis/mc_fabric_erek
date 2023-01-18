@@ -1,43 +1,39 @@
 {
-  "schemaVersion": 1,
-  "id": "d3d9_dllerek",
-  "version": "${version}",
-
-  "name": "ЁРЭК",
-  "description": "",
-  "authors": [
-    "d3d9_dll"
-  ],
-  "contact": {
-    "homepage": "https://github.com/d3d9-dll",
-    "sources": ""
-  },
-
-  "license": "MIT",
-  "icon": "assets/d3d9_dllerek/icon.png",
-
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "github.d3d9_dll.minecraft.fabric.erek.Entrypoint"
+    "schemaVersion": 1,
+    "id": "d3d9_dllerek",
+    "version": "${version}",
+    "name": "ЁРЭК",
+    "description": "",
+    "authors": [
+        "d3d9_dll"
     ],
-    "client": [
-      "github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint"
+    "contact": {
+        "homepage": "https://github.com/d3d9-dll",
+        "sources": ""
+    },
+    "license": "MIT",
+    "icon": "assets/d3d9_dllerek/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "github.d3d9_dll.minecraft.fabric.erek.Entrypoint"
+        ],
+        "client": [
+            "github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint"
+        ],
+        "server": [
+            "github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint"
+        ]
+    },
+    "mixins": [
+        "d3d9_dllerek.mixins.json"
     ],
-    "server": [
-      "github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint"
-    ]
-  },
-  "mixins": [
-    "d3d9_dllerek.mixins.json"
-  ],
-
-  "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": "1.14.x"
-  },
-  "suggests": {
-    "another-mod": "*"
-  }
+    "depends": {
+        "fabricloader": ">=0.7.4",
+        "fabric": "*",
+        "minecraft": "1.14.x"
+    },
+    "suggests": {
+        "another-mod": "*"
+    }
 }
