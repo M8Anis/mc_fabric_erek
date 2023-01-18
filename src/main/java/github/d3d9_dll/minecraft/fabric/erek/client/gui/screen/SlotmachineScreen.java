@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 https://github.com/d3d9-dll
+Copyright © 2022-2023 https://github.com/d3d9-dll
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -127,6 +127,7 @@ public class SlotmachineScreen extends Screen {
         ClientPlayNetworking.send(Entrypoint.PACKET_CASINO_PIECES, buf);
     }
 
+    @SuppressWarnings("DataFlowIssue")
     public void render(int mouseX, int mouseY, float delta) {
         if (!checkMachine()) return;
         this.renderBackground();
@@ -135,7 +136,6 @@ public class SlotmachineScreen extends Screen {
         int y = (this.height / 10);
 
         if (lastSpin != null) {
-            //noinspection ConstantConditions
             this.minecraft.getTextureManager().bindTexture(SYMBOLS_ATLAS);
             for (int real = 0; real < lastSpin.length; real++) {
                 for (int symbol = 0; symbol < lastSpin[real].length; symbol++) {
@@ -191,6 +191,7 @@ public class SlotmachineScreen extends Screen {
         super.render(mouseX, mouseY, delta);
     }
 
+    @SuppressWarnings("DataFlowIssue")
     @Override
     public void onClose() {
         lastSpin = null;
@@ -199,7 +200,6 @@ public class SlotmachineScreen extends Screen {
         initialized = false;
         matchedLines = null;
         coefficient = 0.0f;
-        //noinspection ConstantConditions
         this.minecraft.openScreen(null);
     }
 

@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 https://github.com/d3d9-dll
+Copyright © 2022-2023 https://github.com/d3d9-dll
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,9 +68,9 @@ public class AtmScreen extends Screen {
         super.render(mouseX, mouseY, delta);
     }
 
+    @SuppressWarnings("DataFlowIssue")
     @Override
     public void onClose() {
-        //noinspection ConstantConditions
         this.minecraft.openScreen(null);
     }
 
