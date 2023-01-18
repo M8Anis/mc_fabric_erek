@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "d3d9_dllmcservermod",
+  "id": "d3d9_dllerek",
   "version": "${version}",
 
-  "name": "Server Mod",
+  "name": "ЁРЭК",
   "description": "",
   "authors": [
     "d3d9_dll"
@@ -14,22 +14,22 @@
   },
 
   "license": "MIT",
-  "icon": "assets/d3d9_dllmcservermod/icon.png",
+  "icon": "assets/d3d9_dllerek/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "github.d3d9_dll.minecraft.fabric.mcservermod.Entrypoint"
+      "github.d3d9_dll.minecraft.fabric.erek.Entrypoint"
     ],
     "client": [
-      "github.d3d9_dll.minecraft.fabric.mcservermod.client.ClientEntrypoint"
+      "github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint"
     ],
     "server": [
-      "github.d3d9_dll.minecraft.fabric.mcservermod.server.ServerEntrypoint"
+      "github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint"
     ]
   },
   "mixins": [
-    "d3d9_dllmcservermod.mixins.json"
+    "d3d9_dllerek.mixins.json"
   ],
 
   "depends": {
