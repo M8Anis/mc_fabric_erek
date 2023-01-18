@@ -102,7 +102,7 @@ public class SlotmachineScreen extends Screen {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeBlockPos(slotmachinePos);
 
-        ClientPlayNetworking.send(Entrypoint.PACKET_SLOTMACHINE_PIECES, buf);
+        ClientPlayNetworking.send(Entrypoint.PACKET_CASINO_PIECES, buf);
     }
 
     public void render(int mouseX, int mouseY, float delta) {

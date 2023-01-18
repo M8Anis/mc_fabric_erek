@@ -1,7 +1,9 @@
-package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s;
+package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Balances;
+import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Moneys;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -13,7 +15,9 @@ import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.SERVER)
-public class CheatSetBalanceC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
+public class Casino2BankExchangeC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
+
+    private static final float EXCHANGE_COURSE = 0.8f;
 
     @Override
     public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
@@ -22,15 +26,20 @@ public class CheatSetBalanceC2SPacket implements ServerPlayNetworking.PlayChanne
         if (!AtmBlock.checkConstruct(atmPos, player.getServerWorld()))
             throw new IllegalArgumentException();
 
-        float newBalance = buf.readFloat();
-        if (newBalance < 0.0f || newBalance > 10000.0f)
-            throw new IllegalArgumentException();
-
         String UUID = player.getUuidAsString();
-        float currentBalance = Balances.get(UUID);
-        float delta = currentBalance - newBalance;
-        if (delta < 0.0f) Balances.increment(UUID, -delta);
-        else Balances.subtract(UUID, delta);
+
+        float exchange = buf.readFloat();
+        float currentPieces = Pieces.get(UUID);
+        if (exchange > currentPieces)
+            throw new IllegalArgumentException();
+        float money = exchange * EXCHANGE_COURSE;
+
+        Pieces.subtract(UUID, exchange);
+        Moneys.increment(UUID, money);
+
+        ServerEntrypoint.LOGGER.debug(
+                String.format("ATM Exchanged by course %.2f money %.2f", EXCHANGE_COURSE, money)
+        );
     }
 
 }

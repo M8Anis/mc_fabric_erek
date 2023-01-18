@@ -1,7 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.client.block;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
-import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.ATMScreen;
+import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.AtmScreen;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
@@ -26,7 +26,7 @@ public class ClientAtmBlock extends AtmBlock {
             player.sendMessage(new TranslatableText("chat.d3d9_dllerek.atm.construct_not_full"));
             return false;
         } else {
-            MinecraftClient.getInstance().openScreen(new ATMScreen(pos, (ClientWorld) world));
+            MinecraftClient.getInstance().openScreen(new AtmScreen(pos, (ClientWorld) world));
             return true;
         }
     }

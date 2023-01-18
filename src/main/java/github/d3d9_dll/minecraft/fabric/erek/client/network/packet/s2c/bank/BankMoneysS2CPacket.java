@@ -1,7 +1,7 @@
-package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c;
+package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.bank;
 
 import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;
+import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.AtmScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -11,15 +11,15 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.util.PacketByteBuf;
 
 @Environment(EnvType.CLIENT)
-public class SlotMachinePiecesS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
+public class BankMoneysS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
 
     @Override
     public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
                         PacketSender responseSender) {
-        float newPiecesCount = buf.readFloat();
-        SlotmachineScreen.setPiecesCounter(newPiecesCount);
+        float newMoneyCount = buf.readFloat();
+        AtmScreen.setMoneys(newMoneyCount);
 
-        ClientEntrypoint.LOGGER.debug("Slotmachine pieces changed to " + newPiecesCount);
+        ClientEntrypoint.LOGGER.debug("Bank money changed to " + newMoneyCount);
     }
 
 }

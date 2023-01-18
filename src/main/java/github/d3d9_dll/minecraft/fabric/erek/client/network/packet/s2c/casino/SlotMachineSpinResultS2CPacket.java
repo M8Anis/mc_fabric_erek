@@ -1,4 +1,4 @@
-package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c;
+package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.casino;
 
 import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;

@@ -17,11 +17,15 @@ public class Entrypoint implements ModInitializer {
     // Casino
     public static final Identifier PACKET_SLOTMACHINE_SPIN =
             new Identifier("d3d9_dllerek", "packet_slotmachine_spin");
-    public static final Identifier PACKET_SLOTMACHINE_PIECES =
-            new Identifier("d3d9_dllerek", "packet_slotmachine_pieces");
+    public static final Identifier PACKET_CASINO_PIECES =
+            new Identifier("d3d9_dllerek", "packet_casino_pieces");
+    public static final Identifier PACKET_CASINO_TO_BANK_EXCHANGE =
+            new Identifier("d3d9_dllerek", "packet_casino_to_bank_exchange");
     // Bank
-    public static final Identifier PACKET_CHEAT_SET_BALANCE =
-            new Identifier("d3d9_dllerek", "packet_cheat_set_balance");
+    public static final Identifier PACKET_BANK_TO_CASINO_EXCHANGE =
+            new Identifier("d3d9_dllerek", "packet_bank_to_casino_exchange");
+    public static final Identifier PACKET_BANK_MONEYS =
+            new Identifier("d3d9_dllerek", "packet_bank_moneys");
 
     public static final File MOD_DATA_DIRECTORY =
             new File(FabricLoader.getInstance().getConfigDir().toFile(), "d3d9_dllerek");

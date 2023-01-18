@@ -2,8 +2,9 @@ package github.d3d9_dll.minecraft.fabric.erek.client;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.ServerVersionSyncS2CPacket;
-import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachinePiecesS2CPacket;
-import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachineSpinResultS2CPacket;
+import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.bank.BankMoneysS2CPacket;
+import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.casino.CasinoPiecesS2CPacket;
+import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.casino.SlotMachineSpinResultS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.util.ClientBlockRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.client.util.ClientItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
@@ -64,14 +65,19 @@ public class ClientEntrypoint implements ClientModInitializer {
         LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
 
         ClientPlayNetworking.registerReceiver(
-                Entrypoint.PACKET_SLOTMACHINE_PIECES, new SlotMachinePiecesS2CPacket()
+                Entrypoint.PACKET_CASINO_PIECES, new CasinoPiecesS2CPacket()
         );
-        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_PIECES\" registered");
+        LOGGER.debug("Packet \"PACKET_CASINO_PIECES\" registered");
 
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncS2CPacket()
         );
         LOGGER.debug("Packet \"PACKET_VERSION_SYNC\" registered");
+
+        ClientPlayNetworking.registerReceiver(
+                Entrypoint.PACKET_BANK_MONEYS, new BankMoneysS2CPacket()
+        );
+        LOGGER.debug("Packet \"PACKET_BANK_MONEYS\" registered");
     }
 
 }

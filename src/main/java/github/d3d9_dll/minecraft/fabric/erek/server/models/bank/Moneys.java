@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import java.util.HashMap;
 
 @Environment(EnvType.SERVER)
-public class Balances {
+public class Moneys {
 
     private static final Gson GSON = new Gson();
     private static final float DEFAULT_BALANCE = 1000.0f;

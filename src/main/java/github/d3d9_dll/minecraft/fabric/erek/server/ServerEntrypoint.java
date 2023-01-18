@@ -3,13 +3,15 @@ package github.d3d9_dll.minecraft.fabric.erek.server;
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.AutoSave;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.VersionSynchronizeQueue;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Balances;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Moneys;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
-import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.CheatSetBalanceC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.ServerVersionSyncC2SPacket;
-import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineGetPiecesC2SPacket;
-import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineSpinC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank.Bank2CasinoExchangeC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank.BankMoneysC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank.Casino2BankExchangeC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.CasinoGetPiecesC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.SlotMachineSpinC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerBlockRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.util.File;
@@ -106,9 +108,9 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
         LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
 
         ServerPlayNetworking.registerGlobalReceiver(
-                Entrypoint.PACKET_SLOTMACHINE_PIECES, new SlotMachineGetPiecesC2SPacket()
+                Entrypoint.PACKET_CASINO_PIECES, new CasinoGetPiecesC2SPacket()
         );
-        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_PIECES\" registered");
+        LOGGER.debug("Packet \"PACKET_CASINO_PIECES\" registered");
 
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncC2SPacket()
@@ -116,9 +118,19 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
         LOGGER.debug("Packet \"PACKET_VERSION_SYNC\" registered");
 
         ServerPlayNetworking.registerGlobalReceiver(
-                Entrypoint.PACKET_CHEAT_SET_BALANCE, new CheatSetBalanceC2SPacket()
+                Entrypoint.PACKET_BANK_TO_CASINO_EXCHANGE, new Bank2CasinoExchangeC2SPacket()
         );
-        LOGGER.debug("Packet \"PACKET_CHEAT_SET_BALANCE\" registered");
+        LOGGER.debug("Packet \"PACKET_BANK_TO_CASINO_EXCHANGE\" registered");
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                Entrypoint.PACKET_CASINO_TO_BANK_EXCHANGE, new Casino2BankExchangeC2SPacket()
+        );
+        LOGGER.debug("Packet \"PACKET_CASINO_TO_BANK_EXCHANGE\" registered");
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                Entrypoint.PACKET_BANK_MONEYS, new BankMoneysC2SPacket()
+        );
+        LOGGER.debug("Packet \"PACKET_BANK_MONEYS\" registered");
     }
 
     private static void addToVersionSyncQueue(ServerPlayNetworkHandler handler) {
@@ -135,7 +147,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"balances.json\" is not writeable");
         } else {
             try {
-                File.write(BALANCES_FILE, Balances.exportData());
+                File.write(BALANCES_FILE, Moneys.exportData());
                 LOGGER.debug("File \"balances.json\" saved");
             } catch (IOException e) {
                 LOGGER.error("Cannot write \"balances.json\" for save");
@@ -176,7 +188,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 if (data == null) {
                     LOGGER.error("Cannot read \"balances.json\" for load");
                 } else {
-                    Balances.importData(data);
+                    Moneys.importData(data);
                     LOGGER.debug("File \"balances.json\" loaded");
                 }
             } catch (FileNotFoundException e) {

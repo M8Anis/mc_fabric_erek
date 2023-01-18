@@ -1,10 +1,10 @@
-package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s;
+package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Balances;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Moneys;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Coefficients;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Reals;
@@ -32,7 +32,7 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
             throw new IllegalArgumentException();
 
         String UUID = player.getUuidAsString();
-        float balance = Balances.get(UUID);
+        float balance = Moneys.get(UUID);
         float bet = buf.readFloat();
 
         if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance) {
@@ -50,13 +50,13 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         if (bonusGame) FreeSpin.add(UUID, 10);
 
         if (coeff < 0f) {
-            if (!(freeSpins > 0)) Balances.subtract(UUID, bet * -coeff);
+            if (!(freeSpins > 0)) Moneys.subtract(UUID, bet * -coeff);
         } else {
-            Balances.increment(UUID, bet * coeff);
+            Moneys.increment(UUID, bet * coeff);
         }
 
         PacketByteBuf buff = Reals.generateForPacket(resultOfSpin);
-        buff.writeFloat(Balances.get(UUID));
+        buff.writeFloat(Moneys.get(UUID));
         buff.writeFloat(coeff);
         buff.writeBoolean(freeSpins > 0 || bonusGame);
 
