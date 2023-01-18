@@ -1,0 +1,195 @@
+package github.d3d9_dll.minecraft.fabric.erek.games.slotmachine;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+import java.util.HashMap;
+
+@Environment(EnvType.CLIENT)
+public class Lines {
+
+    public final String[][] lines;
+    public final boolean isBonusGame;
+    private final String[][] reals;
+
+    public Lines(String[][] reals) {
+        this.reals = reals;
+
+        lines = new String[][]{
+                getLine1(),
+                getLine2(),
+                getLine3(),
+                getLine4(),
+                getLine5(),
+                getLine6(),
+                getLine7(),
+                getLine8(),
+                getLine9(),
+                getLine10()
+        };
+
+        int bonusGameSymbolCounter = 0;
+        for (int real = 0; real < reals.length; real++) {
+            for (int symbol = 0; symbol < reals[real].length; symbol++) {
+                if (reals[real][symbol].equals("B")) {
+                    bonusGameSymbolCounter++;
+                    break;
+                }
+            }
+        }
+
+        isBonusGame = bonusGameSymbolCounter >= 5;
+    }
+
+    private String[] getLine1() {
+        return new String[]{
+                reals[0][1],
+                reals[1][1],
+                reals[2][1],
+                reals[3][1],
+                reals[4][1]
+        };
+    }
+
+    private String[] getLine2() {
+        return new String[]{
+                reals[0][0],
+                reals[1][0],
+                reals[2][0],
+                reals[3][0],
+                reals[4][0]
+        };
+    }
+
+    private String[] getLine3() {
+        return new String[]{
+                reals[0][2],
+                reals[1][2],
+                reals[2][2],
+                reals[3][2],
+                reals[4][2]
+        };
+    }
+
+    private String[] getLine4() {
+        return new String[]{
+                reals[0][0],
+                reals[1][0],
+                reals[2][1],
+                reals[3][2],
+                reals[4][2]
+        };
+    }
+
+    private String[] getLine5() {
+        return new String[]{
+                reals[0][2],
+                reals[1][2],
+                reals[2][1],
+                reals[3][0],
+                reals[4][0]
+        };
+    }
+
+    private String[] getLine6() {
+        return new String[]{
+                reals[0][2],
+                reals[1][1],
+                reals[2][1],
+                reals[3][1],
+                reals[4][2]
+        };
+    }
+
+    private String[] getLine7() {
+        return new String[]{
+                reals[0][0],
+                reals[1][1],
+                reals[2][1],
+                reals[3][1],
+                reals[4][0]
+        };
+    }
+
+    private String[] getLine8() {
+        return new String[]{
+                reals[0][2],
+                reals[1][1],
+                reals[2][0],
+                reals[3][1],
+                reals[4][2]
+        };
+    }
+
+    private String[] getLine9() {
+        return new String[]{
+                reals[0][0],
+                reals[1][1],
+                reals[2][2],
+                reals[3][1],
+                reals[4][0]
+        };
+    }
+
+    private String[] getLine10() {
+        return new String[]{
+                reals[0][2],
+                reals[1][1],
+                reals[2][1],
+                reals[3][1],
+                reals[4][0]
+        };
+    }
+
+    public static class Matched {
+
+        private final Lines lines;
+        private final HashMap<Integer, Line> matchedLines;
+
+        public Matched(Lines lines) {
+            this.lines = lines;
+            matchedLines = getMatchedLines();
+        }
+
+        public HashMap<Integer, Line> getLines() {
+            return matchedLines;
+        }
+
+        private HashMap<Integer, Line> getMatchedLines() {
+            HashMap<Integer, Line> lines = new HashMap<>();
+            for (int line = 0; line < this.lines.lines.length; line++) {
+                String lineStartsWith = "";
+                String[] givenLine = this.lines.lines[line];
+                int lineLength = 0;
+                for (int symbol = 0; symbol < givenLine.length; symbol++) {
+                    if (symbol == 0) {
+                        lineStartsWith = givenLine[symbol];
+                        lineLength++;
+                        continue;
+                    }
+                    if (givenLine[symbol].equals(lineStartsWith) || givenLine[symbol].equals("W")) {
+                        lineLength++;
+                    } else {
+                        break;
+                    }
+                }
+                if (lineLength >= 3) {
+                    lines.put(line + 1, new Line(lineStartsWith, lineLength));
+                }
+            }
+            return lines;
+        }
+
+        public static class Line {
+            public final String symbol;
+            public final int length;
+
+            public Line(String symbol, int length) {
+                this.symbol = symbol;
+                this.length = length;
+            }
+        }
+
+    }
+
+}

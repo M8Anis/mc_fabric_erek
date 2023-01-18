@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.LiteralText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
@@ -18,7 +19,7 @@ import org.lwjgl.glfw.GLFW;
 @Environment(EnvType.CLIENT)
 public class ClientEntrypoint implements ClientModInitializer {
 
-    public final static Logger LOGGER = LogManager.getLogger("d3d9_dll MCServerMod | Client-side");
+    public final static Logger LOGGER = LogManager.getLogger("d3d9_dll EREK | Client-side");
 
     @Override
     public void onInitializeClient() {
@@ -43,7 +44,7 @@ public class ClientEntrypoint implements ClientModInitializer {
         LOGGER.info("KeyBind \"key.d3d9_dllerek.debug_handle\" registered");
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
-                /* Testing */
+                client.player.sendMessage(new LiteralText("debug"));
             }
         });
         LOGGER.info("KeyBind \"key.d3d9_dllerek.debug_handle\" callback registered");

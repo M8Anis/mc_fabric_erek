@@ -7,5 +7,7 @@
   "block.d3d9_dllerek.slotmachine_block": "Слот-машина",
   "block.d3d9_dllerek.slotmachine_info_panel": "Слот-машина (Информационная панель)",
 
-  "chat.d3d9_dllerek.slotmachine.construct_not_full": "Слот-машина построена не полностью"
+  "chat.d3d9_dllerek.slotmachine.construct_not_full": "Слот-машина построена не полностью",
+
+  "gui.d3d9_dllerek.slotmachine.spin": "Крутить!"
 }

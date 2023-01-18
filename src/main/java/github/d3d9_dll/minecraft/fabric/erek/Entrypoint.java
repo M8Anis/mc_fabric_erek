@@ -1,7 +1,6 @@
 package github.d3d9_dll.minecraft.fabric.erek;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
-import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlockEntity;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBottomCaseBlock;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineInfoPanelBlock;
 import github.d3d9_dll.minecraft.fabric.erek.item.SlotMachineBlockItem;
@@ -17,10 +16,13 @@ import org.apache.logging.log4j.Logger;
 
 public class Entrypoint implements ModInitializer {
 
-    public final static Logger LOGGER = LogManager.getLogger("d3d9_dll MCServerMod");
+    public final static Logger LOGGER = LogManager.getLogger("d3d9_dll EREK");
 
+    public static final Identifier PACKET_SLOTMACHINE_SPIN =
+            new Identifier("d3d9_dllerek", "packet_slotmachine_spin");
     public static final Identifier PACKET_SLOTMACHINE_SPIN_RESULT =
-            new Identifier("d3d9_dllerek", "packet_slotmachine_result");
+            new Identifier("d3d9_dllerek", "packet_slotmachine_spin_result");
+
     public static final ItemGroup GENERAL_ITEM_GROUP = FabricItemGroupBuilder.create(
                     new Identifier("d3d9_dllerek", "casino"))
             .icon(() -> new ItemStack(SlotMachineBlockItem.ITEM))
@@ -48,8 +50,6 @@ public class Entrypoint implements ModInitializer {
         LOGGER.info("BlockItem \"slotmachine_block\" registered");
         SlotMachineBlock.register();
         LOGGER.info("Block \"slotmachine_block\" registered");
-        SlotMachineBlockEntity.register();
-        LOGGER.info("BlockEntity \"slotmachine_block\" registered");
 
         SlotMachineInfoPanelItem.register();
         LOGGER.info("BlockItem \"slotmachine_info_panel\" registered");

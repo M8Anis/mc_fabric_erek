@@ -1,16 +1,17 @@
 package github.d3d9_dll.minecraft.fabric.erek.block;
 
-import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
+import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;
 import github.d3d9_dll.minecraft.fabric.erek.item.SlotMachineBlockItem;
-import github.d3d9_dll.minecraft.fabric.erek.server.games.slotmachine.Reals;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Material;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -22,7 +23,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class SlotMachineBlock extends Block implements BlockEntityProvider {
+public class SlotMachineBlock extends Block {
 
     public static final Identifier IDENTIFIER = SlotMachineBlockItem.IDENTIFIER;
     public static final Block BLOCK = new SlotMachineBlock(
@@ -73,26 +74,7 @@ public class SlotMachineBlock extends Block implements BlockEntityProvider {
         super(settings);
     }
 
-    @SuppressWarnings("deprecation")
-    public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if ( hand != Hand.MAIN_HAND ) return false;
-
-        boolean client = world.isClient;
-        boolean constructValid = checkConstruct(pos, world);
-
-        if (!constructValid) {
-            if (!client)
-                player.sendMessage(new TranslatableText("chat.d3d9_dllerek.slotmachine.construct_not_full"));
-
-            return false;
-        } else if (!client) {
-            ServerPlayNetworking.send((ServerPlayerEntity) player, Entrypoint.PACKET_SLOTMACHINE_SPIN_RESULT, Reals.generateForPacket());
-        }
-
-        return true;
-    }
-
-    private boolean checkConstruct(BlockPos blockPos, World world) {
+    public static boolean checkConstruct(BlockPos blockPos, World world) {
         if (world == null || blockPos == null) return false;
 
         Block slotmachine = world.getBlockState(blockPos).getBlock();
@@ -102,6 +84,19 @@ public class SlotMachineBlock extends Block implements BlockEntityProvider {
         return slotmachine instanceof SlotMachineBlock &&
                 slotmachine_info_panel instanceof SlotMachineInfoPanelBlock &&
                 slotmachine_bottom_case instanceof SlotMachineBottomCaseBlock;
+    }
+
+    @SuppressWarnings("deprecation")
+    public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (!world.isClient || hand != Hand.OFF_HAND) return false;
+
+        if (!checkConstruct(pos, world)) {
+            player.sendMessage(new TranslatableText("chat.d3d9_dllerek.slotmachine.construct_not_full"));
+            return false;
+        } else {
+            MinecraftClient.getInstance().openScreen(new SlotmachineScreen(pos, (ClientWorld) world));
+            return true;
+        }
     }
 
     @SuppressWarnings("deprecation")
@@ -120,11 +115,6 @@ public class SlotMachineBlock extends Block implements BlockEntityProvider {
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public BlockEntity createBlockEntity(BlockView view) {
-        return new SlotMachineBlockEntity();
     }
 
     public static void register() {
