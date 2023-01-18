@@ -95,7 +95,7 @@ publishing {
 loom{
 	mixin {
 		useLegacyMixinAp = true
-		defaultRefmapName = "d3d9_dllerek.mixins.refmap.json"
+		defaultRefmapName = "m8anis_erek.mixins.refmap.json"
 		add("main")
 	}
 }
