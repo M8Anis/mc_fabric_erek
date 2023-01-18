@@ -4,9 +4,9 @@ import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Moneys;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Coefficients;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Reals;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,12 +32,11 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
             throw new IllegalArgumentException();
 
         String UUID = player.getUuidAsString();
-        float balance = Moneys.get(UUID);
+        float balance = Pieces.get(UUID);
         float bet = buf.readFloat();
 
-        if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance) {
+        if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance)
             throw new IllegalArgumentException();
-        }
 
         String[][] resultOfSpin = Reals.generateResult();
         Lines lines = new Lines(resultOfSpin);
@@ -50,19 +49,20 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         if (bonusGame) FreeSpin.add(UUID, 10);
 
         if (coeff < 0f) {
-            if (!(freeSpins > 0)) Moneys.subtract(UUID, bet * -coeff);
+            if (!(freeSpins > 0)) Pieces.subtract(UUID, bet * -coeff);
         } else {
-            Moneys.increment(UUID, bet * coeff);
+            Pieces.increment(UUID, bet * coeff);
         }
 
         PacketByteBuf buff = Reals.generateForPacket(resultOfSpin);
-        buff.writeFloat(Moneys.get(UUID));
+        buff.writeFloat(Pieces.get(UUID));
         buff.writeFloat(coeff);
         buff.writeBoolean(freeSpins > 0 || bonusGame);
 
         responseSender.sendPacket(Entrypoint.PACKET_SLOTMACHINE_SPIN, buff);
 
-        ServerEntrypoint.LOGGER.debug("Slotmachine spin result sended to player \"" + player.getName().asString() + "\"");
+        ServerEntrypoint.LOGGER.debug("Slotmachine spin result sended to player \""
+                + player.getName().asString() + "\"");
     }
 
 }
