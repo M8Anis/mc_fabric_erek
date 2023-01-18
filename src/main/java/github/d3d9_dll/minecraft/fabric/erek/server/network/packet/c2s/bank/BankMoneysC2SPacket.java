@@ -3,7 +3,6 @@ package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank;
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Moneys;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -25,7 +24,7 @@ public class BankMoneysC2SPacket implements ServerPlayNetworking.PlayChannelHand
         if (!AtmBlock.checkConstruct(atmPos, player.getServerWorld()))
             throw new IllegalArgumentException();
 
-        float money = Moneys.get(player.getUuidAsString());
+        float money = ServerEntrypoint.MONEYS.get(player.getUuidAsString());
         PacketByteBuf buff = PacketByteBufs.create();
         buff.writeFloat(money);
 

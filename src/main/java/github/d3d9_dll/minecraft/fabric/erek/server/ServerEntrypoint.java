@@ -10,7 +10,7 @@ import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.ServerVer
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank.Bank2CasinoExchangeC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank.BankMoneysC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank.Casino2BankExchangeC2SPacket;
-import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.CasinoGetPiecesC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.CasinoPiecesC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.SlotMachineSpinC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerBlockRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerItemRegistration;
@@ -111,7 +111,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
         LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
 
         ServerPlayNetworking.registerGlobalReceiver(
-                Entrypoint.PACKET_CASINO_PIECES, new CasinoGetPiecesC2SPacket()
+                Entrypoint.PACKET_CASINO_PIECES, new CasinoPiecesC2SPacket()
         );
         LOGGER.debug("Packet \"PACKET_CASINO_PIECES\" registered");
 

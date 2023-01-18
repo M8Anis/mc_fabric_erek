@@ -4,7 +4,6 @@ import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -17,7 +16,7 @@ import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.SERVER)
-public class CasinoGetPiecesC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
+public class CasinoPiecesC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
 
     @Override
     public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
@@ -27,7 +26,7 @@ public class CasinoGetPiecesC2SPacket implements ServerPlayNetworking.PlayChanne
                 !AtmBlock.checkConstruct(blockPos, player.getServerWorld()))
             throw new IllegalArgumentException();
 
-        float pieces = Pieces.get(player.getUuidAsString());
+        float pieces = ServerEntrypoint.PIECES.get(player.getUuidAsString());
         PacketByteBuf buff = PacketByteBufs.create();
         buff.writeFloat(pieces);
 
