@@ -9,7 +9,7 @@
     ],
     "contact": {
         "homepage": "https://github.com/d3d9-dll",
-        "sources": ""
+        "sources": "https://github.com/d3d9-dll/mc-fabric-erek"
     },
     "license": "MIT License",
     "icon": "assets/d3d9_dllerek/icon.png",
