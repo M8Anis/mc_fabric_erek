@@ -1,6 +1,5 @@
 package github.d3d9_dll.minecraft.fabric.erek.server.util;
 
-import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.item.*;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import net.fabricmc.api.EnvType;
@@ -108,10 +107,10 @@ public class ServerItemRegistration {
         ServerEntrypoint.LOGGER.debug("Item \"atm_bottom_case\" registered");
 
         Registry.register(Registry.ITEM, ExchangeMachineBlockItem.IDENTIFIER, exchangeMachineBlockItem);
-        ClientEntrypoint.LOGGER.debug("Item \"exchange_machine_block\" registered");
+        ServerEntrypoint.LOGGER.debug("Item \"exchange_machine_block\" registered");
 
         Registry.register(Registry.ITEM, ExchangeMachineStandBlockItem.IDENTIFIER, exchangeMachineStandBlockItem);
-        ClientEntrypoint.LOGGER.debug("Item \"exchange_machine_stand\" registered");
+        ServerEntrypoint.LOGGER.debug("Item \"exchange_machine_stand\" registered");
 
         registered = true;
     }
