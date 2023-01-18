@@ -21,7 +21,7 @@ public class VoxelShapeHelper {
             buffer[1] = VoxelShapes.empty();
         }
 
-        return buffer[0];
+        return buffer[0].simplify();
     }
 
 }
