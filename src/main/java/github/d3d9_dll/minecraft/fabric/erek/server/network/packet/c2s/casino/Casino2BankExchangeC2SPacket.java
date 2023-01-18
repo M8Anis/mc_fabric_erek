@@ -1,6 +1,6 @@
-package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank;
+package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino;
 
-import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
+import github.d3d9_dll.minecraft.fabric.erek.block.ExchangeMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,16 +20,16 @@ public class Casino2BankExchangeC2SPacket implements ServerPlayNetworking.PlayCh
     @Override
     public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                         PacketByteBuf buf, PacketSender responseSender) {
-        BlockPos atmPos = buf.readBlockPos();
-        if (!AtmBlock.checkConstruct(atmPos, player.getServerWorld()))
-            throw new IllegalArgumentException();
+        BlockPos exchangeMachine = buf.readBlockPos();
+        if (!ExchangeMachineBlock.checkConstruct(exchangeMachine, player.getServerWorld()))
+            throw new IllegalArgumentException("exchange machine is not found on the given coordinates");
 
         String UUID = player.getUuidAsString();
 
         float exchange = buf.readFloat();
         float currentPieces = ServerEntrypoint.PIECES.get(UUID);
         if (exchange > currentPieces || exchange <= 0)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("illegal exchange value");
         float money = exchange * EXCHANGE_COURSE;
 
         ServerEntrypoint.PIECES.subtract(UUID, exchange);

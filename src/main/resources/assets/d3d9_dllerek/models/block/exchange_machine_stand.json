@@ -3,9 +3,9 @@
     "parent": "block/block",
     "texture_size": [64, 64],
     "textures": {
-        "0": "d3d9_dllerek:block/exchange_machine_stand_block/bottom_plate",
-        "1": "d3d9_dllerek:block/exchange_machine_stand_block/standing_plate",
-        "particle": "d3d9_dllerek:block/exchange_machine_stand_block/standing_plate"
+        "0": "d3d9_dllerek:block/exchange_machine_stand/bottom_plate",
+        "1": "d3d9_dllerek:block/exchange_machine_stand/standing_plate",
+        "particle": "d3d9_dllerek:block/exchange_machine_stand/standing_plate"
     },
     "elements": [
         {

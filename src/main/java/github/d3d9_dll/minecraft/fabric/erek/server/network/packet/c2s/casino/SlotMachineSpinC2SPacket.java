@@ -27,14 +27,14 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
                         PacketByteBuf buf, PacketSender responseSender) {
         BlockPos slotmachinePos = buf.readBlockPos();
         if (!SlotMachineBlock.checkConstruct(slotmachinePos, player.getServerWorld()))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("slot exchange machine is not found on the given coordinates");
 
         String UUID = player.getUuidAsString();
         float balance = ServerEntrypoint.PIECES.get(UUID);
         float bet = buf.readFloat();
 
         if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("bet out of bounds");
 
         String[][] resultOfSpin = Reals.generateResult();
         Lines lines = new Lines(resultOfSpin);

@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 public class SlotMachineBottomCaseBlockItem extends BlockItem {
 
-    public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_bottom_case_block");
+    public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_bottom_case");
 
     public SlotMachineBottomCaseBlockItem(Block block, Settings settings) {
         super(block, settings);

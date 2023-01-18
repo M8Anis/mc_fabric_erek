@@ -8,11 +8,11 @@
     "text.d3d9_dllerek.version_sync.newer": "%s На сервере стоит более старая версия мода чем у вас",
 
     "itemGroup.d3d9_dllerek.casino": "[ЁРЭК] Казино",
-    "block.d3d9_dllerek.slotmachine_bottom_case_block": "Слот-машина (Нижняя часть)",
+    "block.d3d9_dllerek.slotmachine_bottom_case": "Слот-машина (Нижняя часть)",
     "block.d3d9_dllerek.slotmachine_block": "Слот-машина",
-    "block.d3d9_dllerek.slotmachine_info_panel_block": "Слот-машина (Информационная панель)",
+    "block.d3d9_dllerek.slotmachine_info_panel": "Слот-машина (Информационная панель)",
     "block.d3d9_dllerek.exchange_machine_block": "Касса обмена",
-    "block.d3d9_dllerek.exchange_machine_stand_block": "Касса обмена (Нижняя часть)",
+    "block.d3d9_dllerek.exchange_machine_stand": "Касса обмена (Нижняя часть)",
 
     "gui.d3d9_dllerek.slotmachine.button.spin": "Крутить!",
     "gui.d3d9_dllerek.slotmachine.text.bet": "Ставка: %.2f",
@@ -32,7 +32,7 @@
 
     "itemGroup.d3d9_dllerek.bank": "[ЁРЭК] Банк",
     "block.d3d9_dllerek.atm_block": "Банкомат",
-    "block.d3d9_dllerek.atm_bottom_case_block": "Банкомат (Нижняя часть)",
+    "block.d3d9_dllerek.atm_bottom_case": "Банкомат (Нижняя часть)",
 
     "gui.d3d9_dllerek.atm.text.moneys": "Денег на счёте: %.2f",
 

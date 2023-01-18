@@ -1,7 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
+import github.d3d9_dll.minecraft.fabric.erek.block.ExchangeMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import net.fabricmc.api.EnvType;
@@ -23,8 +23,8 @@ public class CasinoPiecesC2SPacket implements ServerPlayNetworking.PlayChannelHa
                         PacketByteBuf buf, PacketSender responseSender) {
         BlockPos blockPos = buf.readBlockPos();
         if (!SlotMachineBlock.checkConstruct(blockPos, player.getServerWorld()) &&
-                !AtmBlock.checkConstruct(blockPos, player.getServerWorld()))
-            throw new IllegalArgumentException();
+                !ExchangeMachineBlock.checkConstruct(blockPos, player.getServerWorld()))
+            throw new IllegalArgumentException("slot or exchange machine is not found on the given coordinates");
 
         float pieces = ServerEntrypoint.PIECES.get(player.getUuidAsString());
         PacketByteBuf buff = PacketByteBufs.create();

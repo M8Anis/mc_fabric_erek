@@ -14,16 +14,44 @@ public class ExchangeMachineBlock extends github.d3d9_dll.minecraft.fabric.erek.
     public static final Identifier IDENTIFIER = ExchangeMachineBlockItem.IDENTIFIER;
 
     private static final VoxelShape SHAPE_NORTH = VoxelShapes.union(
-            Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+            // Bottom plate
+            Block.createCuboidShape(4.0D, 0.0D, 3.0D, 12.0D, 2.0D, 8.0D),
+            // Right plate
+            Block.createCuboidShape(4.0D, 2.0D, 3.0D, 5.0D, 3.0D, 4.0D),
+            Block.createCuboidShape(4.0D, 2.0D, 4.0D, 5.0D, 4.0D, 5.0D),
+            Block.createCuboidShape(4.0D, 2.0D, 5.0D, 5.0D, 5.0D, 6.0D),
+            Block.createCuboidShape(4.0D, 2.0D, 6.0D, 5.0D, 6.0D, 7.0D),
+            Block.createCuboidShape(4.0D, 2.0D, 7.0D, 5.0D, 7.0D, 8.0D),
+            // Left plate
+            Block.createCuboidShape(11.0D, 2.0D, 3.0D, 12.0D, 3.0D, 4.0D),
+            Block.createCuboidShape(11.0D, 2.0D, 4.0D, 12.0D, 4.0D, 5.0D),
+            Block.createCuboidShape(11.0D, 2.0D, 5.0D, 12.0D, 5.0D, 6.0D),
+            Block.createCuboidShape(11.0D, 2.0D, 6.0D, 12.0D, 6.0D, 7.0D),
+            Block.createCuboidShape(11.0D, 2.0D, 7.0D, 12.0D, 7.0D, 8.0D),
+            // Upper plate
+            Block.createCuboidShape(4.0D, 6.0D, 8.0D, 12.0D, 8.0D, 11.0D),
+            // Backplate
+            Block.createCuboidShape(5.0D, 5.0D, 9.0D, 11.0D, 6.0D, 11.0D),
+            Block.createCuboidShape(5.0D, 4.0D, 8.0D, 11.0D, 5.0D, 10.0D),
+            Block.createCuboidShape(5.0D, 3.0D, 7.0D, 11.0D, 4.0D, 9.0D),
+            Block.createCuboidShape(5.0D, 2.0D, 6.0D, 11.0D, 3.0D, 8.0D),
+            // Right plate 2
+            Block.createCuboidShape(4.0D, 5.0D, 8.0D, 5.0D, 6.0D, 11.0D),
+            Block.createCuboidShape(4.0D, 4.0D, 8.0D, 5.0D, 5.0D, 10.0D),
+            Block.createCuboidShape(4.0D, 3.0D, 8.0D, 5.0D, 4.0D, 9.0D),
+            // Left plate 2
+            Block.createCuboidShape(11.0D, 5.0D, 8.0D, 12.0D, 6.0D, 11.0D),
+            Block.createCuboidShape(11.0D, 4.0D, 8.0D, 12.0D, 5.0D, 10.0D),
+            Block.createCuboidShape(11.0D, 3.0D, 8.0D, 12.0D, 4.0D, 9.0D)
     );
     private static final VoxelShape SHAPE_EAST = VoxelShapes.union(
-            Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+            Block.createCuboidShape(4.0D, 0.0D, 3.0D, 12.0D, 2.0D, 8.0D)
     );
     private static final VoxelShape SHAPE_SOUTH = VoxelShapes.union(
-            Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+            Block.createCuboidShape(4.0D, 0.0D, 5.0D, 12.0D, 8.0D, 13.0D)
     );
     private static final VoxelShape SHAPE_WEST = VoxelShapes.union(
-            Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+            Block.createCuboidShape(3.0D, 0.0D, 4.0D, 11.0D, 8.0D, 12.0D)
     );
 
     public ExchangeMachineBlock(Settings settings) {

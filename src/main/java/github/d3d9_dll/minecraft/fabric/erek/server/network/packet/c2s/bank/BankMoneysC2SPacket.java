@@ -2,6 +2,7 @@ package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
+import github.d3d9_dll.minecraft.fabric.erek.block.ExchangeMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,9 +21,10 @@ public class BankMoneysC2SPacket implements ServerPlayNetworking.PlayChannelHand
     @Override
     public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                         PacketByteBuf buf, PacketSender responseSender) {
-        BlockPos atmPos = buf.readBlockPos();
-        if (!AtmBlock.checkConstruct(atmPos, player.getServerWorld()))
-            throw new IllegalArgumentException();
+        BlockPos blockPos = buf.readBlockPos();
+        if (!AtmBlock.checkConstruct(blockPos, player.getServerWorld()) &&
+                !ExchangeMachineBlock.checkConstruct(blockPos, player.getServerWorld()))
+            throw new IllegalArgumentException("atm is not found on the given coordinates");
 
         float money = ServerEntrypoint.MONEYS.get(player.getUuidAsString());
         PacketByteBuf buff = PacketByteBufs.create();

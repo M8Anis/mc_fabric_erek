@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 public class SlotMachineInfoPanelBlockItem extends BlockItem {
 
-    public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_info_panel_block");
+    public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_info_panel");
 
     public SlotMachineInfoPanelBlockItem(Block block, Settings settings) {
         super(block, settings);

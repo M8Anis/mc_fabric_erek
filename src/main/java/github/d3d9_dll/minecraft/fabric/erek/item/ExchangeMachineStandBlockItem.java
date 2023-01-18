@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 
 public class ExchangeMachineStandBlockItem extends BlockItem {
 
-    public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "exchange_machine_stand_block");
+    public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "exchange_machine_stand");
 
     public ExchangeMachineStandBlockItem(Block block, Settings settings) {
         super(block, settings);
