@@ -1,0 +1,40 @@
+{
+    "category.m8anis_erek.debug_category": "Функции отладки",
+    "key.m8anis_erek.debug_handle": "Вызов отладочной функции",
+
+    "text.m8anis_erek.erek_prefix": "[ЁРЭК]",
+    "text.m8anis_erek.version_sync.timeout": "%s Не удалось синхронизировать версии мода",
+    "text.m8anis_erek.version_sync.older": "%s Ваша версия мода старая, обновитесь до новой",
+    "text.m8anis_erek.version_sync.newer": "%s На сервере стоит более старая версия мода чем у вас",
+
+    "itemGroup.m8anis_erek.casino": "[ЁРЭК] Казино",
+    "block.m8anis_erek.slotmachine_bottom_case": "Слот-машина (Нижняя часть)",
+    "block.m8anis_erek.slotmachine_block": "Слот-машина",
+    "block.m8anis_erek.slotmachine_info_panel": "Слот-машина (Информационная панель)",
+    "block.m8anis_erek.exchange_machine_block": "Касса обмена",
+    "block.m8anis_erek.exchange_machine_stand": "Касса обмена (Нижняя часть)",
+
+    "gui.m8anis_erek.slotmachine.button.spin": "Крутить!",
+    "gui.m8anis_erek.slotmachine.text.bet": "Ставка: %.2f",
+    "gui.m8anis_erek.slotmachine.text.balance": "Фишки: %.2f",
+
+    "chat.m8anis_erek.slotmachine.construct_not_full": "Невозможно воспользоваться слот машиной! Она построена не полностью",
+
+    "gui.m8anis_erek.exchange_machine.text.moneys": "Денег: %.2f",
+    "gui.m8anis_erek.exchange_machine.text.pieces": "Фишек: %.2f",
+    "gui.m8anis_erek.exchange_machine.text.not_enough_pieces": "Нехватает фишек!",
+    "gui.m8anis_erek.exchange_machine.text.not_enough_moneys": "Нехватает денег!",
+    "gui.m8anis_erek.exchange_machine.text.incorrect_value": "Не корректное число!",
+    "gui.m8anis_erek.exchange_machine.button.exchange_money": "Поменять фишки на деньги",
+    "gui.m8anis_erek.exchange_machine.button.exchange_piece": "Поменять деньги на фишки",
+
+    "chat.m8anis_erek.exchange_machine.construct_not_full": "Невозможно воспользоваться обменной машиной! Она построена не полностью",
+
+    "itemGroup.m8anis_erek.bank": "[ЁРЭК] Банк",
+    "block.m8anis_erek.atm_block": "Банкомат",
+    "block.m8anis_erek.atm_bottom_case": "Банкомат (Нижняя часть)",
+
+    "gui.m8anis_erek.atm.text.moneys": "Денег на счёте: %.2f",
+
+    "chat.m8anis_erek.atm.construct_not_full": "Невозможно воспользоваться банкоматом! Он построен не полностью"
+}

@@ -1,32 +1,32 @@
 {
     "schemaVersion": 1,
-    "id": "d3d9_dllerek",
+    "id": "m8anis_erek",
     "version": "${version}",
     "name": "ЁРЭК",
     "description": "",
     "authors": [
-        "d3d9_dll"
+        "M8Anis"
     ],
     "contact": {
         "homepage": "https://github.com/d3d9-dll",
         "sources": "https://github.com/d3d9-dll/mc-fabric-erek"
     },
     "license": "MIT License",
-    "icon": "assets/d3d9_dllerek/icon.png",
+    "icon": "assets/m8anis_erek/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "github.d3d9_dll.minecraft.fabric.erek.Entrypoint"
+          "github.m8anis.minecraft.fabric.erek.Entrypoint"
         ],
         "client": [
-            "github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint"
+          "github.m8anis.minecraft.fabric.erek.client.ClientEntrypoint"
         ],
         "server": [
-            "github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint"
+          "github.m8anis.minecraft.fabric.erek.server.ServerEntrypoint"
         ]
     },
     "mixins": [
-        "d3d9_dllerek.mixins.json"
+        "m8anis_erek.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.7.4",

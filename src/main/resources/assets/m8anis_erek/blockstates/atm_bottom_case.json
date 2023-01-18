@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "m8anis_erek:block/atm_bottom_case" },
+        "facing=east": { "model": "m8anis_erek:block/atm_bottom_case", "y": 90 },
+        "facing=south": { "model": "m8anis_erek:block/atm_bottom_case", "y": 180 },
+        "facing=west": { "model": "m8anis_erek:block/atm_bottom_case", "y": 270 }
+    }
+}
