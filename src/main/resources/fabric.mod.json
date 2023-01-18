@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "d3d9_dllmcservermod",
+  "version": "${version}",
+
+  "name": "Server Mod",
+  "description": "",
+  "authors": [
+    "d3d9_dll"
+  ],
+  "contact": {
+    "homepage": "https://github.com/d3d9-dll",
+    "sources": ""
+  },
+
+  "license": "MIT",
+  "icon": "assets/d3d9_dllmcservermod/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "github.d3d9_dll.minecraft.fabric.mcservermod.ExampleMod"
+    ]
+  },
+  "mixins": [
+    "d3d9_dllmcservermod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.14.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
