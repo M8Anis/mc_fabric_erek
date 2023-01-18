@@ -21,19 +21,37 @@ import java.util.HashMap;
 @Environment(EnvType.CLIENT)
 public class SlotmachineScreen extends Screen {
 
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int TEXTURE_WIDTH = 256;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int TEXTURE_HEIGHT = 256;
+
     private final static Identifier SYMBOLS_ATLAS =
             new Identifier("d3d9_dllerek:textures/gui/slotmachine/symbols.png");
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int SYMBOLS_ATLAS_WIDTH = 768;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int SYMBOLS_ATLAS_HEIGHT = 768;
+    private final HashMap<String, int[]> SYMBOLS_OFFSETS = new HashMap<>(9);
+
+    private final static Identifier LINES_ATLAS =
+            new Identifier("d3d9_dllerek:textures/gui/slotmachine/lines.png");
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int LINES_ATLAS_WIDTH = 512;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int LINES_ATLAS_HEIGHT = 512;
+    private final HashMap<String, int[]> LINES_OFFSETS = new HashMap<>(4);
+
     private static final float MINIMAL_BET = 4.0f;
     private static final float MAXIMAL_BET = 12.0f;
-    public static boolean bonusGame = false;
 
     private final BlockPos slotmachinePos;
     private final ClientWorld world;
     private static String[][] lastSpin;
     private static float balance = 0.0f;
     private static float bet = MINIMAL_BET;
+    public static boolean bonusGame = false;
     private static boolean initialized = false;
-    private final HashMap<String, int[]> OFFSETS = new HashMap<>(9);
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private ButtonWidget spinButton;
@@ -45,15 +63,20 @@ public class SlotmachineScreen extends Screen {
     public SlotmachineScreen(BlockPos slotmachinePos, ClientWorld world) {
         super(NarratorManager.EMPTY);
         // symbol = {x, y}
-        OFFSETS.put("B", new int[]{0, 0});
-        OFFSETS.put("W", new int[]{256, 0});
-        OFFSETS.put("1", new int[]{512, 0});
-        OFFSETS.put("2", new int[]{0, 256});
-        OFFSETS.put("3", new int[]{256, 256});
-        OFFSETS.put("A", new int[]{512, 256});
-        OFFSETS.put("K", new int[]{0, 512});
-        OFFSETS.put("Q", new int[]{256, 512});
-        OFFSETS.put("J", new int[]{512, 512});
+        SYMBOLS_OFFSETS.put("B", new int[]{0, 0});
+        SYMBOLS_OFFSETS.put("W", new int[]{256, 0});
+        SYMBOLS_OFFSETS.put("1", new int[]{512, 0});
+        SYMBOLS_OFFSETS.put("2", new int[]{0, 256});
+        SYMBOLS_OFFSETS.put("3", new int[]{256, 256});
+        SYMBOLS_OFFSETS.put("A", new int[]{512, 256});
+        SYMBOLS_OFFSETS.put("K", new int[]{0, 512});
+        SYMBOLS_OFFSETS.put("Q", new int[]{256, 512});
+        SYMBOLS_OFFSETS.put("J", new int[]{512, 512});
+        // line = {x, y}
+        LINES_OFFSETS.put("dU", new int[]{0, 0}); // = /
+        LINES_OFFSETS.put("uD", new int[]{256, 0}); // = \
+        LINES_OFFSETS.put("h", new int[]{0, 256}); // = -
+        LINES_OFFSETS.put("f", new int[]{256, 256}); // = --
 
         this.world = world;
         this.slotmachinePos = slotmachinePos;
@@ -94,17 +117,38 @@ public class SlotmachineScreen extends Screen {
         int x = (this.width / 2) - ((66 * 5) / 2);
         int y = (this.height / 10);
 
+        //noinspection ConstantConditions
+        this.minecraft.getTextureManager().bindTexture(LINES_ATLAS);
+
+        int[] lineTextureOffset = LINES_OFFSETS.get("h");
+        blit(x, y, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
+                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
+        lineTextureOffset = LINES_OFFSETS.get("uD");
+        blit(x + 34, y + 33, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
+                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
+        lineTextureOffset = LINES_OFFSETS.get("f");
+        blit(x + 100, y + 65, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
+                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
+        blit(x + 166, y + 65, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
+                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
+        lineTextureOffset = LINES_OFFSETS.get("uD");
+        blit(x + 232, y + 98, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
+                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
+        lineTextureOffset = LINES_OFFSETS.get("h");
+        blit(x + 298, y + 130, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
+                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
+
         if (lastSpin != null) {
-            //noinspection ConstantConditions
+            //noinspection
             this.minecraft.getTextureManager().bindTexture(SYMBOLS_ATLAS);
             for (int real = 0; real < lastSpin.length; real++) {
                 for (int symbol = 0; symbol < lastSpin[real].length; symbol++) {
                     int symbolX = x + (66 * real);
                     int symbolY = y + (65 * symbol);
                     String resultSymbol = lastSpin[real][symbol];
-                    int[] textureOffset = OFFSETS.get(resultSymbol);
-                    blit(symbolX, symbolY, 64, 64, textureOffset[0], textureOffset[1],
-                            256, 256, 768, 768);
+                    int[] symbolTextureOffset = SYMBOLS_OFFSETS.get(resultSymbol);
+                    blit(symbolX, symbolY, 64, 64, symbolTextureOffset[0], symbolTextureOffset[1],
+                            TEXTURE_WIDTH, TEXTURE_HEIGHT, SYMBOLS_ATLAS_WIDTH, SYMBOLS_ATLAS_HEIGHT);
                 }
             }
         } else {
