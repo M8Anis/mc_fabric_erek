@@ -1,5 +1,5 @@
 {
-  "category.key.d3d9_dllerek.debug_category": "Функции отладки",
+  "category.d3d9_dllerek.debug_category": "Функции отладки",
   "key.d3d9_dllerek.debug_handle": "Вызов отладочной функции",
 
   "itemGroup.d3d9_dllerek.casino": "ЁРЭК Казино",
@@ -11,5 +11,10 @@
 
   "gui.d3d9_dllerek.slotmachine.button.spin": "Крутить!",
   "gui.d3d9_dllerek.slotmachine.text.bet": "Ставка: %.2f",
-  "gui.d3d9_dllerek.slotmachine.text.balance": "Баланс: %.2f"
+  "gui.d3d9_dllerek.slotmachine.text.balance": "Баланс: %.2f",
+
+  "text.d3d9_dllerek.erek_prefix": "[ЁРЭК]",
+  "text.d3d9_dllerek.version_sync.timeout": "%s Не удалось синхронизировать версии мода",
+  "text.d3d9_dllerek.version_sync.older": "%s Ваша версия мода старая, обновитесь до новой",
+  "text.d3d9_dllerek.version_sync.newer": "%s На сервере стоит более старая версия мода чем у вас"
 }

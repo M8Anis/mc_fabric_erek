@@ -3,7 +3,7 @@ package github.d3d9_dll.minecraft.fabric.erek.server.models;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 
 import java.util.HashMap;
 
@@ -43,7 +43,12 @@ public class VersionSynchronizeQueue {
         public void run() {
             try {
                 sleep(TIMEOUT_MILLISECONDS);
-                handler.disconnect(new LiteralText("[EREK] Version check timeout"));
+                handler.disconnect(
+                        new TranslatableText(
+                                "text.d3d9_dllerek.version_sync.timeout",
+                                new TranslatableText("text.d3d9_dllerek.erek_prefix")
+                        )
+                );
             } catch (InterruptedException ignore) {
                 // IGNORE because it's not important
             }
