@@ -13,8 +13,7 @@ public class Balances {
     private static final HashMap<String, Float> balances = new HashMap<>();
 
     public static float get(String UUID) {
-        if (!balances.containsKey(UUID))
-            balances.put(UUID, DEFAULT_BALANCE);
+        if (!balances.containsKey(UUID)) balances.put(UUID, DEFAULT_BALANCE);
         return balances.get(UUID);
     }
 

@@ -5,6 +5,7 @@ import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Coefficients;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Reals;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -29,26 +30,31 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         if (!SlotMachineBlock.checkConstruct(slotmachinePos, player.getServerWorld()))
             throw new IllegalArgumentException();
 
-        float balance = Balances.get(player.getUuidAsString());
+        String UUID = player.getUuidAsString();
+        float balance = Balances.get(UUID);
         float bet = buf.readFloat();
 
-        if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance)
+        if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance) {
             throw new IllegalArgumentException();
+        }
 
         String[][] resultOfSpin = Reals.generateResult();
         Lines lines = new Lines(resultOfSpin);
         Lines.Matched matchedLines = new Lines.Matched(lines);
         boolean bonusGame = lines.isBonusGame;
         float coeff = (new Coefficients(matchedLines)).getCoefficient();
+        if (bonusGame) FreeSpin.add(UUID, 10);
+        int freeSpins = FreeSpin.get(UUID);
 
-        if (coeff < 0f) Balances.subtract(player.getUuidAsString(), bet * -coeff);
-        else Balances.increment(player.getUuidAsString(), bet * coeff);
-
-        if (bonusGame)
-            Balances.increment(player.getUuidAsString(), bet * 12);
+        if (coeff < 0f) {
+            if (freeSpins > 0) FreeSpin.subtract(UUID);
+            else Balances.subtract(UUID, bet * -coeff);
+        } else {
+            Balances.increment(UUID, bet * coeff);
+        }
 
         PacketByteBuf buff = Reals.generateForPacket(resultOfSpin);
-        buff.writeFloat(Balances.get(player.getUuidAsString()));
+        buff.writeFloat(Balances.get(UUID));
         buff.writeFloat(coeff);
         buff.writeBoolean(bonusGame);
 
