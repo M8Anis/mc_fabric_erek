@@ -3,7 +3,6 @@ package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s;
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
-import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Coefficients;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Reals;
@@ -11,11 +10,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.network.MessageType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
@@ -44,24 +41,11 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         boolean bonusGame = lines.isBonusGame;
         float coeff = (new Coefficients(matchedLines)).getCoefficient();
 
-        try {
-            if (coeff < 0f)
-                Balances.subtract(player.getUuidAsString(), bet * -coeff);
-            else
-                Balances.increment(player.getUuidAsString(), bet * coeff);
+        if (coeff < 0f) Balances.subtract(player.getUuidAsString(), bet * -coeff);
+        else Balances.increment(player.getUuidAsString(), bet * coeff);
 
-            if (bonusGame)
-                Balances.increment(player.getUuidAsString(), bet * 12);
-        } catch (Balances.BalanceOverflow e) {
-            ServerEntrypoint.LOGGER.info(
-                    "Player " + player.getUuidAsString() +
-                            " (" + player.getName() + ") balance recent attempted to overflow! Value not changed"
-            );
-            player.sendChatMessage(
-                    new LiteralText("[Slotmachine] Your balance may overflowed! Balance not changed"),
-                    MessageType.SYSTEM
-            );
-        }
+        if (bonusGame)
+            Balances.increment(player.getUuidAsString(), bet * 12);
 
         PacketByteBuf buff = Reals.generateForPacket(resultOfSpin);
         buff.writeFloat(Balances.get(player.getUuidAsString()));

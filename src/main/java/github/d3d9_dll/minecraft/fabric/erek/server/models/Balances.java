@@ -18,34 +18,16 @@ public class Balances {
         return balances.get(UUID);
     }
 
-    public static void increment(String UUID, float count) throws BalanceOverflow {
+    public static void increment(String UUID, float count) {
         if (count < 0) return;
 
-        float currentBalance = get(UUID);
-        float newBalance = currentBalance + count;
-
-        if (newBalance < 0) throw new BalanceOverflow(UUID, currentBalance, newBalance);
-
-        balances.replace(UUID, newBalance);
+        balances.replace(UUID, get(UUID) + count);
     }
 
-    public static void subtract(String UUID, float count) throws BalanceOverflow {
+    public static void subtract(String UUID, float count) {
         if (count < 0) return;
 
-        float currentBalance = get(UUID);
-        float newBalance = currentBalance - count;
-
-        if (newBalance > 0) throw new BalanceOverflow(UUID, currentBalance, newBalance);
-
-        balances.replace(UUID, newBalance);
-    }
-
-    public static class BalanceOverflow extends Exception {
-
-        public BalanceOverflow(String UUID, float oldBalance, float newBalance) {
-            super("balance overflowed: " + UUID + "; " + oldBalance + " -> " + newBalance);
-        }
-
+        balances.replace(UUID, get(UUID) - count);
     }
 
 }
