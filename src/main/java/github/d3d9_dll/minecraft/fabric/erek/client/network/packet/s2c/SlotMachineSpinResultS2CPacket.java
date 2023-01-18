@@ -26,14 +26,14 @@ public class SlotMachineSpinResultS2CPacket implements ClientPlayNetworking.Play
 
         SlotmachineScreen.setResult(resultOfSpin, new Lines.Matched(new Lines(resultOfSpin)));
 
-        float newBalance = buf.readFloat();
+        float newPiecesCounter = buf.readFloat();
         float newCoefficient = buf.readFloat();
 
-        SlotmachineScreen.setBalance(newBalance);
+        SlotmachineScreen.setPiecesCounter(newPiecesCounter);
         SlotmachineScreen.setCoefficient(newCoefficient);
         SlotmachineScreen.bonusGame = buf.readBoolean();
 
-        ClientEntrypoint.LOGGER.debug("Slotmachine balance changed to " + newBalance +
+        ClientEntrypoint.LOGGER.debug("Slotmachine pieces changed to " + newPiecesCounter +
                 ", coefficient to " + newCoefficient + " and spin result showed");
     }
 

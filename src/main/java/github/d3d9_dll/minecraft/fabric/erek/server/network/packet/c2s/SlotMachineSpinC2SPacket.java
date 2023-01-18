@@ -4,7 +4,7 @@ import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Balances;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Coefficients;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Reals;

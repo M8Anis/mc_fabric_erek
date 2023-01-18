@@ -43,7 +43,7 @@ public class SlotmachineScreen extends Screen {
 
     private static String[][] lastSpin;
     private static Lines.Matched matchedLines;
-    private static float balance = 0.0f;
+    private static float pieces = 0.0f;
     private static float coefficient = 0.0f;
     private static float bet = MINIMAL_BET;
     public static boolean bonusGame = false;
@@ -102,7 +102,7 @@ public class SlotmachineScreen extends Screen {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeBlockPos(slotmachinePos);
 
-        ClientPlayNetworking.send(Entrypoint.PACKET_SLOTMACHINE_BALANCE, buf);
+        ClientPlayNetworking.send(Entrypoint.PACKET_SLOTMACHINE_PIECES, buf);
     }
 
     public void render(int mouseX, int mouseY, float delta) {
@@ -146,7 +146,7 @@ public class SlotmachineScreen extends Screen {
         y = y + (65 * 3) + 8;
 
         String balanceString =
-                new TranslatableText("gui.d3d9_dllerek.slotmachine.text.balance", balance).asString();
+                new TranslatableText("gui.d3d9_dllerek.slotmachine.text.balance", pieces).asString();
         String betString =
                 new TranslatableText("gui.d3d9_dllerek.slotmachine.text.bet", bet).asString();
 
@@ -172,7 +172,7 @@ public class SlotmachineScreen extends Screen {
     @Override
     public void onClose() {
         lastSpin = null;
-        balance = 0.0f;
+        pieces = 0.0f;
         bet = MINIMAL_BET;
         initialized = false;
         matchedLines = null;
@@ -190,9 +190,9 @@ public class SlotmachineScreen extends Screen {
         coefficient = value;
     }
 
-    public static void setBalance(float value) {
+    public static void setPiecesCounter(float value) {
         if (!initialized) initialized = true;
-        balance = value;
+        pieces = value;
     }
 
     private void changedBet(float newBet) {
@@ -224,7 +224,7 @@ public class SlotmachineScreen extends Screen {
     private void spinButton(ButtonWidget button) {
         if (!checkMachine()) return;
 
-        if (bet > balance || !initialized) return;
+        if (bet > pieces || !initialized) return;
 
         lastSpin = new String[0][0];
 

@@ -11,15 +11,15 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.util.PacketByteBuf;
 
 @Environment(EnvType.CLIENT)
-public class SlotMachineBalanceS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
+public class SlotMachinePiecesS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
 
     @Override
     public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
                         PacketSender responseSender) {
-        float newBalance = buf.readFloat();
-        SlotmachineScreen.setBalance(newBalance);
+        float newPiecesCount = buf.readFloat();
+        SlotmachineScreen.setPiecesCounter(newPiecesCount);
 
-        ClientEntrypoint.LOGGER.debug("Slotmachine balance changed to " + newBalance);
+        ClientEntrypoint.LOGGER.debug("Slotmachine pieces changed to " + newPiecesCount);
     }
 
 }

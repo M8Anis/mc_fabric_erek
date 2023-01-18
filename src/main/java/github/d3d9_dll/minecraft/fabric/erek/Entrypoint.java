@@ -11,14 +11,15 @@ import java.io.File;
 public class Entrypoint implements ModInitializer {
 
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX));
-
-    public static final Identifier PACKET_SLOTMACHINE_SPIN =
-            new Identifier("d3d9_dllerek", "packet_slotmachine_spin");
-    public static final Identifier PACKET_SLOTMACHINE_BALANCE =
-            new Identifier("d3d9_dllerek", "packet_slotmachine_balance");
+    // Common
     public static final Identifier PACKET_VERSION_SYNC =
             new Identifier("d3d9_dllerek", "packet_version_synchronize");
-
+    // Casino
+    public static final Identifier PACKET_SLOTMACHINE_SPIN =
+            new Identifier("d3d9_dllerek", "packet_slotmachine_spin");
+    public static final Identifier PACKET_SLOTMACHINE_PIECES =
+            new Identifier("d3d9_dllerek", "packet_slotmachine_pieces");
+    // Bank
     public static final Identifier PACKET_CHEAT_SET_BALANCE =
             new Identifier("d3d9_dllerek", "packet_cheat_set_balance");
 

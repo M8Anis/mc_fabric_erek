@@ -3,7 +3,7 @@ package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s;
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -16,7 +16,7 @@ import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.SERVER)
-public class SlotMachineGetBalanceC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
+public class SlotMachineGetPiecesC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
 
     @Override
     public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
@@ -25,11 +25,11 @@ public class SlotMachineGetBalanceC2SPacket implements ServerPlayNetworking.Play
         if (!SlotMachineBlock.checkConstruct(slotmachinePos, player.getServerWorld()))
             throw new IllegalArgumentException();
 
-        float balance = Balances.get(player.getUuidAsString());
+        float balance = Pieces.get(player.getUuidAsString());
         PacketByteBuf buff = PacketByteBufs.create();
         buff.writeFloat(balance);
 
-        responseSender.sendPacket(Entrypoint.PACKET_SLOTMACHINE_BALANCE, buff);
+        responseSender.sendPacket(Entrypoint.PACKET_SLOTMACHINE_PIECES, buff);
 
         ServerEntrypoint.LOGGER.debug("Slotmachine balance (" + balance +
                 ") sended to player \"" + player.getName().asString() + "\"");

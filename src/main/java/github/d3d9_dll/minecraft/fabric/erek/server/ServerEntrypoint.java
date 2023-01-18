@@ -2,12 +2,13 @@ package github.d3d9_dll.minecraft.fabric.erek.server;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.AutoSave;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.VersionSynchronizeQueue;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Balances;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.CheatSetBalanceC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.ServerVersionSyncC2SPacket;
-import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineGetBalanceC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineGetPiecesC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineSpinC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerBlockRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerItemRegistration;
@@ -32,12 +33,13 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
 
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Server-side"));
 
-    private static final java.io.File BALANCES_FILE =
-            new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "balances.json");
+    private static final java.io.File BANK_DIRECTORY = new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "bank");
+    private static final java.io.File BALANCES_FILE = new java.io.File(BANK_DIRECTORY, "balances.json");
     private static final java.io.File CASINO_DIRECTORY = new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "casino");
     private static final java.io.File FREE_SPINS_FILE = new java.io.File(CASINO_DIRECTORY, "freespins.json");
+    private static final java.io.File PIECES_FILE = new java.io.File(CASINO_DIRECTORY, "pieces.json");
 
-    private static final AutoSave autosave = new AutoSave(300000L);
+    private static final AutoSave AUTO_SAVE_THREAD = new AutoSave(300000L);
 
     @Override
     public void onInitializeServer() {
@@ -45,6 +47,8 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
 
         if (!BALANCES_FILE.exists()) {
             try {
+                //noinspection ResultOfMethodCallIgnored
+                BANK_DIRECTORY.mkdirs();
                 //noinspection ResultOfMethodCallIgnored
                 BALANCES_FILE.createNewFile();
                 LOGGER.debug("File \"balances.json\" created");
@@ -63,6 +67,15 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 LOGGER.error("Cannot create \"freespins.json\"");
             }
         }
+        if (!PIECES_FILE.exists()) {
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                PIECES_FILE.createNewFile();
+                LOGGER.debug("File \"pieces.json\" created");
+            } catch (IOException e) {
+                LOGGER.error("Cannot create \"pieces.json\"");
+            }
+        }
 
         new ServerItemRegistration(new ServerBlockRegistration());
 
@@ -74,10 +87,10 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
         ServerLifecycleEvents.SERVER_STOPPING.register((listener) -> saveData());
         LOGGER.debug("Data saving registered to \"ServerLifecycleEvents.SERVER_STOPPING\" event");
 
-        ServerLifecycleEvents.SERVER_STARTING.register((listener) -> autosave.start());
+        ServerLifecycleEvents.SERVER_STARTING.register((listener) -> AUTO_SAVE_THREAD.start());
         LOGGER.debug("Data auto-saving enabler registered to \"ServerLifecycleEvents.SERVER_STARTING\" event");
 
-        ServerLifecycleEvents.SERVER_STOPPING.register((listener) -> autosave.interrupt());
+        ServerLifecycleEvents.SERVER_STOPPING.register((listener) -> AUTO_SAVE_THREAD.interrupt());
         LOGGER.debug("Data auto-saver interrupter registered to \"ServerLifecycleEvents.SERVER_STOPPING\" event");
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> addToVersionSyncQueue(handler));
@@ -93,9 +106,9 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
         LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
 
         ServerPlayNetworking.registerGlobalReceiver(
-                Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineGetBalanceC2SPacket()
+                Entrypoint.PACKET_SLOTMACHINE_PIECES, new SlotMachineGetPiecesC2SPacket()
         );
-        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
+        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_PIECES\" registered");
 
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncC2SPacket()
@@ -117,6 +130,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
 
     public static void saveData() {
         LOGGER.debug("Saving data");
+
         if (!BALANCES_FILE.canWrite()) {
             LOGGER.error("File \"balances.json\" is not writeable");
         } else {
@@ -138,10 +152,22 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 LOGGER.error("Cannot write \"freespins.json\" for save");
             }
         }
+
+        if (!PIECES_FILE.canWrite()) {
+            LOGGER.error("File \"pieces.json\" is not writeable");
+        } else {
+            try {
+                File.write(PIECES_FILE, Pieces.exportData());
+                LOGGER.debug("File \"pieces.json\" saved");
+            } catch (IOException e) {
+                LOGGER.error("Cannot write \"pieces.json\" for save");
+            }
+        }
     }
 
     private static void loadData() {
         LOGGER.debug("Loading data");
+
         if (!BALANCES_FILE.canRead()) {
             LOGGER.error("File \"balances.json\" is not readable");
         } else {
@@ -171,6 +197,22 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 }
             } catch (FileNotFoundException e) {
                 LOGGER.error("File \"freespins.json\" not found for load");
+            }
+        }
+
+        if (!PIECES_FILE.canRead()) {
+            LOGGER.error("File \"pieces.json\" is not readable");
+        } else {
+            try {
+                String data = File.read(PIECES_FILE);
+                if (data == null) {
+                    LOGGER.error("Cannot read \"pieces.json\" for load");
+                } else {
+                    Pieces.importData(data);
+                    LOGGER.debug("File \"pieces.json\" loaded");
+                }
+            } catch (FileNotFoundException e) {
+                LOGGER.error("File \"pieces.json\" not found for load");
             }
         }
     }

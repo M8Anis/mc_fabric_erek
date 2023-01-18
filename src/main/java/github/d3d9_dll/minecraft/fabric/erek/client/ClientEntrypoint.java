@@ -2,7 +2,7 @@ package github.d3d9_dll.minecraft.fabric.erek.client;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.ServerVersionSyncS2CPacket;
-import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachineBalanceS2CPacket;
+import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachinePiecesS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachineSpinResultS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.util.ClientBlockRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.client.util.ClientItemRegistration;
@@ -64,9 +64,9 @@ public class ClientEntrypoint implements ClientModInitializer {
         LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
 
         ClientPlayNetworking.registerReceiver(
-                Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineBalanceS2CPacket()
+                Entrypoint.PACKET_SLOTMACHINE_PIECES, new SlotMachinePiecesS2CPacket()
         );
-        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
+        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_PIECES\" registered");
 
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncS2CPacket()

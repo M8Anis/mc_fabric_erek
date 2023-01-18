@@ -1,7 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Balances;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
