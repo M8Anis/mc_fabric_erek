@@ -34,16 +34,16 @@ public class SlotmachineScreen extends Screen {
     private final int SYMBOLS_ATLAS_WIDTH = 768;
     @SuppressWarnings("FieldCanBeLocal")
     private final int SYMBOLS_ATLAS_HEIGHT = 768;
-    private static Lines.Matched matchedLines;
-    private static float coefficient = 0.0f;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int TEXTURE_WIDTH = 256;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int TEXTURE_HEIGHT = 256;
     private final HashMap<String, int[]> SYMBOLS_OFFSETS = createOffsets();
 
     private static String[][] lastSpin;
-    @SuppressWarnings("FieldCanBeLocal")
-    private final int TEXTURE_WIDTH = 256;
+    private static Lines.Matched matchedLines;
     private static float balance = 0.0f;
-    @SuppressWarnings("FieldCanBeLocal")
-    private final int TEXTURE_HEIGHT = 256;
+    private static float coefficient = 0.0f;
     private static float bet = MINIMAL_BET;
     public static boolean bonusGame = false;
     private static boolean initialized = false;
