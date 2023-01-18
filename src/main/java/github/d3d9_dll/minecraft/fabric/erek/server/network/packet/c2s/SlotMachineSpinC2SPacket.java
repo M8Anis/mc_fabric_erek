@@ -43,12 +43,13 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         Lines.Matched matchedLines = new Lines.Matched(lines);
         boolean bonusGame = lines.isBonusGame;
         float coeff = (new Coefficients(matchedLines)).getCoefficient();
-        if (bonusGame) FreeSpin.add(UUID, 10);
+
         int freeSpins = FreeSpin.get(UUID);
+        if (freeSpins > 0) FreeSpin.subtract(UUID);
+        if (bonusGame) FreeSpin.add(UUID, 10);
 
         if (coeff < 0f) {
-            if (freeSpins > 0) FreeSpin.subtract(UUID);
-            else Balances.subtract(UUID, bet * -coeff);
+            if (!(freeSpins > 0)) Balances.subtract(UUID, bet * -coeff);
         } else {
             Balances.increment(UUID, bet * coeff);
         }
@@ -56,7 +57,7 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         PacketByteBuf buff = Reals.generateForPacket(resultOfSpin);
         buff.writeFloat(Balances.get(UUID));
         buff.writeFloat(coeff);
-        buff.writeBoolean(bonusGame);
+        buff.writeBoolean(freeSpins > 0 || bonusGame);
 
         responseSender.sendPacket(Entrypoint.PACKET_SLOTMACHINE_SPIN, buff);
     }
