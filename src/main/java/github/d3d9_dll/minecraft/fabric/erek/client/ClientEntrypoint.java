@@ -26,9 +26,9 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Client-side"));
 
-    public static final ClientBlockRegistration BLOCK_REGISTER = new ClientBlockRegistration().registerAll();
+    public static final ClientBlockRegistration BLOCK_REGISTER = new ClientBlockRegistration();
     @SuppressWarnings("unused")
-    public static final ClientItemRegistration ITEM_REGISTER = new ClientItemRegistration(BLOCK_REGISTER).registerAll();
+    public static final ClientItemRegistration ITEM_REGISTER = new ClientItemRegistration(BLOCK_REGISTER);
 
     @Override
     public void onInitializeClient() {
@@ -36,6 +36,9 @@ public class ClientEntrypoint implements ClientModInitializer {
 
         ClientPlayConnectionEvents.INIT.register((handler, minecraftClient) -> registerClientPackets());
         LOGGER.debug("Packet registration registered to \"ClientPlayConnectionEvents.INIT\" event");
+
+        BLOCK_REGISTER.registerAll();
+        ITEM_REGISTER.registerAll();
 
         registerKeyBinds();
     }

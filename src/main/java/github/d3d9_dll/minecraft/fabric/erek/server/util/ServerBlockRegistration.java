@@ -41,8 +41,8 @@ public class ServerBlockRegistration {
         atmBottomCaseBlock = new AtmBottomCaseBlock(DEFAULT_BLOCK_SETTINGS);
     }
 
-    public ServerBlockRegistration registerAll() {
-        if (registered) return this;
+    public void registerAll() throws IllegalStateException {
+        if (registered) throw new IllegalStateException("blocks already registered");
 
         ServerEntrypoint.LOGGER.debug("Block registering");
 
@@ -68,8 +68,6 @@ public class ServerBlockRegistration {
         ClientEntrypoint.LOGGER.debug("Block \"exchange_machine_stand\" registered");
 
         registered = true;
-
-        return this;
     }
 
 }

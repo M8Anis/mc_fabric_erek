@@ -45,9 +45,9 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
     public static final Moneys MONEYS = new Moneys();
     public static final Pieces PIECES = new Pieces();
     public static final FreeSpin FREE_SPINS = new FreeSpin();
-    public static final ServerBlockRegistration BLOCK_REGISTER = new ServerBlockRegistration().registerAll();
+    public static final ServerBlockRegistration BLOCK_REGISTER = new ServerBlockRegistration();
     @SuppressWarnings("unused")
-    public static final ServerItemRegistration ITEM_REGISTER = new ServerItemRegistration(BLOCK_REGISTER).registerAll();
+    public static final ServerItemRegistration ITEM_REGISTER = new ServerItemRegistration(BLOCK_REGISTER);
 
     @Override
     public void onInitializeServer() {
@@ -85,8 +85,6 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             }
         }
 
-        new ServerItemRegistration(new ServerBlockRegistration());
-
         registerServerPackets();
 
         ServerLifecycleEvents.SERVER_STARTING.register((listener) -> loadData());
@@ -103,6 +101,9 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> addToVersionSyncQueue(handler));
         LOGGER.debug("Players adding to version sync registered to \"ServerPlayConnectionEvents.JOIN\" event");
+
+        BLOCK_REGISTER.registerAll();
+        ITEM_REGISTER.registerAll();
     }
 
     private static void registerServerPackets() {

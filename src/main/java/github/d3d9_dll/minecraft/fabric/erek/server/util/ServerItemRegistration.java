@@ -87,8 +87,8 @@ public class ServerItemRegistration {
                 .build();
     }
 
-    public ServerItemRegistration registerAll() {
-        if (registered) return this;
+    public void registerAll() throws IllegalStateException {
+        if (registered) throw new IllegalStateException("blocks already registered");
 
         ServerEntrypoint.LOGGER.debug("Item registering");
 
@@ -114,8 +114,6 @@ public class ServerItemRegistration {
         ClientEntrypoint.LOGGER.debug("Item \"exchange_machine_stand\" registered");
 
         registered = true;
-
-        return this;
     }
 
 }
