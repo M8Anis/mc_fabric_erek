@@ -1,5 +1,6 @@
 package github.d3d9_dll.minecraft.fabric.erek.block;
 
+import github.d3d9_dll.minecraft.fabric.erek.util.VoxelShapeHelper;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -36,9 +37,20 @@ public abstract class Block extends HorizontalFacingBlock {
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH));
     }
 
-    public Block(Settings settings, VoxelShape northShape, VoxelShape eastShape, VoxelShape southShape,
-                 VoxelShape westShape) {
+    public Block(Settings settings, VoxelShape northShape) {
         this(settings);
+        VoxelShape eastShape = VoxelShapeHelper.rotateShape(
+                Direction.NORTH, Direction.NORTH,
+                northShape
+        );
+        VoxelShape southShape = VoxelShapeHelper.rotateShape(
+                Direction.NORTH, Direction.SOUTH,
+                northShape
+        );
+        VoxelShape westShape = VoxelShapeHelper.rotateShape(
+                Direction.NORTH, Direction.WEST,
+                northShape
+        );
         this.northShape = northShape;
         this.eastShape = eastShape;
         this.southShape = southShape;

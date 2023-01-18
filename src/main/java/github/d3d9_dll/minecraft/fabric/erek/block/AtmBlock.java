@@ -33,69 +33,8 @@ public class AtmBlock extends github.d3d9_dll.minecraft.fabric.erek.block.Block 
             // Keypad
             Block.createCuboidShape(6.0D, 0.0D, 4.0D, 10.0D, 1.0D, 6.0D)
     );
-    private static final VoxelShape SHAPE_EAST = VoxelShapes.union(
-            // Back case
-            Block.createCuboidShape(0.0D, 0.0D, 2.0D, 7.0D, 14.0D, 14.0D),
-            // Left plate
-            Block.createCuboidShape(13.0D, 0.0D, 2.0D, 14.0D, 4.0D, 3.0D),
-            Block.createCuboidShape(12.0D, 0.0D, 2.0D, 13.0D, 7.0D, 3.0D),
-            Block.createCuboidShape(11.0D, 0.0D, 2.0D, 12.0D, 9.0D, 3.0D),
-            Block.createCuboidShape(9.0D, 0.0D, 2.0D, 11.0D, 10.0D, 3.0D),
-            Block.createCuboidShape(7.0D, 0.0D, 2.0D, 9.0D, 14.0D, 3.0D),
-            // Right plate
-            Block.createCuboidShape(13.0D, 0.0D, 13.0D, 14.0D, 4.0D, 14.0D),
-            Block.createCuboidShape(12.0D, 0.0D, 13.0D, 13.0D, 7.0D, 14.0D),
-            Block.createCuboidShape(11.0D, 0.0D, 13.0D, 12.0D, 9.0D, 14.0D),
-            Block.createCuboidShape(9.0D, 0.0D, 13.0D, 11.0D, 10.0D, 14.0D),
-            Block.createCuboidShape(7.0D, 0.0D, 13.0D, 9.0D, 14.0D, 14.0D),
-            // Upper plate
-            Block.createCuboidShape(7.0D, 12.0D, 3.0D, 9.0D, 14.0D, 13.0D),
-            // Keypad
-            Block.createCuboidShape(9.0D, 0.0D, 6.0D, 12.0D, 1.0D, 10.0D)
-    );
-    private static final VoxelShape SHAPE_SOUTH = VoxelShapes.union(
-            // Back case
-            Block.createCuboidShape(2.0D, 0.0D, 0.0D, 14.0D, 14.0D, 7.0D),
-            // Left plate
-            Block.createCuboidShape(2.0D, 0.0D, 13.0D, 3.0D, 4.0D, 14.0D),
-            Block.createCuboidShape(2.0D, 0.0D, 12.0D, 3.0D, 7.0D, 13.0D),
-            Block.createCuboidShape(2.0D, 0.0D, 11.0D, 3.0D, 9.0D, 12.0D),
-            Block.createCuboidShape(2.0D, 0.0D, 9.0D, 3.0D, 10.0D, 11.0D),
-            Block.createCuboidShape(2.0D, 0.0D, 7.0D, 3.0D, 14.0D, 9.0D),
-            // Right plate
-            Block.createCuboidShape(13.0D, 0.0D, 13.0D, 14.0D, 4.0D, 14.0D),
-            Block.createCuboidShape(13.0D, 0.0D, 12.0D, 14.0D, 7.0D, 13.0D),
-            Block.createCuboidShape(13.0D, 0.0D, 11.0D, 14.0D, 9.0D, 12.0D),
-            Block.createCuboidShape(13.0D, 0.0D, 9.0D, 14.0D, 10.0D, 11.0D),
-            Block.createCuboidShape(13.0D, 0.0D, 7.0D, 14.0D, 14.0D, 9.0D),
-            // Upper plate
-            Block.createCuboidShape(3.0D, 12.0D, 7.0D, 13.0D, 14.0D, 9.0D),
-            // Keypad
-            Block.createCuboidShape(6.0D, 0.0D, 9.0D, 10.0D, 1.0D, 12.0D)
-    );
-    private static final VoxelShape SHAPE_WEST = VoxelShapes.union(
-            // Back case
-            Block.createCuboidShape(9.0D, 0.0D, 2.0D, 16.0D, 14.0D, 14.0D),
-            // Left plate
-            Block.createCuboidShape(2.0D, 0.0D, 2.0D, 3.0D, 4.0D, 3.0D),
-            Block.createCuboidShape(3.0D, 0.0D, 2.0D, 4.0D, 7.0D, 3.0D),
-            Block.createCuboidShape(4.0D, 0.0D, 2.0D, 5.0D, 9.0D, 3.0D),
-            Block.createCuboidShape(5.0D, 0.0D, 2.0D, 7.0D, 10.0D, 3.0D),
-            Block.createCuboidShape(7.0D, 0.0D, 2.0D, 9.0D, 14.0D, 3.0D),
-            // Right plate
-            Block.createCuboidShape(2.0D, 0.0D, 13.0D, 3.0D, 4.0D, 14.0D),
-            Block.createCuboidShape(3.0D, 0.0D, 13.0D, 4.0D, 7.0D, 14.0D),
-            Block.createCuboidShape(4.0D, 0.0D, 13.0D, 5.0D, 9.0D, 14.0D),
-            Block.createCuboidShape(5.0D, 0.0D, 13.0D, 7.0D, 10.0D, 14.0D),
-            Block.createCuboidShape(7.0D, 0.0D, 13.0D, 9.0D, 14.0D, 14.0D),
-            // Upper plate
-            Block.createCuboidShape(7.0D, 12.0D, 3.0D, 9.0D, 14.0D, 13.0D),
-            // Keypad
-            Block.createCuboidShape(4.0D, 0.0D, 6.0D, 7.0D, 1.0D, 10.0D)
-    );
-
     public AtmBlock(Settings settings) {
-        super(settings, SHAPE_NORTH, SHAPE_EAST, SHAPE_SOUTH, SHAPE_WEST);
+        super(settings, SHAPE_NORTH);
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
