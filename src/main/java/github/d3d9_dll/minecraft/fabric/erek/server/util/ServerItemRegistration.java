@@ -14,8 +14,10 @@ import net.minecraft.util.registry.Registry;
 @Environment(EnvType.SERVER)
 public class ServerItemRegistration {
 
+    @SuppressWarnings("unused")
     public final ItemGroup casinoItemGroup;
 
+    @SuppressWarnings("unused")
     public final ItemGroup bankItemGroup;
 
     public final SlotMachineBottomCaseItem slotMachineBottomCaseBlockItem;

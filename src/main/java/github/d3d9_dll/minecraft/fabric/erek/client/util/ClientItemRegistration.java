@@ -18,8 +18,10 @@ import net.minecraft.util.registry.Registry;
 @Environment(EnvType.CLIENT)
 public class ClientItemRegistration {
 
+    @SuppressWarnings("unused")
     public final ItemGroup casinoItemGroup;
 
+    @SuppressWarnings("unused")
     public final ItemGroup bankItemGroup;
 
     public final SlotMachineBottomCaseItem slotMachineBottomCaseBlockItem;

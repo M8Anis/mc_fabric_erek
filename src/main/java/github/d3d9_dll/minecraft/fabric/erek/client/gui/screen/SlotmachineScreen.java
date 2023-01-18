@@ -67,16 +67,25 @@ public class SlotmachineScreen extends Screen {
     }
 
     public void init() {
+        int buttonPlaceY = (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight;
+        if ((buttonPlaceY + 20) > this.height) {
+            float difference = 1 - (
+                    (24 + (this.height - ((this.height / 10.0f) + (65 * 3) + 16 + this.font.fontHeight + 20))) / 24.0f
+            );
+            buttonPlaceY -= (16 + this.font.fontHeight) * difference;
+        }
+
         this.subBetButton = this.addButton(
                 new ButtonWidget(
                         (this.width / 2) - 50,
-                        (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight, 16, 20,
+                        buttonPlaceY, 16, 20,
                         "-", this::subBetButton
                 )
         );
         this.spinButton = this.addButton(
                 new ButtonWidget(
-                        (this.width / 2) - 32, (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight,
+                        (this.width / 2) - 32,
+                        buttonPlaceY,
                         64, 20,
                         new TranslatableText("gui.d3d9_dllerek.slotmachine.button.spin").asString(),
                         this::spinButton
@@ -84,7 +93,8 @@ public class SlotmachineScreen extends Screen {
         );
         this.addBetButton = this.addButton(
                 new ButtonWidget(
-                        (this.width / 2) + 34, (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight,
+                        (this.width / 2) + 34,
+                        buttonPlaceY,
                         16, 20, "+", this::addBetButton
                 )
         );
@@ -97,6 +107,7 @@ public class SlotmachineScreen extends Screen {
 
     public void render(int mouseX, int mouseY, float delta) {
         if (!checkMachine()) return;
+        this.renderBackground();
 
         int x = (this.width / 2) - ((66 * 5) / 2);
         int y = (this.height / 10);

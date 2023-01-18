@@ -1,9 +1,11 @@
 package github.d3d9_dll.minecraft.fabric.erek.server;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.AutoSave;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.VersionSynchronizeQueue;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
+import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.CheatSetBalanceC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.ServerVersionSyncC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineGetBalanceC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineSpinC2SPacket;
@@ -30,9 +32,12 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
 
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Server-side"));
 
-    private static final java.io.File BALANCES_FILE = new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "balances.json");
+    private static final java.io.File BALANCES_FILE =
+            new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "balances.json");
     private static final java.io.File CASINO_DIRECTORY = new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "casino");
     private static final java.io.File FREE_SPINS_FILE = new java.io.File(CASINO_DIRECTORY, "freespins.json");
+
+    private static final AutoSave autosave = new AutoSave(300000L);
 
     @Override
     public void onInitializeServer() {
@@ -63,30 +68,44 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
 
         registerServerPackets();
 
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> addToVersionSyncQueue(handler));
-        LOGGER.debug("Players adding to version sync registered to \"ServerPlayConnectionEvents.JOIN\" event");
+        ServerLifecycleEvents.SERVER_STARTING.register((listener) -> loadData());
+        LOGGER.debug("Data loading registered to \"ServerLifecycleEvents.SERVER_STARTING\" event");
 
         ServerLifecycleEvents.SERVER_STOPPING.register((listener) -> saveData());
         LOGGER.debug("Data saving registered to \"ServerLifecycleEvents.SERVER_STOPPING\" event");
 
-        ServerLifecycleEvents.SERVER_STARTING.register((listener) -> loadData());
-        LOGGER.debug("Data loading registered to \"ServerLifecycleEvents.SERVER_STARTING\" event");
+        ServerLifecycleEvents.SERVER_STARTING.register((listener) -> autosave.start());
+        LOGGER.debug("Data auto-saving enabler registered to \"ServerLifecycleEvents.SERVER_STARTING\" event");
+
+        ServerLifecycleEvents.SERVER_STOPPING.register((listener) -> autosave.interrupt());
+        LOGGER.debug("Data auto-saver interrupter registered to \"ServerLifecycleEvents.SERVER_STOPPING\" event");
+
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> addToVersionSyncQueue(handler));
+        LOGGER.debug("Players adding to version sync registered to \"ServerPlayConnectionEvents.JOIN\" event");
     }
 
     private static void registerServerPackets() {
         LOGGER.debug("Packets registration");
+
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinC2SPacket()
         );
         LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
+
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineGetBalanceC2SPacket()
         );
         LOGGER.debug("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
+
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncC2SPacket()
         );
         LOGGER.debug("Packet \"PACKET_VERSION_SYNC\" registered");
+
+        ServerPlayNetworking.registerGlobalReceiver(
+                Entrypoint.PACKET_CHEAT_SET_BALANCE, new CheatSetBalanceC2SPacket()
+        );
+        LOGGER.debug("Packet \"PACKET_CHEAT_SET_BALANCE\" registered");
     }
 
     private static void addToVersionSyncQueue(ServerPlayNetworkHandler handler) {
@@ -96,7 +115,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
         LOGGER.debug("Player \"" + player.getName().asString() + "\" added to version synchronize queue");
     }
 
-    private static void saveData() {
+    public static void saveData() {
         LOGGER.debug("Saving data");
         if (!BALANCES_FILE.canWrite()) {
             LOGGER.error("File \"balances.json\" is not writeable");

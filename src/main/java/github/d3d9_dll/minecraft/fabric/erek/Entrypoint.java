@@ -19,6 +19,9 @@ public class Entrypoint implements ModInitializer {
     public static final Identifier PACKET_VERSION_SYNC =
             new Identifier("d3d9_dllerek", "packet_version_synchronize");
 
+    public static final Identifier PACKET_CHEAT_SET_BALANCE =
+            new Identifier("d3d9_dllerek", "packet_cheat_set_balance");
+
     public static final File MOD_DATA_DIRECTORY =
             new File(FabricLoader.getInstance().getConfigDir().toFile(), "d3d9_dllerek");
 
