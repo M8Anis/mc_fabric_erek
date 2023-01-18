@@ -19,18 +19,10 @@ import net.minecraft.world.World;
 
 public abstract class Block extends HorizontalFacingBlock {
 
-    private VoxelShape northShape = VoxelShapes.union(
-            net.minecraft.block.Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
-    );
-    private VoxelShape eastShape = VoxelShapes.union(
-            net.minecraft.block.Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
-    );
-    private VoxelShape southShape = VoxelShapes.union(
-            net.minecraft.block.Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
-    );
-    private VoxelShape westShape = VoxelShapes.union(
-            net.minecraft.block.Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
-    );
+    private VoxelShape northShape = VoxelShapes.fullCube();
+    private VoxelShape eastShape = VoxelShapes.fullCube();
+    private VoxelShape southShape = VoxelShapes.fullCube();
+    private VoxelShape westShape = VoxelShapes.fullCube();
 
     protected Block(Settings settings) {
         super(settings);
