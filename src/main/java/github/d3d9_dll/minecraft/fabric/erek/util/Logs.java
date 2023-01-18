@@ -7,11 +7,11 @@ public class Logs {
 
     private final Logger logger;
 
-    public Logs(Logger logger){
+    public Logs(Logger logger) {
         this.logger = logger;
     }
 
-    public void log(String message){
+    public void log(String message) {
         if (Version.IS_DEBUG != 1) return;
         logger.info(message);
     }

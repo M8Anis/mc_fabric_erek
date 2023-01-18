@@ -7,6 +7,6 @@ public class Version {
     public static final int VERSION_NUMBER = 7;
     @SuppressWarnings({"PointlessArithmeticExpression", "RedundantSuppression"})
     public static final long VERSION_FINGERPRINT =
-            ((long)VERSION_RELEASE_TYPE << 32) + (IS_DEBUG << 30) + VERSION_NUMBER;
+            ((long) VERSION_RELEASE_TYPE << 32) + (IS_DEBUG << 30) + VERSION_NUMBER;
 
 }

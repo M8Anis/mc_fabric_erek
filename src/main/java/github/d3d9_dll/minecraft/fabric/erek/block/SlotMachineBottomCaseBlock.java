@@ -79,9 +79,9 @@ public class SlotMachineBottomCaseBlock extends HorizontalFacingBlock {
         return getShape(state);
     }
 
-    private VoxelShape getShape(BlockState state){
+    private VoxelShape getShape(BlockState state) {
         Direction dir = state.get(FACING);
-        switch(dir) {
+        switch (dir) {
             default:
             case NORTH:
                 return SHAPE_NORTH;
