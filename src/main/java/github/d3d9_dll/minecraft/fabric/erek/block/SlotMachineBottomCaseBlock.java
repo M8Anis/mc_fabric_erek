@@ -16,7 +16,7 @@ public class SlotMachineBottomCaseBlock extends github.d3d9_dll.minecraft.fabric
             Block.createCuboidShape(1.0D, 14.0D, 0.0D, 15.0D, 16.0D, 2.0D),
 
             Block.createCuboidShape(1.0D, 14.0D, 1.0D, 15.0D, 16.0D, 15.0D)
-    );
+    ).simplify();
 
     public SlotMachineBottomCaseBlock(Block.Settings settings) {
         super(settings, SHAPE_NORTH);

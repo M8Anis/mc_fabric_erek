@@ -40,7 +40,7 @@ public class SlotMachineBlock extends github.d3d9_dll.minecraft.fabric.erek.bloc
             Block.createCuboidShape(1.0D, 0.0D, 11.0D, 15.0D, 6.0D, 12.0D),
             Block.createCuboidShape(1.0D, 0.0D, 12.0D, 15.0D, 4.0D, 13.0D),
             Block.createCuboidShape(1.0D, 0.0D, 13.0D, 15.0D, 1.0D, 14.0D)
-    );
+    ).simplify();
 
     public SlotMachineBlock(Block.Settings settings) {
         super(settings, SHAPE_NORTH);
