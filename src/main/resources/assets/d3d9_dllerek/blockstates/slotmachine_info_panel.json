@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "d3d9_dllerek:block/slotmachine_info_panel" },
-        "facing=east": { "model": "d3d9_dllerek:block/slotmachine_info_panel", "y": 90 },
-        "facing=south": { "model": "d3d9_dllerek:block/slotmachine_info_panel", "y": 180 },
-        "facing=west": { "model": "d3d9_dllerek:block/slotmachine_info_panel", "y": 270 }
-    }
-}

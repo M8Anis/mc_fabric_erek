@@ -3,11 +3,11 @@
     "key.d3d9_dllerek.debug_handle": "Вызов отладочной функции",
 
     "itemGroup.d3d9_dllerek.casino": "[ЁРЭК] Казино",
-    "block.d3d9_dllerek.slotmachine_bottom_case": "Слот-машина (Нижняя часть)",
+    "block.d3d9_dllerek.slotmachine_bottom_case_block": "Слот-машина (Нижняя часть)",
     "block.d3d9_dllerek.slotmachine_block": "Слот-машина",
-    "block.d3d9_dllerek.slotmachine_info_panel": "Слот-машина (Информационная панель)",
+    "block.d3d9_dllerek.slotmachine_info_panel_block": "Слот-машина (Информационная панель)",
     "block.d3d9_dllerek.exchange_machine_block": "Касса обмена",
-    "block.d3d9_dllerek.exchange_machine_stand": "Касса обмена (Нижняя часть)",
+    "block.d3d9_dllerek.exchange_machine_stand_block": "Касса обмена (Нижняя часть)",
 
     "chat.d3d9_dllerek.slotmachine.construct_not_full": "Невозможно воспользоваться слот машиной! Она построена не полностью",
     "chat.d3d9_dllerek.exchange_machine.construct_not_full": "Невозможно воспользоваться обменной машиной! Она построена не полностью",
@@ -23,7 +23,7 @@
 
     "itemGroup.d3d9_dllerek.bank": "[ЁРЭК] Банк",
     "block.d3d9_dllerek.atm_block": "Банкомат",
-    "block.d3d9_dllerek.atm_bottom_case": "Банкомат (Нижняя часть)",
+    "block.d3d9_dllerek.atm_bottom_case_block": "Банкомат (Нижняя часть)",
 
     "gui.d3d9_dllerek.atm.button.exchange_money": "Поменять фишки на деньги",
     "gui.d3d9_dllerek.atm.button.exchange_piece": "Поменять деньги на фишки",

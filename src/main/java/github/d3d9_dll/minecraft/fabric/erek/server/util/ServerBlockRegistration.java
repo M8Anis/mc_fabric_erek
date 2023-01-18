@@ -22,10 +22,12 @@ public class ServerBlockRegistration {
     public final SlotMachineInfoPanelBlock slotMachineInfoPanelBlock;
 
     public final ExchangeMachineBlock exchangeMachineBlock;
-    public final ExchangeMachineStand exchangeMachineStand;
+    public final ExchangeMachineStandBlock exchangeMachineStandBlock;
 
     public final AtmBlock atmBlock;
     public final AtmBottomCaseBlock atmBottomCaseBlock;
+
+    private boolean registered = false;
 
     public ServerBlockRegistration() {
         slotMachineBottomCaseBlock = new SlotMachineBottomCaseBlock(DEFAULT_BLOCK_SETTINGS);
@@ -33,15 +35,15 @@ public class ServerBlockRegistration {
         slotMachineInfoPanelBlock = new SlotMachineInfoPanelBlock(DEFAULT_BLOCK_SETTINGS);
 
         exchangeMachineBlock = new ExchangeMachineBlock(DEFAULT_BLOCK_SETTINGS);
-        exchangeMachineStand = new ExchangeMachineStand(DEFAULT_BLOCK_SETTINGS);
+        exchangeMachineStandBlock = new ExchangeMachineStandBlock(DEFAULT_BLOCK_SETTINGS);
 
         atmBlock = new AtmBlock(DEFAULT_BLOCK_SETTINGS);
         atmBottomCaseBlock = new AtmBottomCaseBlock(DEFAULT_BLOCK_SETTINGS);
-
-        registerAll();
     }
 
-    private void registerAll() {
+    public ServerBlockRegistration registerAll() {
+        if (registered) return this;
+
         ServerEntrypoint.LOGGER.debug("Block registering");
 
         Registry.register(Registry.BLOCK, SlotMachineBottomCaseBlock.IDENTIFIER, slotMachineBottomCaseBlock);
@@ -62,8 +64,12 @@ public class ServerBlockRegistration {
         Registry.register(Registry.BLOCK, ExchangeMachineBlock.IDENTIFIER, exchangeMachineBlock);
         ClientEntrypoint.LOGGER.debug("Block \"exchange_machine_block\" registered");
 
-        Registry.register(Registry.BLOCK, ExchangeMachineStand.IDENTIFIER, exchangeMachineStand);
+        Registry.register(Registry.BLOCK, ExchangeMachineStandBlock.IDENTIFIER, exchangeMachineStandBlock);
         ClientEntrypoint.LOGGER.debug("Block \"exchange_machine_stand\" registered");
+
+        registered = true;
+
+        return this;
     }
 
 }

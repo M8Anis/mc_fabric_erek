@@ -1,6 +1,6 @@
 package github.d3d9_dll.minecraft.fabric.erek.block;
 
-import github.d3d9_dll.minecraft.fabric.erek.item.AtmBottomCaseItem;
+import github.d3d9_dll.minecraft.fabric.erek.item.AtmBottomCaseBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.shape.VoxelShape;
@@ -8,7 +8,7 @@ import net.minecraft.util.shape.VoxelShapes;
 
 public class AtmBottomCaseBlock extends github.d3d9_dll.minecraft.fabric.erek.block.Block {
 
-    public static final Identifier IDENTIFIER = AtmBottomCaseItem.IDENTIFIER;
+    public static final Identifier IDENTIFIER = AtmBottomCaseBlockItem.IDENTIFIER;
 
     private static final VoxelShape SHAPE_NORTH = VoxelShapes.union(
             Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 16.0D),

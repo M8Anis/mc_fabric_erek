@@ -26,6 +26,10 @@ public class ClientEntrypoint implements ClientModInitializer {
 
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Client-side"));
 
+    public static final ClientBlockRegistration BLOCK_REGISTER = new ClientBlockRegistration().registerAll();
+    @SuppressWarnings("unused")
+    public static final ClientItemRegistration ITEM_REGISTER = new ClientItemRegistration(BLOCK_REGISTER).registerAll();
+
     @Override
     public void onInitializeClient() {
         LOGGER.debug("Client-side initialization");
@@ -34,8 +38,6 @@ public class ClientEntrypoint implements ClientModInitializer {
         LOGGER.debug("Packet registration registered to \"ClientPlayConnectionEvents.INIT\" event");
 
         registerKeyBinds();
-
-        new ClientItemRegistration(new ClientBlockRegistration());
     }
 
     private static void registerKeyBinds() {

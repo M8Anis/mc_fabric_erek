@@ -3,8 +3,8 @@
     "parent": "block/block",
     "texture_size": [64, 64],
     "textures": {
-        "0": "d3d9_dllerek:block/slotmachine_info_panel/info_panel",
-        "particle": "d3d9_dllerek:block/slotmachine_info_panel/info_panel"
+        "0": "d3d9_dllerek:block/slotmachine_info_panel_block/info_panel",
+        "particle": "d3d9_dllerek:block/slotmachine_info_panel_block/info_panel"
     },
     "elements": [
         {

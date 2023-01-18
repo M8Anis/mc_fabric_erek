@@ -21,7 +21,7 @@
         "15": "d3d9_dllerek:block/exchange_machine_block/back_plate_5",
         "16": "d3d9_dllerek:block/exchange_machine_block/upper_plate",
         "17": "d3d9_dllerek:block/exchange_machine_block/bottom_plate",
-        "particle": "d3d9_dllerek:block/exchange_machine_stand/standing_plate"
+        "particle": "d3d9_dllerek:block/exchange_machine_stand_block/standing_plate"
     },
     "elements": [
         {

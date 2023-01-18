@@ -21,6 +21,7 @@ public class ClientAtmBlock extends AtmBlock {
         super(settings);
     }
 
+    @Override
     public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
                             BlockHitResult hit) {
         if (!world.isClient || hand != Hand.OFF_HAND) return false;

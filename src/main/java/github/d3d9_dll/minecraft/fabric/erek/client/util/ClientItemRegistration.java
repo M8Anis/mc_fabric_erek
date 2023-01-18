@@ -1,13 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.client.util;
 
 import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.client.item.ClientAtmBlockItem;
-import github.d3d9_dll.minecraft.fabric.erek.client.item.ClientExchangeMachineBlockItem;
-import github.d3d9_dll.minecraft.fabric.erek.client.item.ClientSlotMachineBlockItem;
-import github.d3d9_dll.minecraft.fabric.erek.item.AtmBottomCaseItem;
-import github.d3d9_dll.minecraft.fabric.erek.item.ExchangeMachineStandItem;
-import github.d3d9_dll.minecraft.fabric.erek.item.SlotMachineBottomCaseItem;
-import github.d3d9_dll.minecraft.fabric.erek.item.SlotMachineInfoPanelItem;
+import github.d3d9_dll.minecraft.fabric.erek.item.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -26,44 +20,46 @@ public class ClientItemRegistration {
     @SuppressWarnings("unused")
     public final ItemGroup bankItemGroup;
 
-    public final SlotMachineBottomCaseItem slotMachineBottomCaseBlockItem;
-    public final ClientSlotMachineBlockItem slotMachineBlockItem;
-    public final SlotMachineInfoPanelItem slotMachineInfoPanelBlockItem;
+    public final SlotMachineBottomCaseBlockItem slotMachineBottomCaseBlockItem;
+    public final SlotMachineBlockItem slotMachineBlockItem;
+    public final SlotMachineInfoPanelBlockItem slotMachineInfoPanelBlockItem;
 
-    public final ClientExchangeMachineBlockItem exchangeMachineBlockItem;
-    public final ExchangeMachineStandItem exchangeMachineStandItem;
+    public final ExchangeMachineBlockItem exchangeMachineBlockItem;
+    public final ExchangeMachineStandBlockItem exchangeMachineStandBlockItem;
 
-    public final ClientAtmBlockItem atmBlockItem;
-    public final AtmBottomCaseItem atmBottomCaseBlockItem;
+    public final AtmBlockItem atmBlockItem;
+    public final AtmBottomCaseBlockItem atmBottomCaseBlockItem;
+
+    private boolean registered = false;
 
     public ClientItemRegistration(ClientBlockRegistration blockRegistration) {
-        slotMachineBottomCaseBlockItem = new SlotMachineBottomCaseItem(
+        slotMachineBottomCaseBlockItem = new SlotMachineBottomCaseBlockItem(
                 blockRegistration.slotMachineBottomCaseBlock,
                 new FabricItemSettings()
         );
-        slotMachineBlockItem = new ClientSlotMachineBlockItem(
+        slotMachineBlockItem = new SlotMachineBlockItem(
                 blockRegistration.slotMachineBlock,
                 new FabricItemSettings()
         );
-        slotMachineInfoPanelBlockItem = new SlotMachineInfoPanelItem(
+        slotMachineInfoPanelBlockItem = new SlotMachineInfoPanelBlockItem(
                 blockRegistration.slotMachineInfoPanelBlock,
                 new FabricItemSettings()
         );
 
-        exchangeMachineBlockItem = new ClientExchangeMachineBlockItem(
+        exchangeMachineBlockItem = new ExchangeMachineBlockItem(
                 blockRegistration.exchangeMachineBlock,
                 new FabricItemSettings()
         );
-        exchangeMachineStandItem = new ExchangeMachineStandItem(
-                blockRegistration.exchangeMachineStand,
+        exchangeMachineStandBlockItem = new ExchangeMachineStandBlockItem(
+                blockRegistration.exchangeMachineStandBlock,
                 new FabricItemSettings()
         );
 
-        atmBlockItem = new ClientAtmBlockItem(
+        atmBlockItem = new AtmBlockItem(
                 blockRegistration.atmBlock,
                 new FabricItemSettings()
         );
-        atmBottomCaseBlockItem = new AtmBottomCaseItem(
+        atmBottomCaseBlockItem = new AtmBottomCaseBlockItem(
                 blockRegistration.atmBottomCaseBlock,
                 new FabricItemSettings()
         );
@@ -75,7 +71,7 @@ public class ClientItemRegistration {
                     stacks.add(new ItemStack(slotMachineBottomCaseBlockItem));
                     stacks.add(new ItemStack(slotMachineBlockItem));
                     stacks.add(new ItemStack(slotMachineInfoPanelBlockItem));
-                    stacks.add(new ItemStack(exchangeMachineStandItem));
+                    stacks.add(new ItemStack(exchangeMachineStandBlockItem));
                     stacks.add(new ItemStack(exchangeMachineBlockItem));
                 })
                 .build();
@@ -88,33 +84,37 @@ public class ClientItemRegistration {
                     stacks.add(new ItemStack(atmBlockItem));
                 })
                 .build();
-
-        registerAll();
     }
 
-    private void registerAll() {
+    public ClientItemRegistration registerAll() {
+        if (registered) return this;
+
         ClientEntrypoint.LOGGER.debug("Item registering");
 
-        Registry.register(Registry.ITEM, SlotMachineBottomCaseItem.IDENTIFIER, slotMachineBottomCaseBlockItem);
+        Registry.register(Registry.ITEM, SlotMachineBottomCaseBlockItem.IDENTIFIER, slotMachineBottomCaseBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"slotmachine_bottom_case\" registered");
 
-        Registry.register(Registry.ITEM, ClientSlotMachineBlockItem.IDENTIFIER, slotMachineBlockItem);
+        Registry.register(Registry.ITEM, SlotMachineBlockItem.IDENTIFIER, slotMachineBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"slotmachine_block\" registered");
 
-        Registry.register(Registry.ITEM, SlotMachineInfoPanelItem.IDENTIFIER, slotMachineInfoPanelBlockItem);
+        Registry.register(Registry.ITEM, SlotMachineInfoPanelBlockItem.IDENTIFIER, slotMachineInfoPanelBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"slotmachine_info_panel\" registered");
 
-        Registry.register(Registry.ITEM, ClientAtmBlockItem.IDENTIFIER, atmBlockItem);
+        Registry.register(Registry.ITEM, AtmBlockItem.IDENTIFIER, atmBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"atm_block\" registered");
 
-        Registry.register(Registry.ITEM, AtmBottomCaseItem.IDENTIFIER, atmBottomCaseBlockItem);
+        Registry.register(Registry.ITEM, AtmBottomCaseBlockItem.IDENTIFIER, atmBottomCaseBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"atm_bottom_case\" registered");
 
-        Registry.register(Registry.ITEM, ClientExchangeMachineBlockItem.IDENTIFIER, exchangeMachineBlockItem);
+        Registry.register(Registry.ITEM, ExchangeMachineBlockItem.IDENTIFIER, exchangeMachineBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"exchange_machine_block\" registered");
 
-        Registry.register(Registry.ITEM, ExchangeMachineStandItem.IDENTIFIER, exchangeMachineStandItem);
+        Registry.register(Registry.ITEM, ExchangeMachineStandBlockItem.IDENTIFIER, exchangeMachineStandBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"exchange_machine_stand\" registered");
+
+        registered = true;
+
+        return this;
     }
 
 }

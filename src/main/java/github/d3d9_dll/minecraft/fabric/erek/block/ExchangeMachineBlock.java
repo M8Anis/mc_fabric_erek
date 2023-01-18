@@ -38,7 +38,7 @@ public class ExchangeMachineBlock extends github.d3d9_dll.minecraft.fabric.erek.
         BlockState exchange_machine_stand = world.getBlockState(blockPos.add(0, -1, 0));
 
         return exchange_machine.getBlock() instanceof ExchangeMachineBlock &&
-                exchange_machine_stand.getBlock() instanceof ExchangeMachineStand &&
+                exchange_machine_stand.getBlock() instanceof ExchangeMachineStandBlock &&
                 exchange_machine.get(FACING).equals(exchange_machine_stand.get(FACING));
     }
 

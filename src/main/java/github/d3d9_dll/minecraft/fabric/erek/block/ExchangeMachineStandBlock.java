@@ -1,14 +1,14 @@
 package github.d3d9_dll.minecraft.fabric.erek.block;
 
-import github.d3d9_dll.minecraft.fabric.erek.item.ExchangeMachineStandItem;
+import github.d3d9_dll.minecraft.fabric.erek.item.ExchangeMachineStandBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-public class ExchangeMachineStand extends github.d3d9_dll.minecraft.fabric.erek.block.Block {
+public class ExchangeMachineStandBlock extends github.d3d9_dll.minecraft.fabric.erek.block.Block {
 
-    public static final Identifier IDENTIFIER = ExchangeMachineStandItem.IDENTIFIER;
+    public static final Identifier IDENTIFIER = ExchangeMachineStandBlockItem.IDENTIFIER;
 
     private static final VoxelShape SHAPE_NORTH = VoxelShapes.union(
             Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
@@ -23,7 +23,7 @@ public class ExchangeMachineStand extends github.d3d9_dll.minecraft.fabric.erek.
             Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
     );
 
-    public ExchangeMachineStand(Settings settings) {
+    public ExchangeMachineStandBlock(Settings settings) {
         super(settings, SHAPE_NORTH, SHAPE_EAST, SHAPE_SOUTH, SHAPE_WEST);
     }
 
