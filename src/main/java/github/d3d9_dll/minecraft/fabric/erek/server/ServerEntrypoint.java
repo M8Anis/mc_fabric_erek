@@ -9,6 +9,7 @@ import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachi
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineSpinC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerBlockRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerItemRegistration;
+import github.d3d9_dll.minecraft.fabric.erek.util.File;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.EnvType;
@@ -21,16 +22,17 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.apache.logging.log4j.LogManager;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @Environment(EnvType.SERVER)
 public class ServerEntrypoint implements DedicatedServerModInitializer {
 
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Server-side"));
 
-    private static final File BALANCES_FILE = new File(Entrypoint.MOD_DATA_DIRECTORY, "balances.json");
-    private static final File CASINO_DIRECTORY = new File(Entrypoint.MOD_DATA_DIRECTORY, "casino");
-    private static final File FREE_SPINS_FILE = new File(CASINO_DIRECTORY, "freespins.json");
+    private static final java.io.File BALANCES_FILE = new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "balances.json");
+    private static final java.io.File CASINO_DIRECTORY = new java.io.File(Entrypoint.MOD_DATA_DIRECTORY, "casino");
+    private static final java.io.File FREE_SPINS_FILE = new java.io.File(CASINO_DIRECTORY, "freespins.json");
 
     @Override
     public void onInitializeServer() {
@@ -100,13 +102,8 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"balances.json\" is not writeable");
         } else {
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(BALANCES_FILE));
-                String data = Balances.exportData();
-                writer.write(data);
-                writer.close();
+                File.write(BALANCES_FILE, Balances.exportData());
                 LOGGER.debug("File \"balances.json\" saved");
-            } catch (FileNotFoundException e) {
-                LOGGER.error("File \"balances.json\" not found for save");
             } catch (IOException e) {
                 LOGGER.error("Cannot write \"balances.json\" for save");
             }
@@ -116,13 +113,8 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"freespins.json\" is not writeable");
         } else {
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(FREE_SPINS_FILE));
-                String data = FreeSpin.exportData();
-                writer.write(data);
-                writer.close();
+                File.write(FREE_SPINS_FILE, FreeSpin.exportData());
                 LOGGER.debug("File \"freespins.json\" saved");
-            } catch (FileNotFoundException e) {
-                LOGGER.error("File \"freespins.json\" not found for save");
             } catch (IOException e) {
                 LOGGER.error("Cannot write \"freespins.json\" for save");
             }
@@ -135,20 +127,15 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"balances.json\" is not readable");
         } else {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(BALANCES_FILE));
-                StringBuilder data = new StringBuilder();
-                String line = reader.readLine();
-                while (line != null) {
-                    data.append(line);
-                    line = reader.readLine();
+                String data = File.read(BALANCES_FILE);
+                if (data == null) {
+                    LOGGER.error("Cannot read \"balances.json\" for load");
+                } else {
+                    Balances.importData(data);
+                    LOGGER.debug("File \"balances.json\" loaded");
                 }
-                Balances.importData(data.toString());
-                reader.close();
-                LOGGER.debug("File \"balances.json\" loaded");
             } catch (FileNotFoundException e) {
                 LOGGER.error("File \"balances.json\" not found for load");
-            } catch (IOException e) {
-                LOGGER.error("Cannot read \"balances.json\" for load");
             }
         }
 
@@ -156,20 +143,15 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"freespins.json\" is not readable");
         } else {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(FREE_SPINS_FILE));
-                StringBuilder data = new StringBuilder();
-                String line = reader.readLine();
-                while (line != null) {
-                    data.append(line);
-                    line = reader.readLine();
+                String data = File.read(FREE_SPINS_FILE);
+                if (data == null) {
+                    LOGGER.error("Cannot read \"freespins.json\" for load");
+                } else {
+                    FreeSpin.importData(data);
+                    LOGGER.debug("File \"freespins.json\" loaded");
                 }
-                FreeSpin.importData(data.toString());
-                reader.close();
-                LOGGER.debug("File \"freespins.json\" loaded");
             } catch (FileNotFoundException e) {
                 LOGGER.error("File \"freespins.json\" not found for load");
-            } catch (IOException e) {
-                LOGGER.error("Cannot read \"freespins.json\" for load");
             }
         }
     }
