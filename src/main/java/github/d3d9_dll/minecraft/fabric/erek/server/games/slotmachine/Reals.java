@@ -77,9 +77,9 @@ public class Reals {
         /*
          *  Writing in reverse
          **/
-        for (int reals = resultOfSpin.length - 1; 0 <= reals; reals--) {
-            for (int symbol = resultOfSpin[reals].length - 1; 0 <= symbol; symbol--) {
-                buff.writeString(resultOfSpin[reals][symbol], 1);
+        for (String[] strings : resultOfSpin) {
+            for (String string : strings) {
+                buff.writeString(string, 1);
             }
         }
 

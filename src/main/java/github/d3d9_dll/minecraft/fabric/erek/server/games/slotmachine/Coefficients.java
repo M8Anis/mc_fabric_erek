@@ -9,6 +9,8 @@ import java.util.HashMap;
 @Environment(EnvType.SERVER)
 public class Coefficients {
 
+    @SuppressWarnings("FieldCanBeLocal")
+    private final float LOSE_COEFFICIENT = -2.0f;
     private float coefficient = 0.0f;
 
     public Coefficients(Lines.Matched matchedLines) {
@@ -34,7 +36,7 @@ public class Coefficients {
     }
 
     public float getCoefficient() {
-        return coefficient == 0.0f ? -1.0f : coefficient;
+        return coefficient == 0.0f ? LOSE_COEFFICIENT : coefficient;
     }
 
 }

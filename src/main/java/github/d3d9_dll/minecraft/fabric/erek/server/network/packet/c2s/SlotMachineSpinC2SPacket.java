@@ -40,11 +40,15 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         Lines.Matched matchedLines = new Lines.Matched(lines);
         boolean bonusGame = lines.isBonusGame;
         float coeff = (new Coefficients(matchedLines)).getCoefficient();
-        if (coeff == -1.0f) Balances.subtract(player.getUuidAsString(), bet * 2);
+        if (coeff < 0f) Balances.subtract(player.getUuidAsString(), bet * -coeff);
         else Balances.increment(player.getUuidAsString(), bet * coeff);
+
+        if (bonusGame)
+            Balances.increment(player.getUuidAsString(), bet * 12);
 
         PacketByteBuf buff = Reals.generateForPacket(resultOfSpin);
         buff.writeFloat(Balances.get(player.getUuidAsString()));
+        buff.writeFloat(coeff);
         buff.writeBoolean(bonusGame);
 
         ServerPlayNetworking.send(player, Entrypoint.PACKET_SLOTMACHINE_SPIN, buff);

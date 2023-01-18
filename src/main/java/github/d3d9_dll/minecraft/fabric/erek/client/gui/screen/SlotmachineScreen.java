@@ -2,6 +2,7 @@ package github.d3d9_dll.minecraft.fabric.erek.client.gui.screen;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
+import github.d3d9_dll.minecraft.fabric.erek.games.slotmachine.Lines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -17,14 +18,15 @@ import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
 public class SlotmachineScreen extends Screen {
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private final int TEXTURE_WIDTH = 256;
-    @SuppressWarnings("FieldCanBeLocal")
-    private final int TEXTURE_HEIGHT = 256;
+    public static final int REAL_WIDTH_PIXEL = 66;
+    public static final int SYMBOL_HEIGHT_PIXEL = 65;
+    private static final float MINIMAL_BET = 4.0f;
+    private static final float MAXIMAL_BET = 12.0f;
 
     private final static Identifier SYMBOLS_ATLAS =
             new Identifier("d3d9_dllerek:textures/gui/slotmachine/symbols.png");
@@ -32,23 +34,16 @@ public class SlotmachineScreen extends Screen {
     private final int SYMBOLS_ATLAS_WIDTH = 768;
     @SuppressWarnings("FieldCanBeLocal")
     private final int SYMBOLS_ATLAS_HEIGHT = 768;
-    private final HashMap<String, int[]> SYMBOLS_OFFSETS = new HashMap<>(9);
+    private static Lines.Matched matchedLines;
+    private static float coefficient = 0.0f;
+    private final HashMap<String, int[]> SYMBOLS_OFFSETS = createOffsets();
 
-    private final static Identifier LINES_ATLAS =
-            new Identifier("d3d9_dllerek:textures/gui/slotmachine/lines.png");
-    @SuppressWarnings("FieldCanBeLocal")
-    private final int LINES_ATLAS_WIDTH = 512;
-    @SuppressWarnings("FieldCanBeLocal")
-    private final int LINES_ATLAS_HEIGHT = 512;
-    private final HashMap<String, int[]> LINES_OFFSETS = new HashMap<>(4);
-
-    private static final float MINIMAL_BET = 4.0f;
-    private static final float MAXIMAL_BET = 12.0f;
-
-    private final BlockPos slotmachinePos;
-    private final ClientWorld world;
     private static String[][] lastSpin;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int TEXTURE_WIDTH = 256;
     private static float balance = 0.0f;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int TEXTURE_HEIGHT = 256;
     private static float bet = MINIMAL_BET;
     public static boolean bonusGame = false;
     private static boolean initialized = false;
@@ -60,23 +55,11 @@ public class SlotmachineScreen extends Screen {
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private ButtonWidget subBetButton;
 
+    private final BlockPos slotmachinePos;
+    private final ClientWorld world;
+
     public SlotmachineScreen(BlockPos slotmachinePos, ClientWorld world) {
         super(NarratorManager.EMPTY);
-        // symbol = {x, y}
-        SYMBOLS_OFFSETS.put("B", new int[]{0, 0});
-        SYMBOLS_OFFSETS.put("W", new int[]{256, 0});
-        SYMBOLS_OFFSETS.put("1", new int[]{512, 0});
-        SYMBOLS_OFFSETS.put("2", new int[]{0, 256});
-        SYMBOLS_OFFSETS.put("3", new int[]{256, 256});
-        SYMBOLS_OFFSETS.put("A", new int[]{512, 256});
-        SYMBOLS_OFFSETS.put("K", new int[]{0, 512});
-        SYMBOLS_OFFSETS.put("Q", new int[]{256, 512});
-        SYMBOLS_OFFSETS.put("J", new int[]{512, 512});
-        // line = {x, y}
-        LINES_OFFSETS.put("dU", new int[]{0, 0}); // = /
-        LINES_OFFSETS.put("uD", new int[]{256, 0}); // = \
-        LINES_OFFSETS.put("h", new int[]{0, 256}); // = -
-        LINES_OFFSETS.put("f", new int[]{256, 256}); // = --
 
         this.world = world;
         this.slotmachinePos = slotmachinePos;
@@ -117,42 +100,35 @@ public class SlotmachineScreen extends Screen {
         int x = (this.width / 2) - ((66 * 5) / 2);
         int y = (this.height / 10);
 
-        //noinspection ConstantConditions
-        this.minecraft.getTextureManager().bindTexture(LINES_ATLAS);
-
-        int[] lineTextureOffset = LINES_OFFSETS.get("h");
-        blit(x, y, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
-                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-        lineTextureOffset = LINES_OFFSETS.get("uD");
-        blit(x + 34, y + 33, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
-                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-        lineTextureOffset = LINES_OFFSETS.get("f");
-        blit(x + 100, y + 65, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
-                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-        blit(x + 166, y + 65, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
-                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-        lineTextureOffset = LINES_OFFSETS.get("uD");
-        blit(x + 232, y + 98, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
-                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-        lineTextureOffset = LINES_OFFSETS.get("h");
-        blit(x + 298, y + 130, 64, 64, lineTextureOffset[0], lineTextureOffset[1],
-                TEXTURE_WIDTH, TEXTURE_HEIGHT, LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-
         if (lastSpin != null) {
-            //noinspection
+            //noinspection ConstantConditions
             this.minecraft.getTextureManager().bindTexture(SYMBOLS_ATLAS);
             for (int real = 0; real < lastSpin.length; real++) {
                 for (int symbol = 0; symbol < lastSpin[real].length; symbol++) {
-                    int symbolX = x + (66 * real);
-                    int symbolY = y + (65 * symbol);
+                    int symbolX = x + (REAL_WIDTH_PIXEL * real);
+                    int symbolY = y + (SYMBOL_HEIGHT_PIXEL * symbol);
                     String resultSymbol = lastSpin[real][symbol];
                     int[] symbolTextureOffset = SYMBOLS_OFFSETS.get(resultSymbol);
                     blit(symbolX, symbolY, 64, 64, symbolTextureOffset[0], symbolTextureOffset[1],
                             TEXTURE_WIDTH, TEXTURE_HEIGHT, SYMBOLS_ATLAS_WIDTH, SYMBOLS_ATLAS_HEIGHT);
                 }
             }
+            if (matchedLines != null && matchedLines.getLines().size() > 0) {
+                HashMap<Integer, Function<Integer, Void>> lines = new Lines.Draw(this.minecraft, x, y).DRAWS;
+                HashMap<Integer, Lines.Matched.Line> linesEntries = matchedLines.getLines();
+                for (int line = 0; line < 10; line++) {
+                    int lineNumber = line + 1;
+                    if (linesEntries.containsKey(lineNumber)) {
+                        lines.get(lineNumber)
+                                .apply(
+                                        linesEntries.get(lineNumber).length
+                                );
+                    }
+                }
+            }
         } else {
-            DrawableHelper.fill(x, y, x + (66 * 5), y + (65 * 3), 0x80000000);
+            DrawableHelper.fill(x, y,
+                    x + (REAL_WIDTH_PIXEL * 5), y + (SYMBOL_HEIGHT_PIXEL * 3), 0x80000000);
         }
 
         y = y + (65 * 3) + 8;
@@ -165,7 +141,14 @@ public class SlotmachineScreen extends Screen {
         int betWidth = this.font.getStringWidth(betString);
 
         this.font.drawWithShadow(balanceString, x + 4, y, 0xFFFFFFFF);
-        this.font.drawWithShadow(betString, x + 66 * 5 - 4 - betWidth, y, 0xFFFFFFFF);
+        this.font.drawWithShadow(betString, x + REAL_WIDTH_PIXEL * 5 - betWidth, y, 0xFFFFFFFF);
+
+        if (coefficient != 0.0f) {
+            String coefficientString = coefficient < 0 ? "-x" + -coefficient : "x" + coefficient;
+            float coefficientWidth = this.font.getStringWidth(coefficientString) / 2.0f;
+            this.font.drawWithShadow(coefficientString,
+                    x + REAL_WIDTH_PIXEL * 2.5f - coefficientWidth, y, 0xFFFFFFFF);
+        }
 
         if (bonusGame) {
             this.font.drawWithShadow("BONUS", 8, 8, 0xFFFFFFFF);
@@ -180,12 +163,19 @@ public class SlotmachineScreen extends Screen {
         balance = 0.0f;
         bet = MINIMAL_BET;
         initialized = false;
+        matchedLines = null;
+        coefficient = 0.0f;
         //noinspection ConstantConditions
         this.minecraft.openScreen(null);
     }
 
-    public static void setResult(String[][] spinResult) {
-        lastSpin = spinResult;
+    public static void setResult(String[][] spinResult, Lines.Matched matchedLines) {
+        SlotmachineScreen.lastSpin = spinResult;
+        SlotmachineScreen.matchedLines = matchedLines;
+    }
+
+    public static void setCoefficient(float value) {
+        coefficient = value;
     }
 
     public static void setBalance(float value) {
@@ -245,6 +235,21 @@ public class SlotmachineScreen extends Screen {
     @Override
     public boolean isPauseScreen() {
         return false;
+    }
+
+    private static HashMap<String, int[]> createOffsets() {
+        HashMap<String, int[]> SYMBOLS_OFFSETS = new HashMap<>(9);
+        // symbol = {x, y}
+        SYMBOLS_OFFSETS.put("B", new int[]{0, 0});
+        SYMBOLS_OFFSETS.put("W", new int[]{256, 0});
+        SYMBOLS_OFFSETS.put("1", new int[]{512, 0});
+        SYMBOLS_OFFSETS.put("2", new int[]{0, 256});
+        SYMBOLS_OFFSETS.put("3", new int[]{256, 256});
+        SYMBOLS_OFFSETS.put("A", new int[]{512, 256});
+        SYMBOLS_OFFSETS.put("K", new int[]{0, 512});
+        SYMBOLS_OFFSETS.put("Q", new int[]{256, 512});
+        SYMBOLS_OFFSETS.put("J", new int[]{512, 512});
+        return SYMBOLS_OFFSETS;
     }
 
 }
