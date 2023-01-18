@@ -2,6 +2,8 @@ package github.d3d9_dll.minecraft.fabric.erek.server;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.AutoSave;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.ServerBlockRegistration;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.ServerItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.VersionSynchronizeQueue;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Moneys;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
@@ -12,8 +14,6 @@ import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.Ba
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.Casino2BankExchangeC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.CasinoPiecesC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.SlotMachineSpinC2SPacket;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.ServerBlockRegistration;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.ServerItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.util.File;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.DedicatedServerModInitializer;

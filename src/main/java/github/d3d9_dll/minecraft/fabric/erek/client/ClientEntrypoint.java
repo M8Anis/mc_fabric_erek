@@ -1,12 +1,12 @@
 package github.d3d9_dll.minecraft.fabric.erek.client;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
+import github.d3d9_dll.minecraft.fabric.erek.client.models.ClientBlockRegistration;
+import github.d3d9_dll.minecraft.fabric.erek.client.models.ClientItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.ServerVersionSyncS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.bank.BankMoneysS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.casino.CasinoPiecesS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.casino.SlotMachineSpinResultS2CPacket;
-import github.d3d9_dll.minecraft.fabric.erek.client.models.ClientBlockRegistration;
-import github.d3d9_dll.minecraft.fabric.erek.client.models.ClientItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
