@@ -12,8 +12,8 @@ import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.Ba
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.Casino2BankExchangeC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.CasinoPiecesC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.casino.SlotMachineSpinC2SPacket;
-import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerBlockRegistration;
-import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerItemRegistration;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.ServerBlockRegistration;
+import github.d3d9_dll.minecraft.fabric.erek.server.models.ServerItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.util.File;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.DedicatedServerModInitializer;

@@ -1,4 +1,4 @@
-package github.d3d9_dll.minecraft.fabric.erek.client.util;
+package github.d3d9_dll.minecraft.fabric.erek.client.models;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBottomCaseBlock;
 import github.d3d9_dll.minecraft.fabric.erek.block.ExchangeMachineStandBlock;

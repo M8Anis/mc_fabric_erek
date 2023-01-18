@@ -1,4 +1,4 @@
-package github.d3d9_dll.minecraft.fabric.erek.server.util;
+package github.d3d9_dll.minecraft.fabric.erek.server.models;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.*;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
