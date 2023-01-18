@@ -24,7 +24,7 @@
     "gui.d3d9_dllerek.exchange_machine.text.pieces": "Фишек: %.2f",
     "gui.d3d9_dllerek.exchange_machine.text.not_enough_pieces": "Нехватает фишек!",
     "gui.d3d9_dllerek.exchange_machine.text.not_enough_moneys": "Нехватает денег!",
-    "gui.d3d9_dllerek.exchange_machine.text.incorrect_value": "Введённое число не корректно!",
+    "gui.d3d9_dllerek.exchange_machine.text.incorrect_value": "Не корректное число!",
     "gui.d3d9_dllerek.exchange_machine.button.exchange_money": "Поменять фишки на деньги",
     "gui.d3d9_dllerek.exchange_machine.button.exchange_piece": "Поменять деньги на фишки",
 
