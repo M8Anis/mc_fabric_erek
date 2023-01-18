@@ -1,7 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.casino;
 
 import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.AtmScreen;
+import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.ExchangeMachineScreen;
 import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,7 +19,7 @@ public class CasinoPiecesS2CPacket implements ClientPlayNetworking.PlayChannelHa
                         PacketSender responseSender) {
         float newPiecesCount = buf.readFloat();
         SlotmachineScreen.setPiecesCounter(newPiecesCount);
-        AtmScreen.setPieces(newPiecesCount);
+        ExchangeMachineScreen.setPieces(newPiecesCount);
 
         ClientEntrypoint.LOGGER.debug("Casino pieces changed to " + newPiecesCount);
     }

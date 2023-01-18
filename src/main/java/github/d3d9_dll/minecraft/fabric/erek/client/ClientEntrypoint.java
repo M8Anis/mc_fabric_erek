@@ -27,7 +27,6 @@ public class ClientEntrypoint implements ClientModInitializer {
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Client-side"));
 
     public static final ClientBlockRegistration BLOCK_REGISTER = new ClientBlockRegistration();
-    @SuppressWarnings("unused")
     public static final ClientItemRegistration ITEM_REGISTER = new ClientItemRegistration(BLOCK_REGISTER);
 
     @Override

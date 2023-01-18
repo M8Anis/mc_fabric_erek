@@ -2,6 +2,11 @@
     "category.d3d9_dllerek.debug_category": "Функции отладки",
     "key.d3d9_dllerek.debug_handle": "Вызов отладочной функции",
 
+    "text.d3d9_dllerek.erek_prefix": "[ЁРЭК]",
+    "text.d3d9_dllerek.version_sync.timeout": "%s Не удалось синхронизировать версии мода",
+    "text.d3d9_dllerek.version_sync.older": "%s Ваша версия мода старая, обновитесь до новой",
+    "text.d3d9_dllerek.version_sync.newer": "%s На сервере стоит более старая версия мода чем у вас",
+
     "itemGroup.d3d9_dllerek.casino": "[ЁРЭК] Казино",
     "block.d3d9_dllerek.slotmachine_bottom_case_block": "Слот-машина (Нижняя часть)",
     "block.d3d9_dllerek.slotmachine_block": "Слот-машина",
@@ -9,29 +14,27 @@
     "block.d3d9_dllerek.exchange_machine_block": "Касса обмена",
     "block.d3d9_dllerek.exchange_machine_stand_block": "Касса обмена (Нижняя часть)",
 
-    "chat.d3d9_dllerek.slotmachine.construct_not_full": "Невозможно воспользоваться слот машиной! Она построена не полностью",
-    "chat.d3d9_dllerek.exchange_machine.construct_not_full": "Невозможно воспользоваться обменной машиной! Она построена не полностью",
-
     "gui.d3d9_dllerek.slotmachine.button.spin": "Крутить!",
     "gui.d3d9_dllerek.slotmachine.text.bet": "Ставка: %.2f",
     "gui.d3d9_dllerek.slotmachine.text.balance": "Фишки: %.2f",
 
-    "text.d3d9_dllerek.erek_prefix": "[ЁРЭК]",
-    "text.d3d9_dllerek.version_sync.timeout": "%s Не удалось синхронизировать версии мода",
-    "text.d3d9_dllerek.version_sync.older": "%s Ваша версия мода старая, обновитесь до новой",
-    "text.d3d9_dllerek.version_sync.newer": "%s На сервере стоит более старая версия мода чем у вас",
+    "chat.d3d9_dllerek.slotmachine.construct_not_full": "Невозможно воспользоваться слот машиной! Она построена не полностью",
+
+    "gui.d3d9_dllerek.exchange_machine.text.moneys": "Денег: %.2f",
+    "gui.d3d9_dllerek.exchange_machine.text.pieces": "Фишек: %.2f",
+    "gui.d3d9_dllerek.exchange_machine.text.not_enough_pieces": "Нехватает фишек!",
+    "gui.d3d9_dllerek.exchange_machine.text.not_enough_moneys": "Нехватает денег!",
+    "gui.d3d9_dllerek.exchange_machine.text.incorrect_value": "Введённое число не корректно!",
+    "gui.d3d9_dllerek.exchange_machine.button.exchange_money": "Поменять фишки на деньги",
+    "gui.d3d9_dllerek.exchange_machine.button.exchange_piece": "Поменять деньги на фишки",
+
+    "chat.d3d9_dllerek.exchange_machine.construct_not_full": "Невозможно воспользоваться обменной машиной! Она построена не полностью",
 
     "itemGroup.d3d9_dllerek.bank": "[ЁРЭК] Банк",
     "block.d3d9_dllerek.atm_block": "Банкомат",
     "block.d3d9_dllerek.atm_bottom_case_block": "Банкомат (Нижняя часть)",
 
-    "gui.d3d9_dllerek.atm.button.exchange_money": "Поменять фишки на деньги",
-    "gui.d3d9_dllerek.atm.button.exchange_piece": "Поменять деньги на фишки",
-    "gui.d3d9_dllerek.atm.text.moneys": "Денег: %.2f",
-    "gui.d3d9_dllerek.atm.text.pieces": "Фишек: %.2f",
-    "gui.d3d9_dllerek.atm.text.not_enough_pieces": "Нехватает фишек!",
-    "gui.d3d9_dllerek.atm.text.not_enough_moneys": "Нехватает денег!",
-    "gui.d3d9_dllerek.atm.text.incorrect_value": "Введённое число не корректно!",
+    "gui.d3d9_dllerek.atm.text.moneys": "Денег на счёте: %.2f",
 
     "chat.d3d9_dllerek.atm.construct_not_full": "Невозможно воспользоваться банкоматом! Он построен не полностью"
 }

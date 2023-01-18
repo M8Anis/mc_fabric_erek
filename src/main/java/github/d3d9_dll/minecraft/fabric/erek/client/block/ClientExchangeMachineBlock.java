@@ -1,11 +1,13 @@
 package github.d3d9_dll.minecraft.fabric.erek.client.block;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.ExchangeMachineBlock;
+import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.ExchangeMachineScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -28,7 +30,7 @@ public class ClientExchangeMachineBlock extends ExchangeMachineBlock {
             player.sendMessage(new TranslatableText("chat.d3d9_dllerek.exchange_machine.construct_not_full"));
             return false;
         } else {
-            player.sendMessage(new LiteralText("Click!"));
+            MinecraftClient.getInstance().openScreen(new ExchangeMachineScreen(pos, (ClientWorld) world));
             return true;
         }
     }

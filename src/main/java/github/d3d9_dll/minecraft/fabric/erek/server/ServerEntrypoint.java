@@ -46,7 +46,6 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
     public static final Pieces PIECES = new Pieces();
     public static final FreeSpin FREE_SPINS = new FreeSpin();
     public static final ServerBlockRegistration BLOCK_REGISTER = new ServerBlockRegistration();
-    @SuppressWarnings("unused")
     public static final ServerItemRegistration ITEM_REGISTER = new ServerItemRegistration(BLOCK_REGISTER);
 
     @Override
