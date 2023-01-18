@@ -13,7 +13,7 @@ public class SlotMachineInfoPanelItem extends BlockItem {
     public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_info_panel");
     public static final BlockItem ITEM = new SlotMachineInfoPanelItem(
             SlotMachineInfoPanelBlock.BLOCK,
-            new FabricItemSettings().group(Entrypoint.GENERAL_ITEM_GROUP)
+            new FabricItemSettings().group(Entrypoint.CASINO_ITEM_GROUP)
     );
 
     public SlotMachineInfoPanelItem(Block block, Settings settings) {

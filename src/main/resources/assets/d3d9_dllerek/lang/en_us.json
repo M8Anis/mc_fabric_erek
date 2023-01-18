@@ -2,7 +2,7 @@
   "category.d3d9_dllerek.debug_category": "Функции отладки",
   "key.d3d9_dllerek.debug_handle": "Вызов отладочной функции",
 
-  "itemGroup.d3d9_dllerek.casino": "ЁРЭК Казино",
+  "itemGroup.d3d9_dllerek.casino": "[ЁРЭК] Казино",
   "block.d3d9_dllerek.slotmachine_bottom_case": "Слот-машина (Нижняя часть)",
   "block.d3d9_dllerek.slotmachine_block": "Слот-машина",
   "block.d3d9_dllerek.slotmachine_info_panel": "Слот-машина (Информационная панель)",
@@ -16,5 +16,9 @@
   "text.d3d9_dllerek.erek_prefix": "[ЁРЭК]",
   "text.d3d9_dllerek.version_sync.timeout": "%s Не удалось синхронизировать версии мода",
   "text.d3d9_dllerek.version_sync.older": "%s Ваша версия мода старая, обновитесь до новой",
-  "text.d3d9_dllerek.version_sync.newer": "%s На сервере стоит более старая версия мода чем у вас"
+  "text.d3d9_dllerek.version_sync.newer": "%s На сервере стоит более старая версия мода чем у вас",
+
+  "itemGroup.d3d9_dllerek.bank": "[ЁРЭК] Банк",
+  "block.d3d9_dllerek.atm_block": "Банкомат",
+  "block.d3d9_dllerek.atm_bottom_case": "Банкомат (Нижняя часть)"
 }

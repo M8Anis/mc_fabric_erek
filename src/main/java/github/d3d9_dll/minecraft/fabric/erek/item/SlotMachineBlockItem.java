@@ -14,7 +14,7 @@ public class SlotMachineBlockItem extends BlockItem {
     public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_block");
     public static final BlockItem ITEM = new SlotMachineBlockItem(
             SlotMachineBlock.BLOCK,
-            new FabricItemSettings().group(Entrypoint.GENERAL_ITEM_GROUP)
+            new FabricItemSettings().group(Entrypoint.CASINO_ITEM_GROUP)
     );
 
     public SlotMachineBlockItem(Block block, Item.Settings settings) {

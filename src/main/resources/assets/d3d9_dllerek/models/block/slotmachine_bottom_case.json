@@ -1,7 +1,6 @@
 {
 	"credit": "d3d9_dll",
 	"parent": "block/block",
-	"ambientocclusion": false,
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "d3d9_dllerek:block/slotmachine_bottom_case/bottom_case",

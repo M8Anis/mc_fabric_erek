@@ -13,7 +13,7 @@ public class SlotMachineBottomCaseItem extends BlockItem {
     public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_bottom_case");
     public static final BlockItem ITEM = new SlotMachineBottomCaseItem(
             SlotMachineBottomCaseBlock.BLOCK,
-            new FabricItemSettings().group(Entrypoint.GENERAL_ITEM_GROUP)
+            new FabricItemSettings().group(Entrypoint.CASINO_ITEM_GROUP)
     );
 
     public SlotMachineBottomCaseItem(Block block, Settings settings) {
