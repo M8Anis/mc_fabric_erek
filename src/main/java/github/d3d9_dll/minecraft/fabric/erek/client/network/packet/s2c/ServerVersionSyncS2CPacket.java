@@ -19,11 +19,11 @@ public class ServerVersionSyncS2CPacket implements ClientPlayNetworking.PlayChan
     public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
                         PacketSender responseSender) {
         PacketByteBuf buff = PacketByteBufs.create();
-        buff.writeLong(Version.VERSION_FINGERPRINT);
+        buff.writeLong(Version.VERSION_SERIAL);
 
         responseSender.sendPacket(Entrypoint.PACKET_VERSION_SYNC, buff);
 
-        ClientEntrypoint.LOGGER.debug("Version sync response sended (" + Version.VERSION_FINGERPRINT + ")");
+        ClientEntrypoint.LOGGER.debug("Version sync response sended (" + Version.VERSION_SERIAL + ")");
     }
 
 }

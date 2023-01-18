@@ -20,9 +20,9 @@ public class ServerVersionSyncC2SPacket implements ServerPlayNetworking.PlayChan
     public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                         PacketByteBuf buf, PacketSender responseSender) {
         long clientVersionFingerprint = buf.readLong();
-        if (Version.VERSION_FINGERPRINT != clientVersionFingerprint) {
+        if (Version.VERSION_SERIAL != clientVersionFingerprint) {
             TranslatableText reason = new TranslatableText(
-                    clientVersionFingerprint > Version.VERSION_FINGERPRINT ?
+                    clientVersionFingerprint > Version.VERSION_SERIAL ?
                             "text.d3d9_dllerek.version_sync.newer" : "text.d3d9_dllerek.version_sync.older",
                     new TranslatableText("text.d3d9_dllerek.erek_prefix")
             );
