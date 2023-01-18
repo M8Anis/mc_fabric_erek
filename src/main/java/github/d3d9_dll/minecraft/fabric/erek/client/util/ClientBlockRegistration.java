@@ -1,10 +1,12 @@
 package github.d3d9_dll.minecraft.fabric.erek.client.util;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBottomCaseBlock;
+import github.d3d9_dll.minecraft.fabric.erek.block.ExchangeMachineStand;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBottomCaseBlock;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineInfoPanelBlock;
 import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.block.ClientAtmBlock;
+import github.d3d9_dll.minecraft.fabric.erek.client.block.ClientExchangeMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.client.block.ClientSlotMachineBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -24,6 +26,9 @@ public class ClientBlockRegistration {
     public final ClientSlotMachineBlock slotMachineBlock;
     public final SlotMachineInfoPanelBlock slotMachineInfoPanelBlock;
 
+    public final ClientExchangeMachineBlock exchangeMachineBlock;
+    public final ExchangeMachineStand exchangeMachineStand;
+
     public final ClientAtmBlock atmBlock;
     public final AtmBottomCaseBlock atmBottomCaseBlock;
 
@@ -31,6 +36,9 @@ public class ClientBlockRegistration {
         slotMachineBottomCaseBlock = new SlotMachineBottomCaseBlock(DEFAULT_BLOCK_SETTINGS);
         slotMachineBlock = new ClientSlotMachineBlock(DEFAULT_BLOCK_SETTINGS);
         slotMachineInfoPanelBlock = new SlotMachineInfoPanelBlock(DEFAULT_BLOCK_SETTINGS);
+
+        exchangeMachineBlock = new ClientExchangeMachineBlock(DEFAULT_BLOCK_SETTINGS);
+        exchangeMachineStand = new ExchangeMachineStand(DEFAULT_BLOCK_SETTINGS);
 
         atmBlock = new ClientAtmBlock(DEFAULT_BLOCK_SETTINGS);
         atmBottomCaseBlock = new AtmBottomCaseBlock(DEFAULT_BLOCK_SETTINGS);
@@ -55,6 +63,12 @@ public class ClientBlockRegistration {
 
         Registry.register(Registry.BLOCK, AtmBottomCaseBlock.IDENTIFIER, atmBottomCaseBlock);
         ClientEntrypoint.LOGGER.debug("Block \"atm_bottom_case\" registered");
+
+        Registry.register(Registry.BLOCK, ClientExchangeMachineBlock.IDENTIFIER, exchangeMachineBlock);
+        ClientEntrypoint.LOGGER.debug("Block \"exchange_machine_block\" registered");
+
+        Registry.register(Registry.BLOCK, ExchangeMachineStand.IDENTIFIER, exchangeMachineStand);
+        ClientEntrypoint.LOGGER.debug("Block \"exchange_machine_stand\" registered");
     }
 
 }

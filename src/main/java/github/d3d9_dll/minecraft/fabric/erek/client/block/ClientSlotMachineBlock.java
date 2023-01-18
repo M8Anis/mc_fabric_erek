@@ -2,6 +2,8 @@ package github.d3d9_dll.minecraft.fabric.erek.client.block;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
@@ -12,6 +14,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@Environment(EnvType.CLIENT)
 public class ClientSlotMachineBlock extends SlotMachineBlock {
 
     public ClientSlotMachineBlock(Settings settings) {

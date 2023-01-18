@@ -2,8 +2,10 @@ package github.d3d9_dll.minecraft.fabric.erek.client.util;
 
 import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.item.ClientAtmBlockItem;
+import github.d3d9_dll.minecraft.fabric.erek.client.item.ClientExchangeMachineBlockItem;
 import github.d3d9_dll.minecraft.fabric.erek.client.item.ClientSlotMachineBlockItem;
 import github.d3d9_dll.minecraft.fabric.erek.item.AtmBottomCaseItem;
+import github.d3d9_dll.minecraft.fabric.erek.item.ExchangeMachineStandItem;
 import github.d3d9_dll.minecraft.fabric.erek.item.SlotMachineBottomCaseItem;
 import github.d3d9_dll.minecraft.fabric.erek.item.SlotMachineInfoPanelItem;
 import net.fabricmc.api.EnvType;
@@ -28,6 +30,9 @@ public class ClientItemRegistration {
     public final ClientSlotMachineBlockItem slotMachineBlockItem;
     public final SlotMachineInfoPanelItem slotMachineInfoPanelBlockItem;
 
+    public final ClientExchangeMachineBlockItem exchangeMachineBlockItem;
+    public final ExchangeMachineStandItem exchangeMachineStandItem;
+
     public final ClientAtmBlockItem atmBlockItem;
     public final AtmBottomCaseItem atmBottomCaseBlockItem;
 
@@ -42,6 +47,15 @@ public class ClientItemRegistration {
         );
         slotMachineInfoPanelBlockItem = new SlotMachineInfoPanelItem(
                 blockRegistration.slotMachineInfoPanelBlock,
+                new FabricItemSettings()
+        );
+
+        exchangeMachineBlockItem = new ClientExchangeMachineBlockItem(
+                blockRegistration.exchangeMachineBlock,
+                new FabricItemSettings()
+        );
+        exchangeMachineStandItem = new ExchangeMachineStandItem(
+                blockRegistration.exchangeMachineStand,
                 new FabricItemSettings()
         );
 
@@ -61,6 +75,8 @@ public class ClientItemRegistration {
                     stacks.add(new ItemStack(slotMachineBottomCaseBlockItem));
                     stacks.add(new ItemStack(slotMachineBlockItem));
                     stacks.add(new ItemStack(slotMachineInfoPanelBlockItem));
+                    stacks.add(new ItemStack(exchangeMachineStandItem));
+                    stacks.add(new ItemStack(exchangeMachineBlockItem));
                 })
                 .build();
 
@@ -93,6 +109,12 @@ public class ClientItemRegistration {
 
         Registry.register(Registry.ITEM, AtmBottomCaseItem.IDENTIFIER, atmBottomCaseBlockItem);
         ClientEntrypoint.LOGGER.debug("Item \"atm_bottom_case\" registered");
+
+        Registry.register(Registry.ITEM, ClientExchangeMachineBlockItem.IDENTIFIER, exchangeMachineBlockItem);
+        ClientEntrypoint.LOGGER.debug("Item \"exchange_machine_block\" registered");
+
+        Registry.register(Registry.ITEM, ExchangeMachineStandItem.IDENTIFIER, exchangeMachineStandItem);
+        ClientEntrypoint.LOGGER.debug("Item \"exchange_machine_stand\" registered");
     }
 
 }

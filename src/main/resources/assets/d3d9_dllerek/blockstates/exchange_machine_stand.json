@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "d3d9_dllerek:block/exchange_machine_stand" },
+        "facing=east": { "model": "d3d9_dllerek:block/exchange_machine_stand", "y": 90 },
+        "facing=south": { "model": "d3d9_dllerek:block/exchange_machine_stand", "y": 180 },
+        "facing=west": { "model": "d3d9_dllerek:block/exchange_machine_stand", "y": 270 }
+    }
+}

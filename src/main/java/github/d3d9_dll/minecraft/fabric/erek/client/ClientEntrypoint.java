@@ -39,7 +39,7 @@ public class ClientEntrypoint implements ClientModInitializer {
     }
 
     private static void registerKeyBinds() {
-        LOGGER.debug("Key binds registration");
+        LOGGER.debug("Key-binds registration");
 
         KeyBinding keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.d3d9_dllerek.debug_handle",

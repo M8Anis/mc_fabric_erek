@@ -6,8 +6,11 @@
     "block.d3d9_dllerek.slotmachine_bottom_case": "Слот-машина (Нижняя часть)",
     "block.d3d9_dllerek.slotmachine_block": "Слот-машина",
     "block.d3d9_dllerek.slotmachine_info_panel": "Слот-машина (Информационная панель)",
+    "block.d3d9_dllerek.exchange_machine_block": "Касса обмена",
+    "block.d3d9_dllerek.exchange_machine_stand": "Касса обмена (Нижняя часть)",
 
     "chat.d3d9_dllerek.slotmachine.construct_not_full": "Невозможно воспользоваться слот машиной! Она построена не полностью",
+    "chat.d3d9_dllerek.exchange_machine.construct_not_full": "Невозможно воспользоваться обменной машиной! Она построена не полностью",
 
     "gui.d3d9_dllerek.slotmachine.button.spin": "Крутить!",
     "gui.d3d9_dllerek.slotmachine.text.bet": "Ставка: %.2f",

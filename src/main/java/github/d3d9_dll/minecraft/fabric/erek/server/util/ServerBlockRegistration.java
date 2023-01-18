@@ -1,6 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.server.util;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.*;
+import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,6 +21,9 @@ public class ServerBlockRegistration {
     public final SlotMachineBlock slotMachineBlock;
     public final SlotMachineInfoPanelBlock slotMachineInfoPanelBlock;
 
+    public final ExchangeMachineBlock exchangeMachineBlock;
+    public final ExchangeMachineStand exchangeMachineStand;
+
     public final AtmBlock atmBlock;
     public final AtmBottomCaseBlock atmBottomCaseBlock;
 
@@ -27,6 +31,9 @@ public class ServerBlockRegistration {
         slotMachineBottomCaseBlock = new SlotMachineBottomCaseBlock(DEFAULT_BLOCK_SETTINGS);
         slotMachineBlock = new SlotMachineBlock(DEFAULT_BLOCK_SETTINGS);
         slotMachineInfoPanelBlock = new SlotMachineInfoPanelBlock(DEFAULT_BLOCK_SETTINGS);
+
+        exchangeMachineBlock = new ExchangeMachineBlock(DEFAULT_BLOCK_SETTINGS);
+        exchangeMachineStand = new ExchangeMachineStand(DEFAULT_BLOCK_SETTINGS);
 
         atmBlock = new AtmBlock(DEFAULT_BLOCK_SETTINGS);
         atmBottomCaseBlock = new AtmBottomCaseBlock(DEFAULT_BLOCK_SETTINGS);
@@ -51,6 +58,12 @@ public class ServerBlockRegistration {
 
         Registry.register(Registry.BLOCK, AtmBottomCaseBlock.IDENTIFIER, atmBottomCaseBlock);
         ServerEntrypoint.LOGGER.debug("Block \"atm_bottom_case\" registered");
+
+        Registry.register(Registry.BLOCK, ExchangeMachineBlock.IDENTIFIER, exchangeMachineBlock);
+        ClientEntrypoint.LOGGER.debug("Block \"exchange_machine_block\" registered");
+
+        Registry.register(Registry.BLOCK, ExchangeMachineStand.IDENTIFIER, exchangeMachineStand);
+        ClientEntrypoint.LOGGER.debug("Block \"exchange_machine_stand\" registered");
     }
 
 }
