@@ -4,6 +4,7 @@ import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.ServerVersionSyncS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachineBalanceS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachineSpinResultS2CPacket;
+import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,23 +16,22 @@ import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.LiteralText;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class ClientEntrypoint implements ClientModInitializer {
 
-    public final static Logger LOGGER = LogManager.getLogger("d3d9_dll EREK | Client-side");
+    public final static Logs LOGGER = new Logs(LogManager.getLogger("d3d9_dll EREK | Client-side"));
 
     @Override
     public void onInitializeClient() {
-        LOGGER.info("Client-side initialization");
+        LOGGER.log("Client-side initialization");
 
         ClientPlayConnectionEvents.INIT.register((handler, minecraftClient) -> {
-            LOGGER.info("Packets registration handled");
+            LOGGER.log("Packets registration handled");
             registerClientPackets();
         });
-        LOGGER.info("Subscribed to \"ClientPlayConnectionEvents.INIT\"");
+        LOGGER.log("Subscribed to \"ClientPlayConnectionEvents.INIT\"");
 
         registerKeyBinds();
     }
@@ -43,28 +43,28 @@ public class ClientEntrypoint implements ClientModInitializer {
                 GLFW.GLFW_KEY_RIGHT_CONTROL,
                 "category.d3d9_dllerek.debug_category"
         ));
-        LOGGER.info("KeyBind \"key.d3d9_dllerek.debug_handle\" registered");
+        LOGGER.log("KeyBind \"key.d3d9_dllerek.debug_handle\" registered");
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
                 client.player.sendMessage(new LiteralText("debug"));
             }
         });
-        LOGGER.info("KeyBind \"key.d3d9_dllerek.debug_handle\" callback registered");
+        LOGGER.log("KeyBind \"key.d3d9_dllerek.debug_handle\" callback registered");
     }
 
     private static void registerClientPackets() {
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinResultS2CPacket()
         );
-        LOGGER.info("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
+        LOGGER.log("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineBalanceS2CPacket()
         );
-        LOGGER.info("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
+        LOGGER.log("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncS2CPacket()
         );
-        LOGGER.info("Packet \"PACKET_VERSION_SYNC\" registered");
+        LOGGER.log("Packet \"PACKET_VERSION_SYNC\" registered");
     }
 
 }
