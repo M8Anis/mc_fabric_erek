@@ -11,7 +11,7 @@
 
   "gui.d3d9_dllerek.slotmachine.button.spin": "Крутить!",
   "gui.d3d9_dllerek.slotmachine.text.bet": "Ставка: %.2f",
-  "gui.d3d9_dllerek.slotmachine.text.balance": "Баланс: %.2f",
+  "gui.d3d9_dllerek.slotmachine.text.balance": "Фишки: %.2f",
 
   "text.d3d9_dllerek.erek_prefix": "[ЁРЭК]",
   "text.d3d9_dllerek.version_sync.timeout": "%s Не удалось синхронизировать версии мода",
@@ -21,6 +21,14 @@
   "itemGroup.d3d9_dllerek.bank": "[ЁРЭК] Банк",
   "block.d3d9_dllerek.atm_block": "Банкомат",
   "block.d3d9_dllerek.atm_bottom_case": "Банкомат (Нижняя часть)",
+
+  "gui.d3d9_dllerek.atm.button.exchange_money": "Поменять фишки на деньги",
+  "gui.d3d9_dllerek.atm.button.exchange_piece": "Поменять деньги на фишки",
+  "gui.d3d9_dllerek.atm.text.moneys": "Денег: %.2f",
+  "gui.d3d9_dllerek.atm.text.pieces": "Фишек: %.2f",
+  "gui.d3d9_dllerek.atm.text.not_enough_pieces": "Нехватает фишек!",
+  "gui.d3d9_dllerek.atm.text.not_enough_moneys": "Нехватает денег!",
+  "gui.d3d9_dllerek.atm.text.incorrect_value": "Введённое число не корректно!",
 
   "chat.d3d9_dllerek.atm.construct_not_full": "Невозможно воспользоваться банкоматом! Он построен не полностью"
 }

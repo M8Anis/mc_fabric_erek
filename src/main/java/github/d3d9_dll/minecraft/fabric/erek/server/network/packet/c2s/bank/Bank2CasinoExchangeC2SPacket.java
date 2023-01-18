@@ -30,7 +30,7 @@ public class Bank2CasinoExchangeC2SPacket implements ServerPlayNetworking.PlayCh
 
         float exchange = buf.readFloat();
         float currentBalance = Moneys.get(UUID);
-        if (exchange > currentBalance)
+        if (exchange > currentBalance || exchange <= 0)
             throw new IllegalArgumentException();
         float pieces = exchange * EXCHANGE_COURSE;
 

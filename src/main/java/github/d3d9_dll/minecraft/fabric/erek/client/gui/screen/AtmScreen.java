@@ -12,6 +12,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.NarratorManager;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
@@ -44,15 +45,19 @@ public class AtmScreen extends Screen {
     public void init() {
         this.exchangePiece = this.addButton(
                 new ButtonWidget(
-                        8, 32, 96, 20, "Exchange pieces", this::sendPieceExchange
+                        8, 32, 160, 20,
+                        new TranslatableText("gui.d3d9_dllerek.atm.button.exchange_piece").asString(),
+                        this::sendPieceExchange
                 )
         );
         this.exchangeMoney = this.addButton(
                 new ButtonWidget(
-                        8 + 96 + 4, 32, 96, 20, "Exchange money", this::sendMoneyExchange
+                        8 + 160 + 4, 32, 160, 20,
+                        new TranslatableText("gui.d3d9_dllerek.atm.button.exchange_money").asString(),
+                        this::sendMoneyExchange
                 )
         );
-        this.exchangeCount = new TextFieldWidget(this.font, 8, 8, 192 + 4, 20, "");
+        this.exchangeCount = new TextFieldWidget(this.font, 8, 8, 320 + 4, 20, "");
         this.children.add(this.exchangeCount);
 
         updateData();
@@ -62,12 +67,13 @@ public class AtmScreen extends Screen {
         if (!checkMachine()) return;
         this.renderBackground();
 
-        this.font.drawWithShadow(String.format("Moneys: %.2f", moneys), 8, 32 + 20 + 4, 0xFFFFFFFF);
-        this.font.drawWithShadow(
-                String.format("Pieces: %.2f", pieces), 8, 32 + 20 + 4 + font.fontHeight + 4, 0xFFFFFFFF
-        );
+        String moneys = new TranslatableText("gui.d3d9_dllerek.atm.text.moneys", AtmScreen.moneys).asString();
+        String pieces = new TranslatableText("gui.d3d9_dllerek.atm.text.pieces", AtmScreen.pieces).asString();
+
+        this.font.drawWithShadow(moneys, 8, 32 + 20 + 4, 0xFFFFFFFF);
+        this.font.drawWithShadow(pieces, 8, 32 + 20 + font.fontHeight + 4, 0xFFFFFFFF);
         if (error)
-            this.font.drawWithShadow(errorMessage, 8, 32 + 20 + 4 + font.fontHeight * 2 + 4 + 4, 0xFFFF0000);
+            this.font.drawWithShadow(errorMessage, 8, 32 + 20 + font.fontHeight * 2 + 4 + 4, 0xFFFF0000);
 
         this.exchangeCount.render(mouseX, mouseY, delta);
         super.render(mouseX, mouseY, delta);
@@ -96,12 +102,17 @@ public class AtmScreen extends Screen {
             piece = Float.parseFloat(this.exchangeCount.getText().replace(",", "."));
         } catch (NumberFormatException e) {
             error = true;
-            errorMessage = "Exchanging value is not a float!";
+            errorMessage = new TranslatableText("gui.d3d9_dllerek.atm.text.incorrect_value").asString();
+            return;
+        }
+        if (piece <= 0) {
+            error = true;
+            errorMessage = new TranslatableText("gui.d3d9_dllerek.atm.text.incorrect_value").asString();
             return;
         }
         if (piece > pieces) {
             error = true;
-            errorMessage = "Pieces not enough!";
+            errorMessage = new TranslatableText("gui.d3d9_dllerek.atm.text.not_enough_pieces").asString();
             return;
         }
 
@@ -125,12 +136,17 @@ public class AtmScreen extends Screen {
             money = Float.parseFloat(this.exchangeCount.getText().replace(",", "."));
         } catch (NumberFormatException e) {
             error = true;
-            errorMessage = "Exchanging value is not a float!";
+            errorMessage = new TranslatableText("gui.d3d9_dllerek.atm.text.incorrect_value").asString();
+            return;
+        }
+        if (money <= 0) {
+            error = true;
+            errorMessage = new TranslatableText("gui.d3d9_dllerek.atm.text.incorrect_value").asString();
             return;
         }
         if (money > moneys) {
             error = true;
-            errorMessage = "Moneys not enough!";
+            errorMessage = new TranslatableText("gui.d3d9_dllerek.atm.text.not_enough_moneys").asString();
             return;
         }
 
