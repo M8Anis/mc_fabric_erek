@@ -1,5 +1,6 @@
 package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c;
 
+import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import net.fabricmc.api.EnvType;
@@ -24,9 +25,16 @@ public class SlotMachineSpinResultS2CPacket implements ClientPlayNetworking.Play
         }
 
         SlotmachineScreen.setResult(resultOfSpin, new Lines.Matched(new Lines(resultOfSpin)));
-        SlotmachineScreen.setBalance(buf.readFloat());
-        SlotmachineScreen.setCoefficient(buf.readFloat());
+
+        float newBalance = buf.readFloat();
+        float newCoefficient = buf.readFloat();
+
+        SlotmachineScreen.setBalance(newBalance);
+        SlotmachineScreen.setCoefficient(newCoefficient);
         SlotmachineScreen.bonusGame = buf.readBoolean();
+
+        ClientEntrypoint.LOGGER.log("Slotmachine balance changed to " + newBalance +
+                ", coefficient to " + newCoefficient + " and spin result showed");
     }
 
 }

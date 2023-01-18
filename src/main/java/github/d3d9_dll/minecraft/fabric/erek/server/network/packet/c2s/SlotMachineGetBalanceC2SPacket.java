@@ -1,6 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
+import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -23,6 +24,9 @@ public class SlotMachineGetBalanceC2SPacket implements ServerPlayNetworking.Play
         buff.writeFloat(balance);
 
         responseSender.sendPacket(Entrypoint.PACKET_SLOTMACHINE_BALANCE, buff);
+
+        ServerEntrypoint.LOGGER.log("Slotmachine balance (" + balance +
+                ") sended to player \"" + player.getName().asString() + "\"");
     }
 
 }

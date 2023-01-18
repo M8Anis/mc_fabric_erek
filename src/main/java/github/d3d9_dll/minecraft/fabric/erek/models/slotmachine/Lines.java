@@ -145,6 +145,26 @@ public class Lines {
         };
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        int lineNum = 1;
+        sb.append("{");
+        for (String[] line : lines) {
+            sb.append(lineNum)
+                    .append(": ");
+            for (String lineSymbol : line) {
+                sb.append(lineSymbol);
+            }
+            sb.append(", ");
+            lineNum++;
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("}");
+        return sb.toString();
+    }
+
     public static class Matched {
 
         private final Lines lines;
@@ -185,6 +205,24 @@ public class Lines {
             return lines;
         }
 
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("{");
+            for (int lineNum = 0; lineNum < 10; lineNum++) {
+                if (matchedLines.containsKey(lineNum + 1)) {
+                    sb.append(lineNum + 1)
+                            .append(": ")
+                            .append(matchedLines.get(lineNum + 1))
+                            .append(", ");
+                }
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            sb.deleteCharAt(sb.length() - 1);
+            sb.append("}");
+            return sb.toString();
+        }
+
         public static class Line {
 
             public final String symbol;
@@ -195,6 +233,10 @@ public class Lines {
                 this.length = length;
             }
 
+            @Override
+            public String toString() {
+                return symbol + "x" + length;
+            }
         }
 
     }

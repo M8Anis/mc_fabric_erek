@@ -27,16 +27,15 @@ public class ClientEntrypoint implements ClientModInitializer {
     public void onInitializeClient() {
         LOGGER.log("Client-side initialization");
 
-        ClientPlayConnectionEvents.INIT.register((handler, minecraftClient) -> {
-            LOGGER.log("Packets registration handled");
-            registerClientPackets();
-        });
-        LOGGER.log("Subscribed to \"ClientPlayConnectionEvents.INIT\"");
+        ClientPlayConnectionEvents.INIT.register((handler, minecraftClient) -> registerClientPackets());
+        LOGGER.log("Packet registration registered to \"ClientPlayConnectionEvents.INIT\" event");
 
         registerKeyBinds();
     }
 
     private static void registerKeyBinds() {
+        LOGGER.log("Key binds registration");
+
         KeyBinding keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.d3d9_dllerek.debug_handle",
                 InputUtil.Type.KEYSYM,
@@ -53,14 +52,18 @@ public class ClientEntrypoint implements ClientModInitializer {
     }
 
     private static void registerClientPackets() {
+        LOGGER.log("Packets registration");
+
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinResultS2CPacket()
         );
         LOGGER.log("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
+
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineBalanceS2CPacket()
         );
         LOGGER.log("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
+
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncS2CPacket()
         );

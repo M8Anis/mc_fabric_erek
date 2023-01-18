@@ -2,6 +2,7 @@ package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.Version;
+import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -21,6 +22,8 @@ public class ServerVersionSyncS2CPacket implements ClientPlayNetworking.PlayChan
         buff.writeLong(Version.VERSION_FINGERPRINT);
 
         responseSender.sendPacket(Entrypoint.PACKET_VERSION_SYNC, buff);
+
+        ClientEntrypoint.LOGGER.log("Version sync response sended (" + Version.VERSION_FINGERPRINT + ")");
     }
 
 }

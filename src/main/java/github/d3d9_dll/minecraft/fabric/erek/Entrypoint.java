@@ -5,10 +5,13 @@ import github.d3d9_dll.minecraft.fabric.erek.item.*;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
+
+import java.io.File;
 
 public class Entrypoint implements ModInitializer {
 
@@ -40,9 +43,15 @@ public class Entrypoint implements ModInitializer {
             })
             .build();
 
+    public static final File MOD_DATA_DIRECTORY =
+            new File(FabricLoader.getInstance().getConfigDir().toFile(), "d3d9_dllerek");
+
     @Override
     public void onInitialize() {
         LOGGER.log("Common-side initialization");
+
+        if (!MOD_DATA_DIRECTORY.exists()) //noinspection ResultOfMethodCallIgnored
+            MOD_DATA_DIRECTORY.mkdirs();
 
         registerItemsAndBlocks();
     }

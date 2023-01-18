@@ -39,4 +39,9 @@ public class Coefficients {
         return coefficient == 0.0f ? LOSE_COEFFICIENT : coefficient;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(getCoefficient());
+    }
+
 }

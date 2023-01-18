@@ -1,5 +1,6 @@
 package github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c;
 
+import github.d3d9_dll.minecraft.fabric.erek.client.ClientEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,7 +16,10 @@ public class SlotMachineBalanceS2CPacket implements ClientPlayNetworking.PlayCha
     @Override
     public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
                         PacketSender responseSender) {
-        SlotmachineScreen.setBalance(buf.readFloat());
+        float newBalance = buf.readFloat();
+        SlotmachineScreen.setBalance(newBalance);
+
+        ClientEntrypoint.LOGGER.log("Slotmachine balance changed to " + newBalance);
     }
 
 }

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.util.PacketByteBuf;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 @Environment(EnvType.SERVER)
 public class Reals {
@@ -84,6 +85,22 @@ public class Reals {
         }
 
         return buff;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        for (int realNum = 0; realNum < 5; realNum++) {
+            sb.append(realNum + 1)
+                    .append(": ")
+                    .append(Arrays.toString(reals[realNum]))
+                    .append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("}");
+        return sb.toString();
     }
 
 }

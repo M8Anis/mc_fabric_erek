@@ -1,6 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s;
 
 import github.d3d9_dll.minecraft.fabric.erek.Version;
+import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.VersionSynchronizeQueue;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -28,6 +29,9 @@ public class ServerVersionSyncC2SPacket implements ServerPlayNetworking.PlayChan
             handler.disconnect(reason);
         }
         VersionSynchronizeQueue.remove(handler);
+
+        ServerEntrypoint.LOGGER.log("Player \"" + player.getName().asString() +
+                "\" removed from version synchronize queue");
     }
 
 }
