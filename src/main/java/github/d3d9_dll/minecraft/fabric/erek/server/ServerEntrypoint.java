@@ -1,14 +1,14 @@
 package github.d3d9_dll.minecraft.fabric.erek.server;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.block.*;
-import github.d3d9_dll.minecraft.fabric.erek.item.*;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.Balances;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.VersionSynchronizeQueue;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.ServerVersionSyncC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineGetBalanceC2SPacket;
 import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineSpinC2SPacket;
+import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerBlockRegistration;
+import github.d3d9_dll.minecraft.fabric.erek.server.util.ServerItemRegistration;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.EnvType;
@@ -57,7 +57,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             }
         }
 
-        registerServerItemsAndBlocks();
+        new ServerItemRegistration(new ServerBlockRegistration());
 
         registerServerPackets();
 
@@ -172,35 +172,6 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 LOGGER.error("Cannot read \"freespins.json\" for load");
             }
         }
-    }
-
-    private static void registerServerItemsAndBlocks() {
-        LOGGER.debug("Registering casino category");
-        SlotMachineBottomCaseItem.register();
-        LOGGER.debug("BlockItem \"slotmachine_bottom_case\" registered");
-        SlotMachineBottomCaseBlock.register();
-        LOGGER.debug("Block \"slotmachine_bottom_case\" registered");
-
-        SlotMachineBlockItem.register();
-        LOGGER.debug("BlockItem \"slotmachine_block\" registered");
-        SlotMachineBlock.register();
-        LOGGER.debug("Block \"slotmachine_block\" registered");
-
-        SlotMachineInfoPanelItem.register();
-        LOGGER.debug("BlockItem \"slotmachine_info_panel\" registered");
-        SlotMachineInfoPanelBlock.register();
-        LOGGER.debug("Block \"slotmachine_info_panel\" registered");
-
-
-        LOGGER.debug("Registering bank category");
-        AtmBlockItem.register();
-        LOGGER.debug("BlockItem \"atm_block\" registered");
-        AtmBlock.register();
-        LOGGER.debug("Block \"atm_block\" registered");
-        AtmBottomCaseItem.register();
-        LOGGER.debug("BlockItem \"atm_bottom_case\" registered");
-        AtmBottomCaseBlock.register();
-        LOGGER.debug("Block \"atm_bottom_case\" registered");
     }
 
 }
