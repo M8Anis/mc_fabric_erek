@@ -1,12 +1,11 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "github.d3d9_dll.minecraft.fabric.mcservermod.mixins",
+  "package": "github.d3d9_dll.minecraft.fabric.mcservermod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
-    "client.ExampleMixin"
   ],
   "server": [
   ],

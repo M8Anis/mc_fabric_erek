@@ -22,10 +22,10 @@
       "github.d3d9_dll.minecraft.fabric.mcservermod.Entrypoint"
     ],
     "client": [
-      "github.d3d9_dll.minecraft.fabric.mcservermod.client.EntrypointClient"
+      "github.d3d9_dll.minecraft.fabric.mcservermod.client.ClientEntrypoint"
     ],
     "server": [
-      "github.d3d9_dll.minecraft.fabric.mcservermod.server.EntrypointServer"
+      "github.d3d9_dll.minecraft.fabric.mcservermod.server.ServerEntrypoint"
     ]
   },
   "mixins": [
