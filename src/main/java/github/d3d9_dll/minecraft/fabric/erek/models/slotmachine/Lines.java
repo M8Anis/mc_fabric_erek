@@ -1,4 +1,4 @@
-package github.d3d9_dll.minecraft.fabric.erek.games.slotmachine;
+package github.d3d9_dll.minecraft.fabric.erek.models.slotmachine;
 
 import github.d3d9_dll.minecraft.fabric.erek.client.gui.screen.SlotmachineScreen;
 import net.fabricmc.api.EnvType;

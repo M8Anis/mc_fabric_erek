@@ -2,7 +2,7 @@ package github.d3d9_dll.minecraft.fabric.erek.client.gui.screen;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
-import github.d3d9_dll.minecraft.fabric.erek.games.slotmachine.Lines;
+import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

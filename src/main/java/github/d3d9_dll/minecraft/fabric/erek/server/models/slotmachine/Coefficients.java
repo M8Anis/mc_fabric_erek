@@ -1,6 +1,6 @@
-package github.d3d9_dll.minecraft.fabric.erek.server.games.slotmachine;
+package github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine;
 
-import github.d3d9_dll.minecraft.fabric.erek.games.slotmachine.Lines;
+import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
