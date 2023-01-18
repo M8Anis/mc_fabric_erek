@@ -95,7 +95,7 @@ public class Reals {
             sb.append(realNum + 1)
                     .append(": ")
                     .append(Arrays.toString(reals[realNum]))
-                    .append(",");
+                    .append(", ");
         }
         sb.deleteCharAt(sb.length() - 1);
         sb.deleteCharAt(sb.length() - 1);
