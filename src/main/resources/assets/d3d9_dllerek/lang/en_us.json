@@ -7,7 +7,7 @@
   "block.d3d9_dllerek.slotmachine_block": "Слот-машина",
   "block.d3d9_dllerek.slotmachine_info_panel": "Слот-машина (Информационная панель)",
 
-  "chat.d3d9_dllerek.slotmachine.construct_not_full": "Слот-машина построена не полностью",
+  "chat.d3d9_dllerek.slotmachine.construct_not_full": "Невозможно воспользоваться слот машиной! Она построена не полностью",
 
   "gui.d3d9_dllerek.slotmachine.button.spin": "Крутить!",
   "gui.d3d9_dllerek.slotmachine.text.bet": "Ставка: %.2f",
@@ -20,5 +20,7 @@
 
   "itemGroup.d3d9_dllerek.bank": "[ЁРЭК] Банк",
   "block.d3d9_dllerek.atm_block": "Банкомат",
-  "block.d3d9_dllerek.atm_bottom_case": "Банкомат (Нижняя часть)"
+  "block.d3d9_dllerek.atm_bottom_case": "Банкомат (Нижняя часть)",
+
+  "chat.d3d9_dllerek.atm.construct_not_full": "Невозможно воспользоваться банкоматом! Он построен не полностью"
 }
