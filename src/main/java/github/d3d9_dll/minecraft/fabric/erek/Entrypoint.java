@@ -19,11 +19,11 @@ public class Entrypoint implements ModInitializer {
     public final static Logger LOGGER = LogManager.getLogger("d3d9_dll EREK");
 
     public static final Identifier PACKET_SLOTMACHINE_SPIN =
-            new Identifier("d3d9_dllerek", "packet_slotmachine_spin");
+            new Identifier("d3d9_dllerek", "packet_d3d9_dllerek_slotmachine_spin");
     public static final Identifier PACKET_SLOTMACHINE_BALANCE =
-            new Identifier("d3d9_dllerek", "packet_slotmachine_balance");
+            new Identifier("d3d9_dllerek", "packet_d3d9_dllerek_slotmachine_balance");
     public static final Identifier PACKET_VERSION_SYNC =
-            new Identifier("d3d9_dllerek", "packet_version_synchronize");
+            new Identifier("d3d9_dllerek", "packet_d3d9_dllerek_version_synchronize");
 
     public static final ItemGroup GENERAL_ITEM_GROUP = FabricItemGroupBuilder.create(
                     new Identifier("d3d9_dllerek", "casino"))
