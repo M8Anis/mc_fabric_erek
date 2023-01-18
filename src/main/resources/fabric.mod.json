@@ -19,7 +19,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "github.d3d9_dll.minecraft.fabric.mcservermod.ExampleMod"
+      "github.d3d9_dll.minecraft.fabric.mcservermod.Entrypoint"
+    ],
+    "client": [
+      "github.d3d9_dll.minecraft.fabric.mcservermod.client.EntrypointClient"
+    ],
+    "server": [
+      "github.d3d9_dll.minecraft.fabric.mcservermod.server.EntrypointServer"
     ]
   },
   "mixins": [

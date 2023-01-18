@@ -1,11 +1,14 @@
-package github.d3d9_dll.minecraft.fabric.mcservermod.mixin;
+package github.d3d9_dll.minecraft.fabric.mcservermod.mixins.client;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Environment(EnvType.CLIENT)
 @Mixin(TitleScreen.class)
 public class ExampleMixin {
 	@Inject(at = @At("HEAD"), method = "init()V")
