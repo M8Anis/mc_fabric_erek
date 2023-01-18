@@ -41,7 +41,7 @@ public class ClientEntrypoint implements ClientModInitializer {
                 "key.d3d9_dllerek.debug_handle",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_CONTROL,
-                "category.key.d3d9_dllerek.debug_category"
+                "category.d3d9_dllerek.debug_category"
         ));
         LOGGER.info("KeyBind \"key.d3d9_dllerek.debug_handle\" registered");
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
