@@ -21,20 +21,20 @@ import org.lwjgl.glfw.GLFW;
 @Environment(EnvType.CLIENT)
 public class ClientEntrypoint implements ClientModInitializer {
 
-    public final static Logs LOGGER = new Logs(LogManager.getLogger("d3d9_dll EREK | Client-side"));
+    public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Client-side"));
 
     @Override
     public void onInitializeClient() {
-        LOGGER.log("Client-side initialization");
+        LOGGER.debug("Client-side initialization");
 
         ClientPlayConnectionEvents.INIT.register((handler, minecraftClient) -> registerClientPackets());
-        LOGGER.log("Packet registration registered to \"ClientPlayConnectionEvents.INIT\" event");
+        LOGGER.debug("Packet registration registered to \"ClientPlayConnectionEvents.INIT\" event");
 
         registerKeyBinds();
     }
 
     private static void registerKeyBinds() {
-        LOGGER.log("Key binds registration");
+        LOGGER.debug("Key binds registration");
 
         KeyBinding keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.d3d9_dllerek.debug_handle",
@@ -42,32 +42,32 @@ public class ClientEntrypoint implements ClientModInitializer {
                 GLFW.GLFW_KEY_RIGHT_CONTROL,
                 "category.d3d9_dllerek.debug_category"
         ));
-        LOGGER.log("KeyBind \"key.d3d9_dllerek.debug_handle\" registered");
+        LOGGER.debug("KeyBind \"key.d3d9_dllerek.debug_handle\" registered");
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
                 client.player.sendMessage(new LiteralText("debug"));
             }
         });
-        LOGGER.log("KeyBind \"key.d3d9_dllerek.debug_handle\" callback registered");
+        LOGGER.debug("KeyBind \"key.d3d9_dllerek.debug_handle\" callback registered");
     }
 
     private static void registerClientPackets() {
-        LOGGER.log("Packets registration");
+        LOGGER.debug("Packets registration");
 
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinResultS2CPacket()
         );
-        LOGGER.log("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
+        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
 
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineBalanceS2CPacket()
         );
-        LOGGER.log("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
+        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
 
         ClientPlayNetworking.registerReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncS2CPacket()
         );
-        LOGGER.log("Packet \"PACKET_VERSION_SYNC\" registered");
+        LOGGER.debug("Packet \"PACKET_VERSION_SYNC\" registered");
     }
 
 }

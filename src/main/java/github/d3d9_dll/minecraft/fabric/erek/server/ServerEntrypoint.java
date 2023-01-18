@@ -24,7 +24,7 @@ import java.io.*;
 @Environment(EnvType.SERVER)
 public class ServerEntrypoint implements DedicatedServerModInitializer {
 
-    public final static Logs LOGGER = new Logs(LogManager.getLogger("d3d9_dll EREK | Server-side"));
+    public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX + " | Server-side"));
 
     private static final File BALANCES_FILE = new File(Entrypoint.MOD_DATA_DIRECTORY, "balances.json");
     private static final File CASINO_DIRECTORY = new File(Entrypoint.MOD_DATA_DIRECTORY, "casino");
@@ -32,15 +32,15 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
 
     @Override
     public void onInitializeServer() {
-        LOGGER.log("Server-side initialization");
+        LOGGER.debug("Server-side initialization");
 
         if (!BALANCES_FILE.exists()) {
             try {
                 //noinspection ResultOfMethodCallIgnored
                 BALANCES_FILE.createNewFile();
-                LOGGER.log("File \"balances.json\" created");
+                LOGGER.debug("File \"balances.json\" created");
             } catch (IOException e) {
-                LOGGER.log("Cannot create \"balances.json\"");
+                LOGGER.error("Cannot create \"balances.json\"");
             }
         }
         if (!FREE_SPINS_FILE.exists()) {
@@ -49,84 +49,86 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 CASINO_DIRECTORY.mkdirs();
                 //noinspection ResultOfMethodCallIgnored
                 FREE_SPINS_FILE.createNewFile();
-                LOGGER.log("File \"freespins.json\" created");
+                LOGGER.debug("File \"freespins.json\" created");
             } catch (IOException e) {
-                LOGGER.log("Cannot create \"freespins.json\"");
+                LOGGER.error("Cannot create \"freespins.json\"");
             }
         }
 
         registerServerPackets();
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> addToVersionSyncQueue(handler));
-        LOGGER.log("Players adding to version sync registered to \"ServerPlayConnectionEvents.JOIN\" event");
+        LOGGER.debug("Players adding to version sync registered to \"ServerPlayConnectionEvents.JOIN\" event");
 
         ServerLifecycleEvents.SERVER_STOPPING.register((listener) -> saveData());
-        LOGGER.log("Data saving registered to \"ServerLifecycleEvents.SERVER_STOPPING\" event");
+        LOGGER.debug("Data saving registered to \"ServerLifecycleEvents.SERVER_STOPPING\" event");
 
         ServerLifecycleEvents.SERVER_STARTING.register((listener) -> loadData());
-        LOGGER.log("Data loading registered to \"ServerLifecycleEvents.SERVER_STARTING\" event");
+        LOGGER.debug("Data loading registered to \"ServerLifecycleEvents.SERVER_STARTING\" event");
     }
 
     private static void registerServerPackets() {
-        LOGGER.log("Packets registration");
+        LOGGER.debug("Packets registration");
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinC2SPacket()
         );
-        LOGGER.log("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
+        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineGetBalanceC2SPacket()
         );
-        LOGGER.log("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
+        LOGGER.debug("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
         ServerPlayNetworking.registerGlobalReceiver(
                 Entrypoint.PACKET_VERSION_SYNC, new ServerVersionSyncC2SPacket()
         );
-        LOGGER.log("Packet \"PACKET_VERSION_SYNC\" registered");
+        LOGGER.debug("Packet \"PACKET_VERSION_SYNC\" registered");
     }
 
     private static void addToVersionSyncQueue(ServerPlayNetworkHandler handler) {
         ServerPlayerEntity player = handler.player;
         VersionSynchronizeQueue.add(handler);
         ServerPlayNetworking.send(player, Entrypoint.PACKET_VERSION_SYNC, PacketByteBufs.empty());
-        LOGGER.log("Player \"" + player.getName().asString() + "\" added to version synchronize queue");
+        LOGGER.debug("Player \"" + player.getName().asString() + "\" added to version synchronize queue");
     }
 
     private static void saveData() {
-        LOGGER.log("Saving data");
+        LOGGER.debug("Saving data");
         if (!BALANCES_FILE.canWrite()) {
-            LOGGER.log("File \"balances.json\" is not writeable");
+            LOGGER.error("File \"balances.json\" is not writeable");
         } else {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(BALANCES_FILE));
                 String data = Balances.exportData();
                 writer.write(data);
                 writer.close();
+                LOGGER.debug("File \"balances.json\" saved");
             } catch (FileNotFoundException e) {
-                LOGGER.log("File \"balances.json\" not found for save");
+                LOGGER.error("File \"balances.json\" not found for save");
             } catch (IOException e) {
-                LOGGER.log("Cannot write \"balances.json\" for save");
+                LOGGER.error("Cannot write \"balances.json\" for save");
             }
         }
 
         if (!FREE_SPINS_FILE.canWrite()) {
-            LOGGER.log("File \"freespins.json\" is not writeable");
+            LOGGER.error("File \"freespins.json\" is not writeable");
         } else {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(FREE_SPINS_FILE));
                 String data = FreeSpin.exportData();
                 writer.write(data);
                 writer.close();
+                LOGGER.debug("File \"freespins.json\" saved");
             } catch (FileNotFoundException e) {
-                LOGGER.log("File \"freespins.json\" not found for save");
+                LOGGER.error("File \"freespins.json\" not found for save");
             } catch (IOException e) {
-                LOGGER.log("Cannot write \"freespins.json\" for save");
+                LOGGER.error("Cannot write \"freespins.json\" for save");
             }
         }
     }
 
     private static void loadData() {
-        LOGGER.log("Loading data");
+        LOGGER.error("Loading data");
         if (!BALANCES_FILE.canRead()) {
-            LOGGER.log("File \"balances.json\" is not readable");
+            LOGGER.error("File \"balances.json\" is not readable");
         } else {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(BALANCES_FILE));
@@ -138,15 +140,16 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 }
                 Balances.importData(data.toString());
                 reader.close();
+                LOGGER.debug("File \"balances.json\" loaded");
             } catch (FileNotFoundException e) {
-                LOGGER.log("File \"balances.json\" not found for load");
+                LOGGER.error("File \"balances.json\" not found for load");
             } catch (IOException e) {
-                LOGGER.log("Cannot read \"balances.json\" for load");
+                LOGGER.error("Cannot read \"balances.json\" for load");
             }
         }
 
         if (!FREE_SPINS_FILE.canRead()) {
-            LOGGER.log("File \"freespins.json\" is not readable");
+            LOGGER.error("File \"freespins.json\" is not readable");
         } else {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(FREE_SPINS_FILE));
@@ -158,10 +161,11 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 }
                 FreeSpin.importData(data.toString());
                 reader.close();
+                LOGGER.debug("File \"freespins.json\" loaded");
             } catch (FileNotFoundException e) {
-                LOGGER.log("File \"freespins.json\" not found for load");
+                LOGGER.error("File \"freespins.json\" not found for load");
             } catch (IOException e) {
-                LOGGER.log("Cannot read \"freespins.json\" for load");
+                LOGGER.error("Cannot read \"freespins.json\" for load");
             }
         }
     }

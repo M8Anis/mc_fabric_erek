@@ -33,7 +33,7 @@ public class SlotMachineSpinResultS2CPacket implements ClientPlayNetworking.Play
         SlotmachineScreen.setCoefficient(newCoefficient);
         SlotmachineScreen.bonusGame = buf.readBoolean();
 
-        ClientEntrypoint.LOGGER.log("Slotmachine balance changed to " + newBalance +
+        ClientEntrypoint.LOGGER.debug("Slotmachine balance changed to " + newBalance +
                 ", coefficient to " + newCoefficient + " and spin result showed");
     }
 

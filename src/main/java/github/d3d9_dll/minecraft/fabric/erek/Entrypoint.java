@@ -15,7 +15,7 @@ import java.io.File;
 
 public class Entrypoint implements ModInitializer {
 
-    public final static Logs LOGGER = new Logs(LogManager.getLogger("d3d9_dll EREK"));
+    public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX));
 
     public static final Identifier PACKET_SLOTMACHINE_SPIN =
             new Identifier("d3d9_dllerek", "packet_d3d9_dllerek_slotmachine_spin");
@@ -48,7 +48,7 @@ public class Entrypoint implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.log("Common-side initialization");
+        LOGGER.debug("Common-side initialization");
 
         if (!MOD_DATA_DIRECTORY.exists()) //noinspection ResultOfMethodCallIgnored
             MOD_DATA_DIRECTORY.mkdirs();
@@ -57,32 +57,32 @@ public class Entrypoint implements ModInitializer {
     }
 
     private static void registerItemsAndBlocks() {
-        LOGGER.log("Registering casino category");
+        LOGGER.debug("Registering casino category");
         SlotMachineBottomCaseItem.register();
-        LOGGER.log("BlockItem \"slotmachine_bottom_case\" registered");
+        LOGGER.debug("BlockItem \"slotmachine_bottom_case\" registered");
         SlotMachineBottomCaseBlock.register();
-        LOGGER.log("Block \"slotmachine_bottom_case\" registered");
+        LOGGER.debug("Block \"slotmachine_bottom_case\" registered");
 
         SlotMachineBlockItem.register();
-        LOGGER.log("BlockItem \"slotmachine_block\" registered");
+        LOGGER.debug("BlockItem \"slotmachine_block\" registered");
         SlotMachineBlock.register();
-        LOGGER.log("Block \"slotmachine_block\" registered");
+        LOGGER.debug("Block \"slotmachine_block\" registered");
 
         SlotMachineInfoPanelItem.register();
-        LOGGER.log("BlockItem \"slotmachine_info_panel\" registered");
+        LOGGER.debug("BlockItem \"slotmachine_info_panel\" registered");
         SlotMachineInfoPanelBlock.register();
-        LOGGER.log("Block \"slotmachine_info_panel\" registered");
+        LOGGER.debug("Block \"slotmachine_info_panel\" registered");
 
 
-        LOGGER.log("Registering bank category");
+        LOGGER.debug("Registering bank category");
         AtmBlockItem.register();
-        LOGGER.log("BlockItem \"atm_block\" registered");
+        LOGGER.debug("BlockItem \"atm_block\" registered");
         AtmBlock.register();
-        LOGGER.log("Block \"atm_block\" registered");
+        LOGGER.debug("Block \"atm_block\" registered");
         AtmBottomCaseItem.register();
-        LOGGER.log("BlockItem \"atm_bottom_case\" registered");
+        LOGGER.debug("BlockItem \"atm_bottom_case\" registered");
         AtmBottomCaseBlock.register();
-        LOGGER.log("Block \"atm_bottom_case\" registered");
+        LOGGER.debug("Block \"atm_bottom_case\" registered");
     }
 
 }

@@ -30,7 +30,7 @@ public class ServerVersionSyncC2SPacket implements ServerPlayNetworking.PlayChan
         }
         VersionSynchronizeQueue.remove(handler);
 
-        ServerEntrypoint.LOGGER.log("Player \"" + player.getName().asString() +
+        ServerEntrypoint.LOGGER.debug("Player \"" + player.getName().asString() +
                 "\" removed from version synchronize queue");
     }
 

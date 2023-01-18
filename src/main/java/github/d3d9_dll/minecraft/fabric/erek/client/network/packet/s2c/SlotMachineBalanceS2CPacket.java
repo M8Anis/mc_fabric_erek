@@ -19,7 +19,7 @@ public class SlotMachineBalanceS2CPacket implements ClientPlayNetworking.PlayCha
         float newBalance = buf.readFloat();
         SlotmachineScreen.setBalance(newBalance);
 
-        ClientEntrypoint.LOGGER.log("Slotmachine balance changed to " + newBalance);
+        ClientEntrypoint.LOGGER.debug("Slotmachine balance changed to " + newBalance);
     }
 
 }

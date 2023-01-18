@@ -25,7 +25,7 @@ public class SlotMachineGetBalanceC2SPacket implements ServerPlayNetworking.Play
 
         responseSender.sendPacket(Entrypoint.PACKET_SLOTMACHINE_BALANCE, buff);
 
-        ServerEntrypoint.LOGGER.log("Slotmachine balance (" + balance +
+        ServerEntrypoint.LOGGER.debug("Slotmachine balance (" + balance +
                 ") sended to player \"" + player.getName().asString() + "\"");
     }
 

@@ -62,7 +62,7 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
 
         responseSender.sendPacket(Entrypoint.PACKET_SLOTMACHINE_SPIN, buff);
 
-        ServerEntrypoint.LOGGER.log("Slotmachine spin result sended to player \"" + player.getName().asString() + "\"");
+        ServerEntrypoint.LOGGER.debug("Slotmachine spin result sended to player \"" + player.getName().asString() + "\"");
     }
 
 }

@@ -23,7 +23,7 @@ public class ServerVersionSyncS2CPacket implements ClientPlayNetworking.PlayChan
 
         responseSender.sendPacket(Entrypoint.PACKET_VERSION_SYNC, buff);
 
-        ClientEntrypoint.LOGGER.log("Version sync response sended (" + Version.VERSION_FINGERPRINT + ")");
+        ClientEntrypoint.LOGGER.debug("Version sync response sended (" + Version.VERSION_FINGERPRINT + ")");
     }
 
 }
