@@ -8,8 +8,6 @@ import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
@@ -131,15 +129,7 @@ public class AtmBlock extends HorizontalFacingBlock {
     @SuppressWarnings("deprecation")
     public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
                             BlockHitResult hit) {
-        if (!world.isClient || hand != Hand.OFF_HAND) return false;
-
-        if (!checkConstruct(pos, world)) {
-            player.sendMessage(new TranslatableText("chat.d3d9_dllerek.atm.construct_not_full"));
-            return false;
-        } else {
-            player.sendMessage(new LiteralText("Click!"));
-            return true;
-        }
+        return true;
     }
 
     @Override

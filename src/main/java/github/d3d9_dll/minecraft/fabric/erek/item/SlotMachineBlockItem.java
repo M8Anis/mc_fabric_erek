@@ -24,4 +24,5 @@ public class SlotMachineBlockItem extends BlockItem {
     public static void register() {
         Registry.register(Registry.ITEM, IDENTIFIER, ITEM);
     }
+
 }

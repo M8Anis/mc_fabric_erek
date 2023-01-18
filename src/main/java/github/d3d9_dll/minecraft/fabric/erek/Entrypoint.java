@@ -1,6 +1,5 @@
 package github.d3d9_dll.minecraft.fabric.erek;
 
-import github.d3d9_dll.minecraft.fabric.erek.block.*;
 import github.d3d9_dll.minecraft.fabric.erek.item.*;
 import github.d3d9_dll.minecraft.fabric.erek.util.Logs;
 import net.fabricmc.api.ModInitializer;
@@ -52,37 +51,6 @@ public class Entrypoint implements ModInitializer {
 
         if (!MOD_DATA_DIRECTORY.exists()) //noinspection ResultOfMethodCallIgnored
             MOD_DATA_DIRECTORY.mkdirs();
-
-        registerItemsAndBlocks();
-    }
-
-    private static void registerItemsAndBlocks() {
-        LOGGER.debug("Registering casino category");
-        SlotMachineBottomCaseItem.register();
-        LOGGER.debug("BlockItem \"slotmachine_bottom_case\" registered");
-        SlotMachineBottomCaseBlock.register();
-        LOGGER.debug("Block \"slotmachine_bottom_case\" registered");
-
-        SlotMachineBlockItem.register();
-        LOGGER.debug("BlockItem \"slotmachine_block\" registered");
-        SlotMachineBlock.register();
-        LOGGER.debug("Block \"slotmachine_block\" registered");
-
-        SlotMachineInfoPanelItem.register();
-        LOGGER.debug("BlockItem \"slotmachine_info_panel\" registered");
-        SlotMachineInfoPanelBlock.register();
-        LOGGER.debug("Block \"slotmachine_info_panel\" registered");
-
-
-        LOGGER.debug("Registering bank category");
-        AtmBlockItem.register();
-        LOGGER.debug("BlockItem \"atm_block\" registered");
-        AtmBlock.register();
-        LOGGER.debug("Block \"atm_block\" registered");
-        AtmBottomCaseItem.register();
-        LOGGER.debug("BlockItem \"atm_bottom_case\" registered");
-        AtmBottomCaseBlock.register();
-        LOGGER.debug("Block \"atm_bottom_case\" registered");
     }
 
 }

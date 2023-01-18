@@ -2,6 +2,7 @@ package github.d3d9_dll.minecraft.fabric.erek.client.gui.screen;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
+import github.d3d9_dll.minecraft.fabric.erek.client.models.slotmachine.LinesDraw;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -114,7 +115,7 @@ public class SlotmachineScreen extends Screen {
                 }
             }
             if (matchedLines != null && matchedLines.getLines().size() > 0) {
-                HashMap<Integer, Function<Integer, Void>> lines = new Lines.Draw(this.minecraft, x, y).DRAWS;
+                HashMap<Integer, Function<Integer, Void>> lines = new LinesDraw(this.minecraft, x, y).DRAWS;
                 HashMap<Integer, Lines.Matched.Line> linesEntries = matchedLines.getLines();
                 for (int line = 0; line < 10; line++) {
                     int lineNumber = line + 1;
