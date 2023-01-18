@@ -42,6 +42,9 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
     private static final java.io.File PIECES_FILE = new java.io.File(CASINO_DIRECTORY, "pieces.json");
 
     private static final AutoSave AUTO_SAVE_THREAD = new AutoSave(300000L);
+    public static final Moneys MONEYS = new Moneys();
+    public static final Pieces PIECES = new Pieces();
+    public static final FreeSpin FREE_SPINS = new FreeSpin();
 
     @Override
     public void onInitializeServer() {
@@ -147,7 +150,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"balances.json\" is not writeable");
         } else {
             try {
-                File.write(BALANCES_FILE, Moneys.exportData());
+                File.write(BALANCES_FILE, MONEYS.exportData());
                 LOGGER.debug("File \"balances.json\" saved");
             } catch (IOException e) {
                 LOGGER.error("Cannot write \"balances.json\" for save");
@@ -158,7 +161,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"freespins.json\" is not writeable");
         } else {
             try {
-                File.write(FREE_SPINS_FILE, FreeSpin.exportData());
+                File.write(FREE_SPINS_FILE, FREE_SPINS.exportData());
                 LOGGER.debug("File \"freespins.json\" saved");
             } catch (IOException e) {
                 LOGGER.error("Cannot write \"freespins.json\" for save");
@@ -169,7 +172,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
             LOGGER.error("File \"pieces.json\" is not writeable");
         } else {
             try {
-                File.write(PIECES_FILE, Pieces.exportData());
+                File.write(PIECES_FILE, PIECES.exportData());
                 LOGGER.debug("File \"pieces.json\" saved");
             } catch (IOException e) {
                 LOGGER.error("Cannot write \"pieces.json\" for save");
@@ -188,7 +191,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 if (data == null) {
                     LOGGER.error("Cannot read \"balances.json\" for load");
                 } else {
-                    Moneys.importData(data);
+                    MONEYS.importData(data);
                     LOGGER.debug("File \"balances.json\" loaded");
                 }
             } catch (FileNotFoundException e) {
@@ -204,7 +207,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 if (data == null) {
                     LOGGER.error("Cannot read \"freespins.json\" for load");
                 } else {
-                    FreeSpin.importData(data);
+                    FREE_SPINS.importData(data);
                     LOGGER.debug("File \"freespins.json\" loaded");
                 }
             } catch (FileNotFoundException e) {
@@ -220,7 +223,7 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
                 if (data == null) {
                     LOGGER.error("Cannot read \"pieces.json\" for load");
                 } else {
-                    Pieces.importData(data);
+                    PIECES.importData(data);
                     LOGGER.debug("File \"pieces.json\" loaded");
                 }
             } catch (FileNotFoundException e) {

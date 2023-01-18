@@ -75,9 +75,6 @@ public class Reals {
     public static PacketByteBuf generateForPacket(String[][] resultOfSpin) {
         PacketByteBuf buff = PacketByteBufs.create();
 
-        /*
-         *  Writing in reverse
-         **/
         for (String[] strings : resultOfSpin) {
             for (String string : strings) {
                 buff.writeString(string, 1);

@@ -2,8 +2,6 @@ package github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.bank;
 
 import github.d3d9_dll.minecraft.fabric.erek.block.AtmBlock;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.bank.Moneys;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -29,13 +27,13 @@ public class Bank2CasinoExchangeC2SPacket implements ServerPlayNetworking.PlayCh
         String UUID = player.getUuidAsString();
 
         float exchange = buf.readFloat();
-        float currentBalance = Moneys.get(UUID);
+        float currentBalance = ServerEntrypoint.MONEYS.get(UUID);
         if (exchange > currentBalance || exchange <= 0)
             throw new IllegalArgumentException();
         float pieces = exchange * EXCHANGE_COURSE;
 
-        Moneys.subtract(UUID, exchange);
-        Pieces.increment(UUID, pieces);
+        ServerEntrypoint.MONEYS.subtract(UUID, exchange);
+        ServerEntrypoint.PIECES.increment(UUID, pieces);
 
         ServerEntrypoint.LOGGER.debug(
                 String.format("ATM Exchanged by course %.2f pieces %.2f", EXCHANGE_COURSE, pieces)

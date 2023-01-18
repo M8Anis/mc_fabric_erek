@@ -5,8 +5,6 @@ import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.models.slotmachine.Lines;
 import github.d3d9_dll.minecraft.fabric.erek.server.ServerEntrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Coefficients;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.FreeSpin;
-import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Pieces;
 import github.d3d9_dll.minecraft.fabric.erek.server.models.slotmachine.Reals;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,7 +30,7 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
             throw new IllegalArgumentException();
 
         String UUID = player.getUuidAsString();
-        float balance = Pieces.get(UUID);
+        float balance = ServerEntrypoint.PIECES.get(UUID);
         float bet = buf.readFloat();
 
         if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance)
@@ -44,18 +42,18 @@ public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChanne
         boolean bonusGame = lines.isBonusGame;
         float coeff = (new Coefficients(matchedLines)).getCoefficient();
 
-        int freeSpins = FreeSpin.get(UUID);
-        if (freeSpins > 0) FreeSpin.subtract(UUID);
-        if (bonusGame) FreeSpin.add(UUID, 10);
+        int freeSpins = ServerEntrypoint.FREE_SPINS.get(UUID);
+        if (freeSpins > 0) ServerEntrypoint.FREE_SPINS.subtract(UUID);
+        if (bonusGame) ServerEntrypoint.FREE_SPINS.add(UUID, 10);
 
         if (coeff < 0f) {
-            if (!(freeSpins > 0)) Pieces.subtract(UUID, bet * -coeff);
+            if (!(freeSpins > 0)) ServerEntrypoint.PIECES.subtract(UUID, bet * -coeff);
         } else {
-            Pieces.increment(UUID, bet * coeff);
+            ServerEntrypoint.PIECES.increment(UUID, bet * coeff);
         }
 
         PacketByteBuf buff = Reals.generateForPacket(resultOfSpin);
-        buff.writeFloat(Pieces.get(UUID));
+        buff.writeFloat(ServerEntrypoint.PIECES.get(UUID));
         buff.writeFloat(coeff);
         buff.writeBoolean(freeSpins > 0 || bonusGame);
 

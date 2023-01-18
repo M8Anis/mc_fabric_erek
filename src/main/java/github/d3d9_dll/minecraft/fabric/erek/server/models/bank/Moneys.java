@@ -10,33 +10,36 @@ import java.util.HashMap;
 @Environment(EnvType.SERVER)
 public class Moneys {
 
-    private static final Gson GSON = new Gson();
+    protected static final Gson GSON = new Gson();
     private static final float DEFAULT_BALANCE = 1000.0f;
 
-    private static HashMap<String, Float> balances = new HashMap<>();
+    protected HashMap<String, Float> balances = new HashMap<>();
 
-    public static float get(String UUID) {
+    public Moneys() {
+    }
+
+    public float get(String UUID) {
         if (!balances.containsKey(UUID)) balances.put(UUID, DEFAULT_BALANCE);
         return balances.get(UUID);
     }
 
-    public static void increment(String UUID, float count) {
+    public void increment(String UUID, float count) {
         if (count < 0) return;
 
         balances.replace(UUID, get(UUID) + count);
     }
 
-    public static void subtract(String UUID, float count) {
+    public void subtract(String UUID, float count) {
         if (count < 0) return;
 
         balances.replace(UUID, get(UUID) - count);
     }
 
-    public static String exportData() {
+    public String exportData() {
         return GSON.toJson(balances);
     }
 
-    public static void importData(String data) {
+    public void importData(String data) {
         //noinspection UnstableApiUsage
         balances = GSON.fromJson(data, new TypeToken<HashMap<String, Float>>() {
         }.getType());
