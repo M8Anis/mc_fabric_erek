@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 @Environment(EnvType.SERVER)
 public class Casino2BankExchangeC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
 
-    private static final float EXCHANGE_COURSE = 0.8f;
+    private static final float EXCHANGE_COURSE = 0.95f;
 
     @Override
     public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
