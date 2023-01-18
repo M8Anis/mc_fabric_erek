@@ -3,6 +3,8 @@ package github.d3d9_dll.minecraft.fabric.erek.client.gui.screen;
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
 import github.d3d9_dll.minecraft.fabric.erek.block.SlotMachineBlock;
 import github.d3d9_dll.minecraft.fabric.erek.games.slotmachine.Lines;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.screen.Screen;
@@ -16,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.HashMap;
 
+@Environment(EnvType.CLIENT)
 public class SlotmachineScreen extends Screen {
 
     private final static Identifier SYMBOLS_ATLAS =
