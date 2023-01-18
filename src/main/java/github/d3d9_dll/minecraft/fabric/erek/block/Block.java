@@ -54,7 +54,7 @@ public abstract class Block extends HorizontalFacingBlock {
     public Block(Settings settings, VoxelShape northShape) {
         this(settings);
         VoxelShape eastShape = VoxelShapeHelper.rotateShape(
-                Direction.NORTH, Direction.NORTH,
+                Direction.NORTH, Direction.NORTH, // Don't ask! It's just work
                 northShape
         );
         VoxelShape southShape = VoxelShapeHelper.rotateShape(

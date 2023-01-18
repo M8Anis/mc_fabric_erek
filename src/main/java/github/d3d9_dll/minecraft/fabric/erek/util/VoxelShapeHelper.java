@@ -37,7 +37,10 @@ public class VoxelShapeHelper {
         int times = (to.ordinal() - from.getDirection().ordinal() + 4) % 4;
         for (int i = 0; i < times; i++) {
             buffer[0].forEachBox(
-                    (minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = VoxelShapes.union(buffer[1], VoxelShapes.cuboid(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX))
+                    (minX, minY, minZ, maxX, maxY, maxZ) ->
+                            buffer[1] = VoxelShapes.union(
+                                    buffer[1], VoxelShapes.cuboid(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)
+                            )
             );
             buffer[0] = buffer[1];
             buffer[1] = VoxelShapes.empty();
