@@ -10,20 +10,11 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.util.PacketByteBuf;
 
 @Environment(EnvType.CLIENT)
-public class SlotMachineSpinResultS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
+public class SlotMachineBalanceS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
 
     @Override
     public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        String[][] resultOfSpin = new String[5][3];
-        for (int real = 0; real < 5; real++) {
-            for (int symbol = 0; symbol < 3; symbol++) {
-                resultOfSpin[real][symbol] = buf.readString(1);
-            }
-        }
-
-        SlotmachineScreen.setResult(resultOfSpin);
         SlotmachineScreen.setBalance(buf.readFloat());
-        SlotmachineScreen.bonusGame = buf.readBoolean();
     }
 
 }

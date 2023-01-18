@@ -20,8 +20,8 @@ public class Entrypoint implements ModInitializer {
 
     public static final Identifier PACKET_SLOTMACHINE_SPIN =
             new Identifier("d3d9_dllerek", "packet_slotmachine_spin");
-    public static final Identifier PACKET_SLOTMACHINE_SPIN_RESULT =
-            new Identifier("d3d9_dllerek", "packet_slotmachine_spin_result");
+    public static final Identifier PACKET_SLOTMACHINE_BALANCE =
+            new Identifier("d3d9_dllerek", "packet_slotmachine_balance");
 
     public static final ItemGroup GENERAL_ITEM_GROUP = FabricItemGroupBuilder.create(
                     new Identifier("d3d9_dllerek", "casino"))

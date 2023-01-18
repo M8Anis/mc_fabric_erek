@@ -1,6 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.client;
 
 import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
+import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachineBalanceS2CPacket;
 import github.d3d9_dll.minecraft.fabric.erek.client.network.packet.s2c.SlotMachineSpinResultS2CPacket;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -51,8 +52,10 @@ public class ClientEntrypoint implements ClientModInitializer {
     }
 
     private static void registerClientPackets() {
-        ClientPlayNetworking.registerReceiver(Entrypoint.PACKET_SLOTMACHINE_SPIN_RESULT, new SlotMachineSpinResultS2CPacket());
-        LOGGER.info("Packet \"SlotMachineSpinResultS2CPacket\" registered");
+        ClientPlayNetworking.registerReceiver(Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinResultS2CPacket());
+        LOGGER.info("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
+        ClientPlayNetworking.registerReceiver(Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineBalanceS2CPacket());
+        LOGGER.info("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
     }
 
 }

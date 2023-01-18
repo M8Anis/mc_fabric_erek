@@ -9,5 +9,7 @@
 
   "chat.d3d9_dllerek.slotmachine.construct_not_full": "Слот-машина построена не полностью",
 
-  "gui.d3d9_dllerek.slotmachine.spin": "Крутить!"
+  "gui.d3d9_dllerek.slotmachine.button.spin": "Крутить!",
+  "gui.d3d9_dllerek.slotmachine.text.bet": "Ставка: %.2f",
+  "gui.d3d9_dllerek.slotmachine.text.balance": "Баланс: %.2f"
 }

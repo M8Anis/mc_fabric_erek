@@ -1,11 +1,7 @@
 package github.d3d9_dll.minecraft.fabric.erek.games.slotmachine;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
 import java.util.HashMap;
 
-@Environment(EnvType.CLIENT)
 public class Lines {
 
     public final String[][] lines;
@@ -29,9 +25,9 @@ public class Lines {
         };
 
         int bonusGameSymbolCounter = 0;
-        for (int real = 0; real < reals.length; real++) {
-            for (int symbol = 0; symbol < reals[real].length; symbol++) {
-                if (reals[real][symbol].equals("B")) {
+        for (String[] strings : reals) {
+            for (String string : strings) {
+                if (string.equals("B")) {
                     bonusGameSymbolCounter++;
                     break;
                 }

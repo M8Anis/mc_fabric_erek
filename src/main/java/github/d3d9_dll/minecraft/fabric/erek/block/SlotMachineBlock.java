@@ -74,6 +74,7 @@ public class SlotMachineBlock extends Block {
         super(settings);
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean checkConstruct(BlockPos blockPos, World world) {
         if (world == null || blockPos == null) return false;
 

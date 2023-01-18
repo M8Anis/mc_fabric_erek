@@ -71,10 +71,9 @@ public class Reals {
         return result;
     }
 
-    public static PacketByteBuf generateForPacket(){
+    public static PacketByteBuf generateForPacket(String[][] resultOfSpin) {
         PacketByteBuf buff = PacketByteBufs.create();
 
-        String[][] resultOfSpin = generateResult();
         /*
          *  Writing in reverse
          **/
