@@ -13,19 +13,19 @@ public class Entrypoint implements ModInitializer {
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX));
     // Common
     public static final Identifier PACKET_VERSION_SYNC =
-            new Identifier("d3d9_dllerek:network_packets/_version_synchronize");
+            new Identifier("d3d9_dllerek:network_packets/version_synchronize");
     // Casino
     public static final Identifier PACKET_SLOTMACHINE_SPIN =
-            new Identifier("d3d9_dllerek:network_packets/packet_slotmachine_spin");
+            new Identifier("d3d9_dllerek:network_packets/slotmachine_spin");
     public static final Identifier PACKET_CASINO_PIECES =
-            new Identifier("d3d9_dllerek:network_packets/packet_casino_pieces");
+            new Identifier("d3d9_dllerek:network_packets/casino_pieces");
     public static final Identifier PACKET_CASINO_TO_BANK_EXCHANGE =
-            new Identifier("d3d9_dllerek:network_packets/packet_casino_to_bank_exchange");
+            new Identifier("d3d9_dllerek:network_packets/casino_to_bank_exchange");
     // Bank
     public static final Identifier PACKET_BANK_TO_CASINO_EXCHANGE =
-            new Identifier("d3d9_dllerek:network_packets/packet_bank_to_casino_exchange");
+            new Identifier("d3d9_dllerek:network_packets/bank_to_casino_exchange");
     public static final Identifier PACKET_BANK_MONEYS =
-            new Identifier("d3d9_dllerek:network_packets/packet_bank_moneys");
+            new Identifier("d3d9_dllerek:network_packets/bank_moneys");
 
     public static final File MOD_DATA_DIRECTORY =
             new File(FabricLoader.getInstance().getConfigDir().toFile(), "d3d9_dllerek");
