@@ -87,7 +87,7 @@ public class ServerItemRegistration {
     }
 
     public void registerAll() throws IllegalStateException {
-        if (registered) throw new IllegalStateException("blocks already registered");
+        if (registered) throw new IllegalStateException("items already registered");
 
         ServerEntrypoint.LOGGER.debug("Item registering");
 
