@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 public class SlotMachineBottomCaseBlock extends Block {
 
     public static final Identifier IDENTIFIER = new Identifier("d3d9_dllerek", "slotmachine_bottom_case");
-    public static final Block BLOCK = new Block(
+    public static final Block BLOCK = new SlotMachineBottomCaseBlock(
             FabricBlockSettings.of(Material.METAL)
                     .strength(6f)
                     .breakByTool(FabricToolTags.PICKAXES, 2)

@@ -1,11 +1,8 @@
 package github.d3d9_dll.minecraft.fabric.erek.server;
 
-import github.d3d9_dll.minecraft.fabric.erek.Entrypoint;
-import github.d3d9_dll.minecraft.fabric.erek.server.network.packet.c2s.SlotMachineSpineC2SPacket;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,13 +14,6 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
     @Override
     public void onInitializeServer() {
         LOGGER.info("Server-side initialization");
-
-        registerServerPackets();
-    }
-
-    private static void registerServerPackets() {
-        ServerPlayNetworking.registerGlobalReceiver(Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpineC2SPacket());
-        LOGGER.info("Packet \"SlotMachineSpineC2SPacket\" registered");
     }
 
 }

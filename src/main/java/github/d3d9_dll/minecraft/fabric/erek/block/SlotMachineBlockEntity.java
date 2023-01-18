@@ -9,7 +9,6 @@ import net.minecraft.util.registry.Registry;
 public class SlotMachineBlockEntity extends BlockEntity {
 
     public static final Identifier IDENTIFIER = SlotMachineBlockItem.IDENTIFIER;
-
     public static final BlockEntityType<SlotMachineBlockEntity> BLOCK_ENTITY =
             BlockEntityType.Builder.create(
                     SlotMachineBlockEntity::new,

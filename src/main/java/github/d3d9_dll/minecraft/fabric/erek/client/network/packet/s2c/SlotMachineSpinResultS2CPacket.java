@@ -17,7 +17,7 @@ public class SlotMachineSpinResultS2CPacket implements ClientPlayNetworking.Play
         String[][] resultOfSpin = new String[5][3];
         for (int real = 0; real < 5; real++) {
             for (int symbol = 0; symbol < 3; symbol++) {
-                resultOfSpin[real][symbol] = buf.readString();
+                resultOfSpin[real][symbol] = buf.readString(1);
             }
         }
 

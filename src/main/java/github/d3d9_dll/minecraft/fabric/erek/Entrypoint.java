@@ -19,18 +19,8 @@ public class Entrypoint implements ModInitializer {
 
     public final static Logger LOGGER = LogManager.getLogger("d3d9_dll MCServerMod");
 
-    public static final Identifier PACKET_SLOTMACHINE_SPIN =
-            new Identifier("d3d9_dllerek", "slotmachine_spin");
     public static final Identifier PACKET_SLOTMACHINE_SPIN_RESULT =
-            new Identifier("d3d9_dllerek", "slotmachine_result");
-
-    @Override
-    public void onInitialize() {
-        LOGGER.info("Common-side initialization");
-
-        registerItemsAndBlocks();
-    }
-
+            new Identifier("d3d9_dllerek", "packet_slotmachine_result");
     public static final ItemGroup GENERAL_ITEM_GROUP = FabricItemGroupBuilder.create(
                     new Identifier("d3d9_dllerek", "casino"))
             .icon(() -> new ItemStack(SlotMachineBlockItem.ITEM))
@@ -40,6 +30,13 @@ public class Entrypoint implements ModInitializer {
                 stacks.add(new ItemStack(SlotMachineInfoPanelItem.ITEM));
             })
             .build();
+
+    @Override
+    public void onInitialize() {
+        LOGGER.info("Common-side initialization");
+
+        registerItemsAndBlocks();
+    }
 
     private static void registerItemsAndBlocks() {
         SlotMachineBottomCaseItem.register();

@@ -2,6 +2,8 @@ package github.d3d9_dll.minecraft.fabric.erek.server.games.slotmachine;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.util.PacketByteBuf;
 
 import java.security.SecureRandom;
 
@@ -67,6 +69,22 @@ public class Reals {
             }
         }
         return result;
+    }
+
+    public static PacketByteBuf generateForPacket(){
+        PacketByteBuf buff = PacketByteBufs.create();
+
+        String[][] resultOfSpin = generateResult();
+        /*
+         *  Writing in reverse
+         **/
+        for (int reals = resultOfSpin.length - 1; 0 <= reals; reals--) {
+            for (int symbol = resultOfSpin[reals].length - 1; 0 <= symbol; symbol--) {
+                buff.writeString(resultOfSpin[reals][symbol], 1);
+            }
+        }
+
+        return buff;
     }
 
 }
