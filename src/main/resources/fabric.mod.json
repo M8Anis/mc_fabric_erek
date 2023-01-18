@@ -11,7 +11,7 @@
         "homepage": "https://github.com/d3d9-dll",
         "sources": ""
     },
-    "license": "MIT",
+    "license": "MIT License",
     "icon": "assets/d3d9_dllerek/icon.png",
     "environment": "*",
     "entrypoints": {
