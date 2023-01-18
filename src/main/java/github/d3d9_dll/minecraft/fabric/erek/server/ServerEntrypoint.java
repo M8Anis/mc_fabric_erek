@@ -23,9 +23,13 @@ public class ServerEntrypoint implements DedicatedServerModInitializer {
     }
 
     private static void registerServerPackets() {
-        ServerPlayNetworking.registerGlobalReceiver(Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinC2SPacket());
+        ServerPlayNetworking.registerGlobalReceiver(
+                Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinC2SPacket()
+        );
         LOGGER.info("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
-        ServerPlayNetworking.registerGlobalReceiver(Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineGetBalanceC2SPacket());
+        ServerPlayNetworking.registerGlobalReceiver(
+                Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineGetBalanceC2SPacket()
+        );
         LOGGER.info("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
     }
 

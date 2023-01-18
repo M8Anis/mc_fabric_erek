@@ -69,15 +69,16 @@ public class SlotmachineScreen extends Screen {
         );
         this.spinButton = this.addButton(
                 new ButtonWidget(
-                        (this.width / 2) - 32,
-                        (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight, 64, 20,
-                        new TranslatableText("gui.d3d9_dllerek.slotmachine.button.spin").asString(), this::spinButton
+                        (this.width / 2) - 32, (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight,
+                        64, 20,
+                        new TranslatableText("gui.d3d9_dllerek.slotmachine.button.spin").asString(),
+                        this::spinButton
                 )
         );
         this.addBetButton = this.addButton(
                 new ButtonWidget(
-                        (this.width / 2) + 34, (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight, 16, 20,
-                        "+", this::addBetButton
+                        (this.width / 2) + 34, (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight,
+                        16, 20, "+", this::addBetButton
                 )
         );
 
@@ -112,8 +113,10 @@ public class SlotmachineScreen extends Screen {
 
         y = y + (65 * 3) + 8;
 
-        String balanceString = new TranslatableText("gui.d3d9_dllerek.slotmachine.text.balance", balance).asString();
-        String betString = new TranslatableText("gui.d3d9_dllerek.slotmachine.text.bet", bet).asString();
+        String balanceString =
+                new TranslatableText("gui.d3d9_dllerek.slotmachine.text.balance", balance).asString();
+        String betString =
+                new TranslatableText("gui.d3d9_dllerek.slotmachine.text.bet", bet).asString();
 
         int betWidth = this.font.getStringWidth(betString);
 

@@ -13,7 +13,8 @@ import net.minecraft.util.PacketByteBuf;
 public class SlotMachineBalanceS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
 
     @Override
-    public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+    public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
+                        PacketSender responseSender) {
         SlotmachineScreen.setBalance(buf.readFloat());
     }
 

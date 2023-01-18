@@ -19,16 +19,21 @@ import net.minecraft.util.math.BlockPos;
 @Environment(EnvType.SERVER)
 public class SlotMachineSpinC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
 
+    private static final float MINIMAL_BET = 4.0f;
+    private static final float MAXIMAL_BET = 12.0f;
+
     @Override
-    public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+    public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
+                        PacketByteBuf buf, PacketSender responseSender) {
         BlockPos slotmachinePos = buf.readBlockPos();
         if (!SlotMachineBlock.checkConstruct(slotmachinePos, player.getServerWorld()))
-            return;
+            throw new IllegalArgumentException();
 
         float balance = Balances.get(player.getUuidAsString());
         float bet = buf.readFloat();
 
-        if (bet > balance) return;
+        if (bet > MAXIMAL_BET || bet < MINIMAL_BET || bet > balance)
+            throw new IllegalArgumentException();
 
         String[][] resultOfSpin = Reals.generateResult();
         Lines lines = new Lines(resultOfSpin);

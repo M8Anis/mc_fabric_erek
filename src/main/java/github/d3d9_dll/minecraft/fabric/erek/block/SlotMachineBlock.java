@@ -88,7 +88,8 @@ public class SlotMachineBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
-    public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+                            BlockHitResult hit) {
         if (!world.isClient || hand != Hand.OFF_HAND) return false;
 
         if (!checkConstruct(pos, world)) {

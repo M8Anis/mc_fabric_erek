@@ -16,7 +16,8 @@ import net.minecraft.util.PacketByteBuf;
 public class SlotMachineGetBalanceC2SPacket implements ServerPlayNetworking.PlayChannelHandler {
 
     @Override
-    public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+    public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
+                        PacketByteBuf buf, PacketSender responseSender) {
         float balance = Balances.get(player.getUuidAsString());
         PacketByteBuf buff = PacketByteBufs.create();
         buff.writeFloat(balance);

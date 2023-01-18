@@ -52,9 +52,13 @@ public class ClientEntrypoint implements ClientModInitializer {
     }
 
     private static void registerClientPackets() {
-        ClientPlayNetworking.registerReceiver(Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinResultS2CPacket());
+        ClientPlayNetworking.registerReceiver(
+                Entrypoint.PACKET_SLOTMACHINE_SPIN, new SlotMachineSpinResultS2CPacket()
+        );
         LOGGER.info("Packet \"PACKET_SLOTMACHINE_SPIN\" registered");
-        ClientPlayNetworking.registerReceiver(Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineBalanceS2CPacket());
+        ClientPlayNetworking.registerReceiver(
+                Entrypoint.PACKET_SLOTMACHINE_BALANCE, new SlotMachineBalanceS2CPacket()
+        );
         LOGGER.info("Packet \"PACKET_SLOTMACHINE_BALANCE\" registered");
     }
 

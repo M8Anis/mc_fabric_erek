@@ -13,7 +13,8 @@ import net.minecraft.util.PacketByteBuf;
 public class SlotMachineSpinResultS2CPacket implements ClientPlayNetworking.PlayChannelHandler {
 
     @Override
-    public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
+    public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
+                        PacketSender responseSender) {
         String[][] resultOfSpin = new String[5][3];
         for (int real = 0; real < 5; real++) {
             for (int symbol = 0; symbol < 3; symbol++) {
