@@ -17,11 +17,11 @@ public class Entrypoint implements ModInitializer {
     public final static Logs LOGGER = new Logs(LogManager.getLogger(Logs.LOG_PREFIX));
 
     public static final Identifier PACKET_SLOTMACHINE_SPIN =
-            new Identifier("d3d9_dllerek", "packet_d3d9_dllerek_slotmachine_spin");
+            new Identifier("d3d9_dllerek", "packet_slotmachine_spin");
     public static final Identifier PACKET_SLOTMACHINE_BALANCE =
-            new Identifier("d3d9_dllerek", "packet_d3d9_dllerek_slotmachine_balance");
+            new Identifier("d3d9_dllerek", "packet_slotmachine_balance");
     public static final Identifier PACKET_VERSION_SYNC =
-            new Identifier("d3d9_dllerek", "packet_d3d9_dllerek_version_synchronize");
+            new Identifier("d3d9_dllerek", "packet_version_synchronize");
 
     public static final ItemGroup CASINO_ITEM_GROUP = FabricItemGroupBuilder.create(
                     new Identifier("d3d9_dllerek", "casino"))
