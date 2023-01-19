@@ -3,26 +3,26 @@
     "id": "m8anis_erek",
     "version": "${version}",
     "name": "ЁРЭК",
-    "description": "",
+    "description": "Мод для локального сервера",
     "authors": [
         "M8Anis"
     ],
     "contact": {
-        "homepage": "https://github.com/M8Anis",
-        "sources": "https://github.com/M8Anis/mc-fabric-erek"
+        "homepage": "https://m8anis.github.io/mc-fabric-erek/",
+        "sources": "https://github.com/M8Anis/mc_fabric_erek"
     },
     "license": "MIT License",
     "icon": "assets/m8anis_erek/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-          "github.m8anis.minecraft.fabric.erek.Entrypoint"
+            "io.github.m8anis.mc_fabric_erek.Entrypoint"
         ],
         "client": [
-          "github.m8anis.minecraft.fabric.erek.client.ClientEntrypoint"
+            "io.github.m8anis.mc_fabric_erek.client.ClientEntrypoint"
         ],
         "server": [
-          "github.m8anis.minecraft.fabric.erek.server.ServerEntrypoint"
+            "io.github.m8anis.mc_fabric_erek.server.ServerEntrypoint"
         ]
     },
     "mixins": [
