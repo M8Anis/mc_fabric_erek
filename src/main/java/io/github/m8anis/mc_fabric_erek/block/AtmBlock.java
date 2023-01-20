@@ -53,7 +53,7 @@ public class AtmBlock extends io.github.m8anis.mc_fabric_erek.block.Block {
             // Upper plate
             Block.createCuboidShape(3.0D, 12.0D, 7.0D, 13.0D, 14.0D, 9.0D),
             // Keypad
-            Block.createCuboidShape(6.0D, 0.0D, 4.0D, 10.0D, 1.0D, 6.0D)
+            Block.createCuboidShape(6.0D, 0.0D, 4.0D, 10.0D, 0.75D, 7.0D)
     ).simplify();
 
     public AtmBlock(Settings settings) {
