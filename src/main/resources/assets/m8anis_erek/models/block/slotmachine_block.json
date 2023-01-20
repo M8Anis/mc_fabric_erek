@@ -23,6 +23,7 @@
         "19": "m8anis_erek:block/slotmachine_block/display_header_2",
         "20": "m8anis_erek:block/slotmachine_block/back_case",
         "21": "m8anis_erek:block/slotmachine_block/display",
+        "22": "m8anis_erek:block/slotmachine_block/covering_plate",
         "particle": "m8anis_erek:block/slotmachine_block/back_case"
     },
     "elements": [
@@ -305,12 +306,25 @@
                 "up": {"uv": [0.5, 0.25, 0.25, 0], "texture": "#9"},
                 "down": {"uv": [0.75, 0, 0.5, 0.25], "texture": "#9"}
             }
+        },
+        {
+            "from": [1, -0.25, 1],
+            "to": [15, -0.25, 8],
+            "faces": {
+                "north": {"uv": [0, 0, 3.5, 0], "texture": "#22"},
+                "east": {"uv": [0, 0, 1.75, 0], "texture": "#22"},
+                "south": {"uv": [0, 0, 3.5, 0], "texture": "#22"},
+                "west": {"uv": [0, 0, 1.75, 0], "texture": "#22"},
+                "up": {"uv": [0, 0, 3.5, 1.75], "texture": "#22"},
+                "down": {"uv": [0, 0, 3.5, 1.75], "texture": "#22"}
+            }
         }
     ],
     "display": {
         "thirdperson_righthand": {
-            "rotation": [0, 180, 0],
-            "scale": [0.15, 0.15, 0.15]
+            "rotation": [75, 45, 0],
+            "translation": [0, 2.5, 0],
+            "scale": [0.375, 0.375, 0.375]
         },
         "thirdperson_lefthand": {
             "rotation": [0, 180, 0],
@@ -361,7 +375,7 @@
             "name": "left_plate",
             "origin": [8, 8, 8],
             "color": 0,
-            "children": [12, 13, 14, 15, 16, 17, 18, 19]
+            "children": [12, 13, 14, 15, 16, 17, 18, 19, 20]
         }
     ]
 }
