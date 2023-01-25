@@ -30,9 +30,10 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.NarratorManager;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
@@ -54,24 +55,24 @@ public class AtmScreen extends Screen {
         updateData();
     }
 
-    public void render(int mouseX, int mouseY, float delta) {
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         if (!checkMachine()) return;
-        this.renderBackground();
+        this.renderBackground(matrices);
 
-        String moneys = new TranslatableText("gui.m8anis_erek.atm.text.moneys", AtmScreen.moneys).asString();
+        String moneys = new TranslatableText("gui.m8anis_erek.atm.text.moneys", AtmScreen.moneys).getString();
 
-        int x = this.width / 2 - this.font.getStringWidth(moneys) / 2;
-        int y = this.height / 2 - this.font.fontHeight / 2;
+        int x = this.width / 2 - this.textRenderer.getWidth(moneys) / 2;
+        int y = this.height / 2 - this.textRenderer.fontHeight / 2;
 
-        this.font.drawWithShadow(moneys, x, y, 0xFFFFFFFF);
+        this.textRenderer.drawWithShadow(matrices, moneys, x, y, 0xFFFFFFFF);
 
-        super.render(mouseX, mouseY, delta);
+        super.render(matrices, mouseX, mouseY, delta);
     }
 
     @SuppressWarnings("DataFlowIssue")
     @Override
     public void onClose() {
-        this.minecraft.openScreen(null);
+        this.client.openScreen(null);
     }
 
     public static void setMoneys(float value) {

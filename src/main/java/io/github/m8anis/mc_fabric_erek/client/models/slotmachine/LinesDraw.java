@@ -27,6 +27,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -47,11 +48,13 @@ public class LinesDraw extends DrawableHelper {
     private final MinecraftClient minecraftClient;
     private final int startX;
     private final int startY;
+    private final MatrixStack matrices;
 
-    public LinesDraw(MinecraftClient minecraftClient, int startX, int startY) {
+    public LinesDraw(MatrixStack matrices, MinecraftClient minecraftClient, int startX, int startY) {
         this.minecraftClient = minecraftClient;
         this.startX = startX;
         this.startY = startY;
+        this.matrices = matrices;
         DRAWS = createDraws();
     }
 
@@ -78,25 +81,25 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("f");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-                blit(startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -113,25 +116,25 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("f");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-                blit(startX, startY, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -148,25 +151,25 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("f");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
-                blit(startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -183,29 +186,29 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("f");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
                 lineTextureOffset = LINES_OFFSETS.get("dh");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
                 lineTextureOffset = LINES_OFFSETS.get("ud");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL - 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("hd");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY - 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("f");
-                blit(startX, startY - 3, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY - 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -222,29 +225,29 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("f");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY - 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
                 lineTextureOffset = LINES_OFFSETS.get("uh");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY - 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
                 lineTextureOffset = LINES_OFFSETS.get("du");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL - 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("hu");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("f");
-                blit(startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 6, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -261,29 +264,29 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("dh");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 + 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
                 lineTextureOffset = LINES_OFFSETS.get("hd");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
                 lineTextureOffset = LINES_OFFSETS.get("f");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("uh");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("hu");
-                blit(startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 + 3, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 + 3, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -300,29 +303,29 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("uh");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY + 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
                 lineTextureOffset = LINES_OFFSETS.get("hu");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
                 lineTextureOffset = LINES_OFFSETS.get("f");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("dh");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("hd");
-                blit(startX, startY + 6, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + 6, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -339,29 +342,29 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("dh");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
                 lineTextureOffset = LINES_OFFSETS.get("ud");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL - 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
                 lineTextureOffset = LINES_OFFSETS.get("uhd");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY - 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("du");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL - 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("hu");
-                blit(startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 9, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 - 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -378,28 +381,28 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("uh");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4, startY + 9, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4, startY + 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
                 lineTextureOffset = LINES_OFFSETS.get("du");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
                 lineTextureOffset = LINES_OFFSETS.get("dhu");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 + 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("ud");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("hd");
-                blit(startX, startY + 9, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + 9, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:
@@ -416,29 +419,29 @@ public class LinesDraw extends DrawableHelper {
         int[] lineTextureOffset = LINES_OFFSETS.get("uh");
         switch (length) {
             case 5:
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 4,
                         startY, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 4:
                 lineTextureOffset = LINES_OFFSETS.get("hu");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 3,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 12, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             case 3:
                 lineTextureOffset = LINES_OFFSETS.get("f");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL * 2,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 12, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("uh");
-                blit(startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
+                DrawableHelper.drawTexture(matrices, startX + SlotmachineScreen.REAL_WIDTH_PIXEL,
                         startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL + 12, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
                 lineTextureOffset = LINES_OFFSETS.get("hu");
-                blit(startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 + 12, 66, 65,
+                DrawableHelper.drawTexture(matrices, startX, startY + SlotmachineScreen.SYMBOL_HEIGHT_PIXEL * 2 + 12, 66, 65,
                         lineTextureOffset[0], lineTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT,
                         LINES_ATLAS_WIDTH, LINES_ATLAS_HEIGHT);
             default:

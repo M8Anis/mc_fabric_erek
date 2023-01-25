@@ -25,7 +25,7 @@ package io.github.m8anis.mc_fabric_erek.server.models.slotmachine;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.util.PacketByteBuf;
+import net.minecraft.network.PacketByteBuf;
 
 import java.security.SecureRandom;
 import java.util.Arrays;

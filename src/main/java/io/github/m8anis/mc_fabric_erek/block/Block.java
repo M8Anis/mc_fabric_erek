@@ -26,10 +26,11 @@ import io.github.m8anis.mc_fabric_erek.util.VoxelShapeHelper;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -72,9 +73,10 @@ public abstract class Block extends HorizontalFacingBlock {
     }
 
     @SuppressWarnings("deprecation")
-    public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-                            BlockHitResult hit) {
-        return true;
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+                              BlockHitResult hit) {
+        return ActionResult.PASS;
     }
 
     @Override
@@ -89,13 +91,13 @@ public abstract class Block extends HorizontalFacingBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext context) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext context) {
         return getShape(state);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, EntityContext context) {
+    public VoxelShape getCollisionShape(BlockState state, BlockView view, BlockPos pos, ShapeContext context) {
         return getShape(state);
     }
 

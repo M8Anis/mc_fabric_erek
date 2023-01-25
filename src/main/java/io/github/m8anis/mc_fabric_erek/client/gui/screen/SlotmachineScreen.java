@@ -34,10 +34,12 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.NarratorManager;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.HashMap;
@@ -89,19 +91,19 @@ public class SlotmachineScreen extends Screen {
     }
 
     public void init() {
-        int buttonPlaceY = (this.height / 10) + (65 * 3) + 16 + this.font.fontHeight;
+        int buttonPlaceY = (this.height / 10) + (65 * 3) + 16 + this.textRenderer.fontHeight;
         if ((buttonPlaceY + 20) > this.height) {
             float difference = 1 - (
-                    (24 + (this.height - ((this.height / 10.0f) + (65 * 3) + 16 + this.font.fontHeight + 20))) / 24.0f
+                    (24 + (this.height - ((this.height / 10.0f) + (65 * 3) + 16 + this.textRenderer.fontHeight + 20))) / 24.0f
             );
-            buttonPlaceY -= (16 + this.font.fontHeight) * difference;
+            buttonPlaceY -= (16 + this.textRenderer.fontHeight) * difference;
         }
 
         this.subBetButton = this.addButton(
                 new ButtonWidget(
                         (this.width / 2) - 50,
                         buttonPlaceY, 16, 20,
-                        "-", this::subBetButton
+                        Text.of("-"), this::subBetButton
                 )
         );
         this.spinButton = this.addButton(
@@ -109,7 +111,7 @@ public class SlotmachineScreen extends Screen {
                         (this.width / 2) - 32,
                         buttonPlaceY,
                         64, 20,
-                        new TranslatableText("gui.m8anis_erek.slotmachine.button.spin").asString(),
+                        new TranslatableText("gui.m8anis_erek.slotmachine.button.spin"),
                         this::spinButton
                 )
         );
@@ -117,7 +119,7 @@ public class SlotmachineScreen extends Screen {
                 new ButtonWidget(
                         (this.width / 2) + 34,
                         buttonPlaceY,
-                        16, 20, "+", this::addBetButton
+                        16, 20, Text.of("+"), this::addBetButton
                 )
         );
 
@@ -128,27 +130,27 @@ public class SlotmachineScreen extends Screen {
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public void render(int mouseX, int mouseY, float delta) {
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         if (!checkMachine()) return;
-        this.renderBackground();
+        this.renderBackground(matrices);
 
         int x = (this.width / 2) - ((66 * 5) / 2);
         int y = (this.height / 10);
 
         if (lastSpin != null) {
-            this.minecraft.getTextureManager().bindTexture(SYMBOLS_ATLAS);
+            this.client.getTextureManager().bindTexture(SYMBOLS_ATLAS);
             for (int real = 0; real < lastSpin.length; real++) {
                 for (int symbol = 0; symbol < lastSpin[real].length; symbol++) {
                     int symbolX = x + (REAL_WIDTH_PIXEL * real);
                     int symbolY = y + (SYMBOL_HEIGHT_PIXEL * symbol);
                     String resultSymbol = lastSpin[real][symbol];
                     int[] symbolTextureOffset = SYMBOLS_OFFSETS.get(resultSymbol);
-                    blit(symbolX, symbolY, 64, 64, symbolTextureOffset[0], symbolTextureOffset[1],
-                            TEXTURE_WIDTH, TEXTURE_HEIGHT, SYMBOLS_ATLAS_WIDTH, SYMBOLS_ATLAS_HEIGHT);
+                    DrawableHelper.drawTexture(matrices, symbolX, symbolY, 64, 64, symbolTextureOffset[0],
+                            symbolTextureOffset[1], TEXTURE_WIDTH, TEXTURE_HEIGHT, SYMBOLS_ATLAS_WIDTH, SYMBOLS_ATLAS_HEIGHT);
                 }
             }
             if (matchedLines != null && matchedLines.getLines().size() > 0) {
-                HashMap<Integer, Function<Integer, Void>> lines = new LinesDraw(this.minecraft, x, y).DRAWS;
+                HashMap<Integer, Function<Integer, Void>> lines = new LinesDraw(matrices, this.client, x, y).DRAWS;
                 HashMap<Integer, Lines.Matched.Line> linesEntries = matchedLines.getLines();
                 for (int line = 0; line < 10; line++) {
                     int lineNumber = line + 1;
@@ -161,34 +163,35 @@ public class SlotmachineScreen extends Screen {
                 }
             }
         } else {
-            DrawableHelper.fill(x, y,
+            DrawableHelper.fill(matrices, x, y,
                     x + (REAL_WIDTH_PIXEL * 5), y + (SYMBOL_HEIGHT_PIXEL * 3), 0x80000000);
         }
 
         y = y + (65 * 3) + 8;
 
         String balanceString =
-                new TranslatableText("gui.m8anis_erek.slotmachine.text.balance", pieces).asString();
+                new TranslatableText("gui.m8anis_erek.slotmachine.text.balance", pieces).getString();
         String betString =
-                new TranslatableText("gui.m8anis_erek.slotmachine.text.bet", bet).asString();
+                new TranslatableText("gui.m8anis_erek.slotmachine.text.bet", bet).getString();
 
-        int betWidth = this.font.getStringWidth(betString);
+        int betWidth = this.textRenderer.getWidth(betString);
 
-        this.font.drawWithShadow(balanceString, x + 4, y, 0xFFFFFFFF);
-        this.font.drawWithShadow(betString, x + REAL_WIDTH_PIXEL * 5 - betWidth, y, 0xFFFFFFFF);
+        this.textRenderer.drawWithShadow(matrices, balanceString, x + 4, y, 0xFFFFFFFF);
+        this.textRenderer.drawWithShadow(matrices, betString, x + REAL_WIDTH_PIXEL * 5 - betWidth, y,
+                0xFFFFFFFF);
 
         if (coefficient != 0.0f) {
             String coefficientString = coefficient < 0 ? "-x" + -coefficient : "x" + coefficient;
-            float coefficientWidth = this.font.getStringWidth(coefficientString) / 2.0f;
-            this.font.drawWithShadow(coefficientString,
+            float coefficientWidth = this.textRenderer.getWidth(coefficientString) / 2.0f;
+            this.textRenderer.drawWithShadow(matrices, coefficientString,
                     x + REAL_WIDTH_PIXEL * 2.5f - coefficientWidth, y, 0xFFFFFFFF);
         }
 
         if (bonusGame) {
-            this.font.drawWithShadow("BONUS", 8, 8, 0xFFFFFFFF);
+            this.textRenderer.drawWithShadow(matrices, "BONUS", 8, 8, 0xFFFFFFFF);
         }
 
-        super.render(mouseX, mouseY, delta);
+        super.render(matrices, mouseX, mouseY, delta);
     }
 
     @SuppressWarnings("DataFlowIssue")
@@ -200,7 +203,7 @@ public class SlotmachineScreen extends Screen {
         initialized = false;
         matchedLines = null;
         coefficient = 0.0f;
-        this.minecraft.openScreen(null);
+        this.client.openScreen(null);
     }
 
     public static void setResult(String[][] spinResult, Lines.Matched matchedLines) {

@@ -37,7 +37,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.LiteralText;
 import org.apache.logging.log4j.LogManager;
@@ -76,7 +76,9 @@ public class ClientEntrypoint implements ClientModInitializer {
         LOGGER.debug("KeyBind \"key.m8anis_erek.debug_handle\" registered");
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
-                client.player.sendMessage(new LiteralText("debug"));
+                if (client.player != null) {
+                    client.player.sendMessage(new LiteralText("debug"), false);
+                }
             }
         });
         LOGGER.debug("KeyBind \"key.m8anis_erek.debug_handle\" callback registered");

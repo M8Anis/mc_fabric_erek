@@ -31,6 +31,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -44,16 +45,16 @@ public class ClientSlotMachineBlock extends SlotMachineBlock {
     }
 
     @Override
-    public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-                            BlockHitResult hit) {
-        if (!world.isClient || hand != Hand.OFF_HAND) return false;
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+                              BlockHitResult hit) {
+        if (!world.isClient || hand != Hand.OFF_HAND) return ActionResult.PASS;
 
         if (!checkConstruct(pos, world)) {
-            player.sendMessage(new TranslatableText("chat.m8anis_erek.slotmachine.construct_not_full"));
-            return false;
+            player.sendMessage(new TranslatableText("chat.m8anis_erek.slotmachine.construct_not_full"), false);
+            return ActionResult.FAIL;
         } else {
             MinecraftClient.getInstance().openScreen(new SlotmachineScreen(pos, (ClientWorld) world));
-            return true;
+            return ActionResult.SUCCESS;
         }
     }
 

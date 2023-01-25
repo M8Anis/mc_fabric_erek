@@ -33,9 +33,11 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.NarratorManager;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 
 @Environment(EnvType.CLIENT)
@@ -67,43 +69,45 @@ public class ExchangeMachineScreen extends Screen {
         this.exchangePiece = this.addButton(
                 new ButtonWidget(
                         8, 32, 160, 20,
-                        new TranslatableText("gui.m8anis_erek.exchange_machine.button.exchange_piece").asString(),
+                        new TranslatableText("gui.m8anis_erek.exchange_machine.button.exchange_piece"),
                         this::sendPieceExchange
                 )
         );
         this.exchangeMoney = this.addButton(
                 new ButtonWidget(
                         8 + 160 + 4, 32, 160, 20,
-                        new TranslatableText("gui.m8anis_erek.exchange_machine.button.exchange_money").asString(),
+                        new TranslatableText("gui.m8anis_erek.exchange_machine.button.exchange_money"),
                         this::sendMoneyExchange
                 )
         );
-        this.exchangeCount = new TextFieldWidget(this.font, 8, 8, 320 + 4, 20, "");
+        this.exchangeCount = new TextFieldWidget(this.textRenderer, 8, 8, 320 + 4, 20, Text.of(""));
         this.children.add(this.exchangeCount);
 
         updateData();
     }
 
-    public void render(int mouseX, int mouseY, float delta) {
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         if (!checkMachine()) return;
-        this.renderBackground();
+        this.renderBackground(matrices);
 
-        String moneys = new TranslatableText("gui.m8anis_erek.exchange_machine.text.moneys", ExchangeMachineScreen.moneys).asString();
-        String pieces = new TranslatableText("gui.m8anis_erek.exchange_machine.text.pieces", ExchangeMachineScreen.pieces).asString();
+        String moneys = new TranslatableText("gui.m8anis_erek.exchange_machine.text.moneys", ExchangeMachineScreen.moneys).getString();
+        String pieces = new TranslatableText("gui.m8anis_erek.exchange_machine.text.pieces", ExchangeMachineScreen.pieces).getString();
 
-        this.font.drawWithShadow(moneys, 8, 32 + 20 + 4, 0xFFFFFFFF);
-        this.font.drawWithShadow(pieces, 8, 32 + 20 + font.fontHeight + 4, 0xFFFFFFFF);
+        this.textRenderer.drawWithShadow(matrices, moneys, 8, 32 + 20 + 4, 0xFFFFFFFF);
+        this.textRenderer.drawWithShadow(matrices, pieces, 8,
+                32 + 20 + this.textRenderer.fontHeight + 4, 0xFFFFFFFF);
         if (error)
-            this.font.drawWithShadow(errorMessage, 8, 32 + 20 + font.fontHeight * 2 + 4 + 4, 0xFFFF0000);
+            this.textRenderer.drawWithShadow(matrices, errorMessage, 8,
+                    32 + 20 + this.textRenderer.fontHeight * 2 + 4 + 4, 0xFFFF0000);
 
-        this.exchangeCount.render(mouseX, mouseY, delta);
-        super.render(mouseX, mouseY, delta);
+        this.exchangeCount.render(matrices, mouseX, mouseY, delta);
+        super.render(matrices, mouseX, mouseY, delta);
     }
 
     @SuppressWarnings("DataFlowIssue")
     @Override
     public void onClose() {
-        this.minecraft.openScreen(null);
+        this.client.openScreen(null);
     }
 
     public static void setPieces(float value) {
@@ -123,17 +127,17 @@ public class ExchangeMachineScreen extends Screen {
             piece = Float.parseFloat(this.exchangeCount.getText().replace(",", "."));
         } catch (NumberFormatException e) {
             error = true;
-            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").asString();
+            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").getString();
             return;
         }
         if (piece <= 0) {
             error = true;
-            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").asString();
+            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").getString();
             return;
         }
         if (piece > pieces) {
             error = true;
-            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.not_enough_pieces").asString();
+            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.not_enough_pieces").getString();
             return;
         }
 
@@ -157,17 +161,17 @@ public class ExchangeMachineScreen extends Screen {
             money = Float.parseFloat(this.exchangeCount.getText().replace(",", "."));
         } catch (NumberFormatException e) {
             error = true;
-            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").asString();
+            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").getString();
             return;
         }
         if (money <= 0) {
             error = true;
-            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").asString();
+            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.incorrect_value").getString();
             return;
         }
         if (money > moneys) {
             error = true;
-            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.not_enough_moneys").asString();
+            errorMessage = new TranslatableText("gui.m8anis_erek.exchange_machine.text.not_enough_moneys").getString();
             return;
         }
 
